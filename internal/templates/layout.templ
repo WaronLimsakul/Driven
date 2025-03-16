@@ -7,7 +7,7 @@ templ head() {
 		<title>Driven</title>
 		<meta charset="UTF-8">
 		// some script here
-		<script src="/static/scripts/htmx.min.js"></script>
+		<script src="/static/scripts/htmx.min.js"/>
 		if os.Getenv("ENV") == "production" {
 			<link rel="stylesheet" href="/static/css/style.min.css"/>
 		} else {
@@ -17,11 +17,11 @@ templ head() {
 }
 
 templ footer() {
-	<footer class="bg-flame-surface p-4">Hello, from footer</footer>
+	<footer class="bg-flame-surface p-4 text-white">Hello, from footer</footer>
 }
 
 templ navbar() {
-	<nav bg="bg-flame-surface p-4">
+  <nav class="bg-flame-surface p-4">
 		<p>Hello, from navbar</p>
 	</nav>
 }
