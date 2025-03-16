@@ -1,0 +1,3 @@
+.env
+tmp/*
+/internal/templates/*.txt

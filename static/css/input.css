@@ -1,0 +1,16 @@
+/* tailwind v4 doesn't support tailwind.config.js so we have
+to configure it using the input.css */
+@import "tailwindcss";
+
+/* In this projbect, tailwind is just a tool that generate this
+a css to make development easier */
+@theme {
+    --color-flame-bg: #0a0a0a;
+    --color-flame-surface: #1a1a1a;
+    --color-flame-primary: #00ccff;
+    --color-flame-hover: #33d6ff;
+    --color-flame-dark: #0099cc;
+    --color-flame-accent: #00ffff;
+    --color-flame-text: #e0f7ff;
+    --color-flame-muted: #7a9eaa;
+}

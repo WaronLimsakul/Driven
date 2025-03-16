@@ -1,0 +1,37 @@
+package templates
+
+import "os"
+
+templ head() {
+	<head>
+		<title>Driven</title>
+		<meta charset="UTF-8">
+		// some script here
+		if os.Getenv("ENV") == "production" {
+			<link rel="stylesheet" href="/static/css/style.min.css"/>
+		} else {
+			<link rel="stylesheet" href="/static/css/style.css"/>
+		}
+	</head>
+}
+
+templ footer() {
+	<footer class="bg-flame-surface p-4">Hello, from footer</footer>
+}
+
+templ navbar() {
+	<nav bg="bg-flame-surface p-4">
+		<p>Hello, from navbar</p>
+	</nav>
+}
+
+templ Layout(child templ.Component) {
+	@head()
+	<body>
+		@navbar()
+		<main class="flex-1 container">
+			@child // don't have to call it, because it's already component
+		</main>
+		@footer()
+	</body>
+}
