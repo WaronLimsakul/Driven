@@ -7,6 +7,7 @@ templ head() {
 		<title>Driven</title>
 		<meta charset="UTF-8">
 		// some script here
+		<script src="/static/scripts/htmx.min.js"></script>
 		if os.Getenv("ENV") == "production" {
 			<link rel="stylesheet" href="/static/css/style.min.css"/>
 		} else {

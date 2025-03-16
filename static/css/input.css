@@ -2,8 +2,8 @@
 to configure it using the input.css */
 @import "tailwindcss";
 
-/* In this projbect, tailwind is just a tool that generate this
-a css to make development easier */
+/* In this projbect, tailwind is just a tool that watch and gen
+the necessary css utility classes for us to make us work faster */
 @theme {
     --color-flame-bg: #0a0a0a;
     --color-flame-surface: #1a1a1a;
