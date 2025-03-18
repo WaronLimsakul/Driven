@@ -6,9 +6,13 @@
     'Noto Color Emoji';
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
     monospace;
+    --color-gray-400: oklch(0.707 0.022 261.325);
+    --color-gray-600: oklch(0.446 0.03 256.802);
+    --color-gray-700: oklch(0.373 0.034 259.733);
     --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
+    --radius-md: 0.375rem;
     --radius-xl: 0.75rem;
     --default-font-family: var(--font-sans);
     --default-font-feature-settings: var(--font-sans--font-feature-settings);
@@ -21,6 +25,7 @@
     --color-flame-primary: #00ccff;
     --color-flame-hover: #33d6ff;
     --color-flame-dark: #0099cc;
+    --color-flame-accent: #00ffff;
     --color-flame-text: #e0f7ff;
   }
 }
@@ -184,11 +189,59 @@
       max-width: 96rem;
     }
   }
+  .flex {
+    display: flex;
+  }
+  .h-2 {
+    height: calc(var(--spacing) * 2);
+  }
+  .h-4 {
+    height: calc(var(--spacing) * 4);
+  }
+  .h-auto {
+    height: auto;
+  }
+  .h-full {
+    height: 100%;
+  }
+  .w-5 {
+    width: calc(var(--spacing) * 5);
+  }
+  .w-20 {
+    width: calc(var(--spacing) * 20);
+  }
+  .w-35 {
+    width: calc(var(--spacing) * 35);
+  }
+  .w-full {
+    width: 100%;
+  }
   .flex-1 {
     flex: 1;
   }
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  .justify-around {
+    justify-content: space-around;
+  }
+  .justify-between {
+    justify-content: space-between;
+  }
+  .justify-center {
+    justify-content: center;
+  }
+  .justify-evenly {
+    justify-content: space-evenly;
+  }
+  .rounded-md {
+    border-radius: var(--radius-md);
+  }
   .rounded-xl {
     border-radius: var(--radius-xl);
+  }
+  .bg-black {
+    background-color: var(--color-black);
   }
   .bg-flame-bg {
     background-color: var(--color-flame-bg);
@@ -198,6 +251,12 @@
   }
   .bg-flame-surface {
     background-color: var(--color-flame-surface);
+  }
+  .object-left {
+    object-position: left;
+  }
+  .p-2 {
+    padding: calc(var(--spacing) * 2);
   }
   .p-4 {
     padding: calc(var(--spacing) * 4);
@@ -217,10 +276,38 @@
   .text-white {
     color: var(--color-white);
   }
+  .hover\:bg-flame-accent {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-flame-accent);
+      }
+    }
+  }
   .hover\:bg-flame-hover {
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-flame-hover);
+      }
+    }
+  }
+  .hover\:bg-gray-400 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-gray-400);
+      }
+    }
+  }
+  .hover\:bg-gray-600 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-gray-600);
+      }
+    }
+  }
+  .hover\:bg-gray-700 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-gray-700);
       }
     }
   }

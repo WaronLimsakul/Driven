@@ -21,16 +21,27 @@ templ footer() {
 }
 
 templ navbar() {
-  <nav class="bg-flame-surface p-4">
-		<p>Hello, from navbar</p>
-	</nav>
+  <nav class="bg-flame-bg p-4 text-flame-text flex justify-between">
+	  <div>
+			<img class="w-35 h-auto" src="/static/img/driven_logo_cut.png"/>
+	  </div>
+
+		<div>
+			<button class="hover:bg-gray-700 cursor-pointer bg-flame-surface p-2 rounded-md">Week view</button>
+			<button class="hover:bg-gray-700 cursor-pointer bg-flame-surface p-2 rounded-md">Day view</button>
+		</div>
+
+		<div>
+			<button class="hover:bg-gray-700 cursor-pointer bg-flame-surface p-2 rounded-md">Sign in</button>
+		</div>
+  </nav>
 }
 
 templ Layout(child templ.Component) {
 	@head()
 	<body>
 		@navbar()
-		<main class="flex-1 container">
+		<main class="flex-1 container h-full w-full">
 			@child // don't have to call it, because it's already component
 		</main>
 		@footer()

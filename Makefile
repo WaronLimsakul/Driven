@@ -31,6 +31,9 @@ full-dev:
 	tmux send-keys -t driven-dev:0.2 'make dev' C-m
 	tmux attach-session -t driven-dev
 
+kill-dev:
+	tmux kill-session -t driven-dev
+
 build: # build for deploy
 	make tw-build
 	make templ-generate
