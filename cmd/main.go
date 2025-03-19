@@ -1,40 +1,12 @@
 package main
 
 import (
-	"fmt"
 	"log"
-	"os"
 
 	handlers "github.com/WaronLimsakul/Driven/internal/handler"
-	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
-
-type serverConfig struct {
-	port string
-	env  string
-}
-
-func newServerConfig() (serverConfig, error) {
-	err := godotenv.Load()
-	if err != nil {
-		return serverConfig{}, fmt.Errorf("Couldn't load .env file")
-	}
-	port := os.Getenv("HOST")
-	if port == "" {
-		return serverConfig{}, fmt.Errorf("Couldn't get host number")
-	}
-	env := os.Getenv("ENV")
-	if env == "" {
-		return serverConfig{}, fmt.Errorf("Couldn't get env config")
-	}
-
-	return serverConfig{
-		port: port,
-		env:  env,
-	}, nil
-}
 
 func main() {
 	e := echo.New()
@@ -49,6 +21,8 @@ func main() {
 
 	// give static files server (css, htmx script)
 	e.Static("/static", "static")
+
+	// server one file
 	e.File("/favicon.ico", "static/ico/favicon.ico")
 
 	e.GET("/", handlers.HandleLanding)
@@ -56,6 +30,8 @@ func main() {
 	e.GET("/day", handlers.HandleGetDay)
 	e.GET("/signin", handlers.HandleGetSignin)
 	e.GET("/signup", handlers.HandleGetSignUp)
+
+	e.POST("/signup", handlers.HandlePostSignUp)
 
 	e.Start(config.port)
 }
