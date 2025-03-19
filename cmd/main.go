@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/WaronLimsakul/Driven/internal/handler"
+	handlers "github.com/WaronLimsakul/Driven/internal/handler"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -49,8 +49,13 @@ func main() {
 
 	// give static files server (css, htmx script)
 	e.Static("/static", "static")
+	e.File("/favicon.ico", "static/ico/favicon.ico")
 
-	e.GET("/", handler.HandleLanding)
+	e.GET("/", handlers.HandleLanding)
+	e.GET("/week", handlers.HandleGetWeek)
+	e.GET("/day", handlers.HandleGetDay)
+	e.GET("/signin", handlers.HandleGetSignin)
+	e.GET("/signup", handlers.HandleGetSignUp)
 
 	e.Start(config.port)
 }
