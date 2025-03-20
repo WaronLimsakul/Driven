@@ -1,0 +1,25 @@
+package templates
+
+templ SignInScript() {
+	<script>
+	document.addEventListener("DOMContentLoaded", (e) => {
+	document.addEventListener("htmx:beforeSwap", (event) => {
+		    if (event.detail.xhr.status == 401) {
+				event.detail.shouldSwap = true;
+			}
+		    else if (event.detail.xhr.status == 201) {
+				event.detail.target = document.querySelector("#form");
+			} else if (event.detail.xhr.status == 404) {
+			    event.detail.shouldSwap = true;
+			    event.detail.target = document.querySelector("#email-warning");
+			}
+		})
+	});
+	</script>
+}
+
+templ SignInSuccessMessage() {
+	<h2 class='text-2xl text-flame-text font-bold text-center'>You're signed in!</h2>
+	<br>
+	<h3 class='text-lg text-flame-text text-center'>Navigate to home...</h3>
+}

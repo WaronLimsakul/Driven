@@ -38,6 +38,7 @@ func main() {
 	e.GET("/signup", handlers.HandleGetSignUp)
 
 	e.POST("/signup", serverDBHandlers.HandlePostSignUp)
+	e.POST("/signin", serverDBHandlers.HandlePostSignin)
 
 	e.Start(serverConfig.Port)
 }

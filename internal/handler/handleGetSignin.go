@@ -8,5 +8,8 @@ import (
 )
 
 func HandleGetSignin(c echo.Context) error {
-	return render(http.StatusOK, c, templates.Layout(templates.SigninPage()))
+	page := templates.SigninPage()
+	script := templates.SignInScript()
+	complete := templates.InjectedLayout(page, script)
+	return render(http.StatusOK, c, complete)
 }

@@ -2,7 +2,9 @@ package templates
 
 templ signinForm() {
 		<div class="min-h-screen flex items-center justify-center">
-			<form class="bg-flame-surface shadow-lg rounded-lg p-8 w-full max-w-md flex flex-col space-y-6">
+			<form
+				hx-post="/signin" hx-target="#password-warning" id="form"
+				class="bg-flame-surface shadow-lg rounded-lg p-8 w-full max-w-md flex flex-col space-y-6">
 				<h2 class="text-2xl font-bold text-center text-flame-text">Sign In</h2>
 				<div class="flex flex-col">
 					<label for="email" class="mb-2 text-gray-300">Email</label>
@@ -12,7 +14,9 @@ templ signinForm() {
 						name="email"
 						placeholder="Enter your email"
 						class="border border-gray-600 rounded-md p-2 bg-gray-700 text-flame-text focus:outline-none focus:ring-2 focus:ring-flame-primary"
+						required
 					/>
+					<p class="text-red-500" id="email-warning"></p>
 				</div>
 				<div class="flex flex-col">
 					<label for="password" class="mb-2 text-gray-300">Password</label>
@@ -22,7 +26,9 @@ templ signinForm() {
 						name="password"
 						placeholder="Enter your password"
 						class="border border-gray-600 rounded-md p-2 bg-gray-700 text-flame-text focus:outline-none focus:ring-2 focus:ring-flame-primary"
+						required
 					/>
+					<p class="text-red-500" id="password-warning"></p>
 				</div>
 				<button
 					type="submit"

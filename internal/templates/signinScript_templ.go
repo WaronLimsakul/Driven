@@ -8,7 +8,7 @@ package templates
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-func signinForm() templ.Component {
+func SignInScript() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -29,7 +29,7 @@ func signinForm() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"min-h-screen flex items-center justify-center\"><form hx-post=\"/signin\" hx-target=\"#password-warning\" id=\"form\" class=\"bg-flame-surface shadow-lg rounded-lg p-8 w-full max-w-md flex flex-col space-y-6\"><h2 class=\"text-2xl font-bold text-center text-flame-text\">Sign In</h2><div class=\"flex flex-col\"><label for=\"email\" class=\"mb-2 text-gray-300\">Email</label> <input type=\"email\" id=\"email\" name=\"email\" placeholder=\"Enter your email\" class=\"border border-gray-600 rounded-md p-2 bg-gray-700 text-flame-text focus:outline-none focus:ring-2 focus:ring-flame-primary\" required><p class=\"text-red-500\" id=\"email-warning\"></p></div><div class=\"flex flex-col\"><label for=\"password\" class=\"mb-2 text-gray-300\">Password</label> <input type=\"password\" id=\"password\" name=\"password\" placeholder=\"Enter your password\" class=\"border border-gray-600 rounded-md p-2 bg-gray-700 text-flame-text focus:outline-none focus:ring-2 focus:ring-flame-primary\" required><p class=\"text-red-500\" id=\"password-warning\"></p></div><button type=\"submit\" class=\"bg-blue-700 hover:bg-blue-800 cursor-pointer text-flame-text font-semibold py-2 rounded-md transition-colors\">Sign In</button><p class=\"text-center text-gray-400 text-sm\">Don't have an account? <a href=\"/signup\" class=\"text-blue-400 hover:underline\">Sign Up</a></p></form></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<script>\n\tdocument.addEventListener(\"DOMContentLoaded\", (e) => {\n\tdocument.addEventListener(\"htmx:beforeSwap\", (event) => {\n\t\t    if (event.detail.xhr.status == 401) {\n\t\t\t\tevent.detail.shouldSwap = true;\n\t\t\t}\n\t\t    else if (event.detail.xhr.status == 201) {\n\t\t\t\tevent.detail.target = document.querySelector(\"#form\");\n\t\t\t} else if (event.detail.xhr.status == 404) {\n\t\t\t    event.detail.shouldSwap = true;\n\t\t\t    event.detail.target = document.querySelector(\"#email-warning\");\n\t\t\t}\n\t\t})\n\t});\n\t</script>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -37,7 +37,7 @@ func signinForm() templ.Component {
 	})
 }
 
-func SigninPage() templ.Component {
+func SignInSuccessMessage() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -58,15 +58,7 @@ func SigninPage() templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<main class=\"w-screen h-full bg-flame-bg\">")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Err = signinForm().Render(ctx, templ_7745c5c3_Buffer)
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</main>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<h2 class=\"text-2xl text-flame-text font-bold text-center\">You're signed in!</h2><br><h3 class=\"text-lg text-flame-text text-center\">Navigate to home...</h3>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
