@@ -8,5 +8,8 @@ import (
 )
 
 func HandleGetSignUp(c echo.Context) error {
-	return render(http.StatusOK, c, templates.Layout(templates.SignUpPage()))
+	signUpPageScript := templates.SignUpScript()
+	page := templates.SignUpPage()
+	component := templates.InjectedLayout(page, signUpPageScript)
+	return render(http.StatusOK, c, component)
 }

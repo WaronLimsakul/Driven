@@ -13,6 +13,7 @@ import (
 type User struct {
 	ID             uuid.UUID
 	Name           string
+	Email          string
 	HashedPassword string
 	CreatedAt      time.Time
 	UpdatedAt      time.Time

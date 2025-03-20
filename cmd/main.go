@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 
+	"github.com/WaronLimsakul/Driven/internal/config"
 	handlers "github.com/WaronLimsakul/Driven/internal/handler"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -10,12 +11,17 @@ import (
 
 func main() {
 	e := echo.New()
-	config, err := newServerConfig()
+	serverConfig, err := config.NewServerConfig()
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	if config.env == "development" {
+	serverDBHandlers, err := handlers.NewDBHandler()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if serverConfig.Env == "development" {
 		e.Use(middleware.Logger())
 	}
 
@@ -31,7 +37,7 @@ func main() {
 	e.GET("/signin", handlers.HandleGetSignin)
 	e.GET("/signup", handlers.HandleGetSignUp)
 
-	e.POST("/signup", handlers.HandlePostSignUp)
+	e.POST("/signup", serverDBHandlers.HandlePostSignUp)
 
-	e.Start(config.port)
+	e.Start(serverConfig.Port)
 }

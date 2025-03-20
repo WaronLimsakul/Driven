@@ -2,7 +2,7 @@ package templates
 
 templ signUpForm() {
 	<div class="min-h-screen flex items-center justify-center">
-				<form class="bg-flame-surface shadow-lg rounded-lg p-8 w-full max-w-md flex flex-col space-y-6">
+				<form id="form" hx-post="/signup"  hx-target="#alert" class="bg-flame-surface shadow-lg rounded-lg p-8 w-full max-w-md flex flex-col space-y-6">
 					<h2 class="text-2xl font-bold text-center text-flame-text">Register</h2>
 					<div class="flex flex-col">
 						<label for="name" class="mb-2 text-gray-300">Name</label>
@@ -23,6 +23,7 @@ templ signUpForm() {
 							placeholder="Enter your email"
 							class="border border-gray-600 rounded-md p-2 bg-gray-700 text-flame-text focus:outline-none focus:ring-2 focus:ring-flame-primary"
 						/>
+						<p class="text-red-500" id="alert"></p>
 					</div>
 					<div class="flex flex-col">
 						<label for="password" class="mb-2 text-gray-300">Password</label>
@@ -36,7 +37,8 @@ templ signUpForm() {
 					</div>
 					<button
 						type="submit"
-						class="bg-blue-700 hover:bg-blue-800 cursor-pointer text-flame-text font-semibold py-2 rounded-md transition-colors"
+						class="bg-blue-700 hover:bg-blue-800 disabled:bg-grey-800 cursor-pointer text-flame-text font-semibold py-2 rounded-md transition-colors"
+						hx-disabled-elt="this"
 					>
 						Sign Up
 					</button>

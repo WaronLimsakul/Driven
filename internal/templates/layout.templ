@@ -16,6 +16,21 @@ templ head() {
 	</head>
 }
 
+templ injectedHead(script templ.Component) {
+	<head>
+		<title>Driven | Keep grinding</title>
+		<meta charset="UTF-8">
+		// some script here
+		<script src="/static/scripts/htmx.min.js"/>
+		@script
+		if os.Getenv("ENV") == "production" {
+			<link rel="stylesheet" href="/static/css/style.min.css"/>
+		} else {
+			<link rel="stylesheet" href="/static/css/style.css"/>
+		}
+	</head>
+}
+
 templ footer() {
 	<footer class="bg-flame-surface p-4 text-white">Hello, from footer</footer>
 }
@@ -54,20 +69,37 @@ templ navbar() {
 
 // this one have top bar and footer
 templ AppLayout(child templ.Component) {
-	@head()
-	<body>
-		@navbar()
-		<main class="w-full h-full">
-			@child // don't have to call it, because it's already component
-		</main>
-		@footer()
-	</body>
+	<!doctype html>
+	<html>
+		@head()
+		<body>
+			@navbar()
+			<main class="w-full h-full">
+				@child // don't have to call it, because it's already component
+			</main>
+			@footer()
+		</body>
+	</html>
 }
 
-// only header
+// only head
 templ Layout(child templ.Component) {
-	@head()
-	<body>
-		@child
-	</body>
+	<!doctype html>
+	<html>
+		@head()
+		<body>
+			@child
+		</body>
+	</html>
+}
+
+// basic head and inject some script
+templ InjectedLayout(child templ.Component, script templ.Component) {
+	<!doctype html>
+	<html>
+		@injectedHead(script)
+		<body>
+			@child
+		</body>
+	</html>
 }

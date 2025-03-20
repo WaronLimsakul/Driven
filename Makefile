@@ -19,7 +19,7 @@ templ-generate:
 	templ generate
 
 dev:
-	go build -o ./tmp/main ./cmd/main.go && air
+	go build -o ./tmp/main ./cmd/ && air
 
 full-dev:
 	tmux kill-session -t driven-dev || true

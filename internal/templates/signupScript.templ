@@ -1,0 +1,27 @@
+package templates
+
+templ SignUpScript() {
+	<script type="text/javascript">
+		document.addEventListener("DOMContentLoaded", (event) => {
+		  document.addEventListener("htmx:beforeSwap", function(evt) {
+				if (evt.detail.xhr.status == 409) {
+				    console.log("setting status conflict to be able to swapt");
+					evt.detail.shouldSwap = true;
+					evt.detail.isError = false;
+				} else if (evt.detail.xhr.status == 201) {
+				    // show success message, delay redirecting for a sec
+				    evt.detail.target = document.querySelector("#form");
+					setTimeout(() => {
+				      window.location.replace("/");
+					}, 1000);
+				}
+			})
+		});
+	</script>
+}
+
+templ SignUpSuccessMessage() {
+	<h2 class='text-2xl text-flame-text font-bold text-center'>Registering success!</h2>
+	<br>
+	<h3 class='text-lg text-flame-text text-center'>Navigate to home...</h3>
+}
