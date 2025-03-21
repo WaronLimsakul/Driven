@@ -4,6 +4,7 @@ templ SignInScript() {
 	<script>
 	document.addEventListener("DOMContentLoaded", (e) => {
 	document.addEventListener("htmx:beforeSwap", (event) => {
+	        // every error message will be 401, preventing bruteforce.
 		    if (event.detail.xhr.status == 401) {
 				event.detail.shouldSwap = true;
 			}
