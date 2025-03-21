@@ -12,17 +12,17 @@ func (h *DBHandler) HandlePostSignin(c echo.Context) error {
 	email := c.FormValue("email")
 	password := c.FormValue("password")
 	if email == "" || password == "" {
-		return c.String(http.StatusBadRequest, "Email or password not found")
+		return c.String(http.StatusUnauthorized, "Invalid user or password")
 	}
 
 	user, err := h.Db.GetUserByEmail(c.Request().Context(), email)
 	if err != nil {
-		return c.String(http.StatusNotFound, "*User not found")
+		return c.String(http.StatusUnauthorized, "Invalid user or password")
 	}
 
 	err = auth.ValidatePassword(password, user.HashedPassword)
 	if err != nil {
-		return c.String(http.StatusUnauthorized, "*Invalid password")
+		return c.String(http.StatusUnauthorized, "Invalid user or password")
 	}
 
 	return render(201, c, templates.SignInSuccessMessage())

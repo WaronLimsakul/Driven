@@ -29,7 +29,7 @@ func SignInScript() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<script>\n\tdocument.addEventListener(\"DOMContentLoaded\", (e) => {\n\tdocument.addEventListener(\"htmx:beforeSwap\", (event) => {\n\t\t    if (event.detail.xhr.status == 401) {\n\t\t\t\tevent.detail.shouldSwap = true;\n\t\t\t}\n\t\t    else if (event.detail.xhr.status == 201) {\n\t\t\t\tevent.detail.target = document.querySelector(\"#form\");\n\t\t\t} else if (event.detail.xhr.status == 404) {\n\t\t\t    event.detail.shouldSwap = true;\n\t\t\t    event.detail.target = document.querySelector(\"#email-warning\");\n\t\t\t}\n\t\t})\n\t});\n\t</script>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<script>\n\tdocument.addEventListener(\"DOMContentLoaded\", (e) => {\n\tdocument.addEventListener(\"htmx:beforeSwap\", (event) => {\n\t\t    if (event.detail.xhr.status == 401) {\n\t\t\t\tevent.detail.shouldSwap = true;\n\t\t\t}\n\t\t    else if (event.detail.xhr.status == 201) {\n\t\t\t\tevent.detail.target = document.querySelector(\"#form\");\n\t\t\t}\n\t\t})\n\t});\n\t</script>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
