@@ -32,7 +32,9 @@ templ injectedHead(script templ.Component) {
 }
 
 templ footer() {
-	<footer class="bg-flame-surface p-4 text-white">Hello, from footer</footer>
+	<footer class="bg-flame-surface text-center text-flame-muted py-6">
+        <p class="text-sm">&copy 2025 Driven. All rights reserved.</p>
+      </footer>
 }
 
 templ navbar() {
@@ -45,20 +47,20 @@ templ navbar() {
 			<button
 				hx-get="/week"
 				hx-target="#view"
-				class="hover:bg-gray-700 cursor-pointer bg-flame-surface p-2 rounded-md">
+				class="hover:bg-gray-700 cursor-pointer bg-flame-surface p-3 rounded-md">
 					Week view
 			</button>
 			<button
 				hx-get="/day"
 				hx-target="#view"
-				class="hover:bg-gray-700 cursor-pointer bg-flame-surface p-2 rounded-md">
+				class="hover:bg-gray-700 cursor-pointer bg-flame-surface p-3 rounded-md">
 					Day view
 			</button>
 		</div>
 
 		<div>
 			<button
-				class="hover:bg-gray-700 cursor-pointer bg-flame-surface p-2 rounded-md">
+				class="hover:bg-gray-700 cursor-pointer bg-gray-800 p-2 rounded-md">
 				<a href="/signin">
 				Sign in
 				</a>

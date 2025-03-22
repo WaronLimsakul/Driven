@@ -1,16 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 /* tailwind v4 doesn't support tailwind.config.js so we have
 to configure it using the input.css */
 @import "tailwindcss" source("../../internal/templates");
 
-/* In this projbect, tailwind is just a tool that watch and gen
+/* In this project, tailwind is just a tool that watch and gen
 the necessary css utility classes for us to make us work faster */
 @theme {
+    --font-inter:
+        "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+        "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --default-font-family: var(--font-inter);
+
     --color-flame-bg: #0a0a0a;
     --color-flame-surface: #1a1a1a;
-    --color-flame-primary: #00ccff;
-    --color-flame-hover: #33d6ff;
-    --color-flame-dark: #0099cc;
-    --color-flame-accent: #00ffff;
-    --color-flame-text: #e0f7ff;
-    --color-flame-muted: #7a9eaa;
+    --color-flame-primary: #0095ff;
+    --color-flame-hover: #1aa3ff;
+    --color-flame-dark: #0077cc;
+    --color-flame-accent: #33bbff;
+    --color-flame-text: #e0f4ff;
+    --color-flame-muted: #6b90a0;
 }
