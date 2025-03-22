@@ -1,0 +1,19 @@
+package templates
+
+templ ServerErrorPage() {
+	<main class="min-h-screen flex items-center justify-center px-6 py-12 bg-flame-bg text-flame-text">
+      <div class="text-center space-y-6 max-w-xl">
+        <h1 class="text-6xl font-extrabold text-flame-primary">500</h1>
+        <h2 class="text-2xl font-semibold">Oops! Something went wrong.</h2>
+        <p class="text-flame-muted">
+          We're experiencing some internal issues. Please try again later, or contact support if the problem persists.
+        </p>
+        <a
+          href="/"
+          class="inline-block px-6 py-3 rounded-lg text-flame-bg font-medium bg-flame-primary hover:bg-flame-hover transition"
+        >
+          Return to Homepage
+        </a>
+      </div>
+    </main>
+}

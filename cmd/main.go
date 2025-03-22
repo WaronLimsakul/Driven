@@ -40,5 +40,8 @@ func main() {
 	e.POST("/signup", serverDBHandlers.HandlePostSignUp)
 	e.POST("/signin", serverDBHandlers.HandlePostSignin)
 
+	e.GET("/*", handlers.HandleNotFound)
+	// e.GET("/error", handlers.TestError)
+
 	e.Start(serverConfig.Port)
 }
