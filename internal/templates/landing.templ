@@ -1,0 +1,31 @@
+package templates
+
+templ LandingPage() {
+	<main class="min-h-screen flex flex-col bg-flame-bg">
+		<img src="/static/img/driven_logo.png" width="500" class="mx-auto mt-10"/>
+      <!-- Hero section -->
+      <section class="flex flex-col items-center justify-center text-center px-6 py-16 flex-grow">
+        <h2 class="text-4xl md:text-5xl font-extrabold mb-4 text-flame-primary">
+          A To-do List for Grinders
+        </h2>
+        <ul class="text-lg text-flame-muted max-w-2xl mb-10">
+	       	<li>⚡ Built with Go + HTMX for blazing-fast performance.</li>
+	           <li>🔐 Secure access token framework for a smooth experience.</li>
+	           <li>🎯 Designed for students who want to stay in flow and crush their goals.</li>
+        </ul>
+
+        <!-- Placeholder video box -->
+        <div class="w-full max-w-3xl aspect-video bg-flame-surface rounded-xl border border-flame-dark flex items-center justify-center mb-12">
+          <span class="text-flame-muted text-sm">[ App demo video placeholder ]</span>
+        </div>
+
+        <a
+          href="/signup"
+          class="px-8 py-3 rounded-lg bg-flame-primary text-flame-bg text-lg font-semibold hover:bg-flame-hover transition"
+        >
+          Get Started
+        </a>
+      </section>
+
+    </main>
+}

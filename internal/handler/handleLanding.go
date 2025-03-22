@@ -6,5 +6,6 @@ import (
 )
 
 func HandleLanding(c echo.Context) error {
-	return render(200, c, templates.AppLayout(templates.Home()))
+	page := templates.LandingPage()
+	return render(200, c, templates.Layout(page))
 }

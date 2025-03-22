@@ -32,6 +32,7 @@ func main() {
 	e.File("/favicon.ico", "static/ico/favicon.ico")
 
 	e.GET("/", handlers.HandleLanding)
+	e.GET("/home", handlers.HandleGetHome)
 	e.GET("/week", handlers.HandleGetWeek)
 	e.GET("/day", handlers.HandleGetDay)
 	e.GET("/signin", handlers.HandleGetSignin)
