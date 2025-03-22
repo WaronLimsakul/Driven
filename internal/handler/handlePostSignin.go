@@ -25,5 +25,10 @@ func (h *DBHandler) HandlePostSignin(c echo.Context) error {
 		return c.String(http.StatusUnauthorized, "Invalid user or password")
 	}
 
-	return render(201, c, templates.SignInSuccessMessage())
+	err = assignAuthCookies(c, user.ID, h.JWTSecret, h.Env == "production")
+	if err != nil {
+		return err
+	}
+
+	return render(http.StatusCreated, c, templates.SignInSuccessMessage())
 }

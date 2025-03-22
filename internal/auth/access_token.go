@@ -28,7 +28,7 @@ func CreateJWT(userID uuid.UUID, expiredIn time.Duration, secret string) (string
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
 	// now we signed the <signature> part in token.
-	signedToken, err := token.SignedString(secret)
+	signedToken, err := token.SignedString([]byte(secret))
 	if err != nil {
 		return "", err
 	}
@@ -36,8 +36,9 @@ func CreateJWT(userID uuid.UUID, expiredIn time.Duration, secret string) (string
 	return signedToken, nil
 }
 
-// just calculate method(secret, message) == expected_signature
-func ValidateJWT(tokenString, secret string) (uuid.UUID, error) {
+// Just calculate method(secret, message) == expected_signature.
+// Return the user uuid, err, and isExpired (bool) if the token is valid
+func ValidateJWT(tokenString, secret string) (uuid.UUID, error, bool) {
 	// take the string, do the check in the function
 	token, err := jwt.ParseWithClaims(
 		tokenString,
@@ -52,35 +53,35 @@ func ValidateJWT(tokenString, secret string) (uuid.UUID, error) {
 		})
 
 	if err != nil {
-		return uuid.UUID{}, fmt.Errorf("Validate token: Couldn't parse token: %v", err)
+		return uuid.UUID{}, fmt.Errorf("Validate token: Couldn't parse token: %v", err), false
 	}
 
 	// check issuer
 	issuer, err := token.Claims.GetIssuer()
 	if err != nil {
-		return uuid.UUID{}, fmt.Errorf("Validate token: No issuer found")
+		return uuid.UUID{}, fmt.Errorf("Validate token: No issuer found"), false
 	} else if issuer != "Driven" {
-		return uuid.UUID{}, fmt.Errorf("Validate token: Unexpected issuer: %v", issuer)
+		return uuid.UUID{}, fmt.Errorf("Validate token: Unexpected issuer: %v", issuer), false
 	}
 
+	isExpired := false
 	// check expire date
 	expiredTime, err := token.Claims.GetExpirationTime()
 	if err != nil {
-		return uuid.UUID{}, fmt.Errorf("Validate token: Couldn't get expire time: %v", err)
+		return uuid.UUID{}, fmt.Errorf("Validate token: Couldn't get expire time: %v", err), false
 	} else if time.Now().After(expiredTime.Time) {
-		return uuid.UUID{}, fmt.Errorf("Validate token: the token is expired")
+		isExpired = true
 	}
 
 	userID, err := token.Claims.GetSubject()
 	if err != nil {
-		return uuid.UUID{}, fmt.Errorf("Validate token: Couldn't get user id: %v", err)
+		return uuid.UUID{}, fmt.Errorf("Validate token: Couldn't get user id: %v", err), isExpired
 	}
 
 	userUUID, err := uuid.Parse(userID)
 	if err != nil {
-		return uuid.UUID{}, fmt.Errorf("Validate token: Couldn't parse user id: %v", err)
+		return uuid.UUID{}, fmt.Errorf("Validate token: Couldn't parse user id: %v", err), isExpired
 	}
 
-	return userUUID, nil
-
+	return userUUID, nil, isExpired
 }

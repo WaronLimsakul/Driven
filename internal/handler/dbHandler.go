@@ -11,7 +11,9 @@ import (
 
 // handlers that need access to database
 type DBHandler struct {
-	Db *database.Queries
+	Db        *database.Queries
+	JWTSecret string
+	Env       string
 }
 
 func NewDBHandler() (DBHandler, error) {
@@ -27,5 +29,19 @@ func NewDBHandler() (DBHandler, error) {
 	}
 	queries := database.New(db)
 
-	return DBHandler{Db: queries}, nil
+	jwtSecret := os.Getenv("JWT_SECRET")
+	if jwtSecret == "" {
+		return DBHandler{}, fmt.Errorf("Couldn't find a Jwt secret config")
+	}
+
+	env := os.Getenv("ENV")
+	if env == "" {
+		return DBHandler{}, fmt.Errorf("Couldn't get env config")
+	}
+
+	return DBHandler{
+		Db:        queries,
+		JWTSecret: jwtSecret,
+		Env:       env,
+	}, nil
 }
