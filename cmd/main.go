@@ -5,6 +5,7 @@ import (
 
 	"github.com/WaronLimsakul/Driven/internal/config"
 	handlers "github.com/WaronLimsakul/Driven/internal/handler"
+	"github.com/WaronLimsakul/Driven/internal/middlewares"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
@@ -21,8 +22,15 @@ func main() {
 		log.Fatal(err)
 	}
 
+	serverMiddleware, err := middlewares.NewServerMiddlware()
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	if serverConfig.Env == "development" {
-		e.Use(middleware.Logger())
+		e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
+			Format: "method=${method} | uri=${uri} | status=${status} | err=${error}\n",
+		}))
 	}
 
 	// give static files server (css, htmx script)
@@ -32,7 +40,7 @@ func main() {
 	e.File("/favicon.ico", "static/ico/favicon.ico")
 
 	e.GET("/", handlers.HandleLanding)
-	e.GET("/home", handlers.HandleGetHome)
+	e.GET("/home", serverMiddleware.AuthMiddleware(handlers.HandleGetHome))
 	e.GET("/week", handlers.HandleGetWeek)
 	e.GET("/day", handlers.HandleGetDay)
 	e.GET("/signin", handlers.HandleGetSignin)
@@ -41,7 +49,7 @@ func main() {
 	e.POST("/signup", serverDBHandlers.HandlePostSignUp)
 	e.POST("/signin", serverDBHandlers.HandlePostSignin)
 
-	e.GET("/*", handlers.HandleNotFound)
+	e.GET("/*", handlers.HandleNotFound) // for not found page
 	// e.GET("/error", handlers.TestError)
 
 	e.Start(serverConfig.Port)
