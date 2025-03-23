@@ -11,7 +11,7 @@ templ SignInScript() {
 		    else if (event.detail.xhr.status == 201) {
 				event.detail.target = document.querySelector("#form");
 				setTimeout(() => {
-			      window.location.replace("/");
+			      window.location.replace("/home");
 				}, 1000);
 			}
 		})

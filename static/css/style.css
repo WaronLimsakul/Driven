@@ -284,9 +284,6 @@
   .justify-center {
     justify-content: center;
   }
-  .justify-items-center {
-    justify-items: center;
-  }
   .space-y-6 {
     :where(& > :not(:last-child)) {
       --tw-space-y-reverse: 0;
@@ -309,9 +306,6 @@
   }
   .border-flame-dark {
     border-color: var(--color-flame-dark);
-  }
-  .border-flame-primary {
-    border-color: var(--color-flame-primary);
   }
   .border-gray-600 {
     border-color: var(--color-gray-600);

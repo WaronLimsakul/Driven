@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/WaronLimsakul/Driven/internal/auth"
 	"github.com/WaronLimsakul/Driven/internal/database"
@@ -27,16 +28,34 @@ func (h DBHandler) HandlePostSignUp(c echo.Context) error {
 		return c.String(http.StatusInternalServerError, "Cannot hash password")
 	}
 
-	params := database.CreateUserParams{
+	createUserParams := database.CreateUserParams{
 		ID:             uuid.New(),
 		Name:           name,
 		Email:          email,
 		HashedPassword: hashedPassword,
 	}
 
-	_, err = h.Db.CreateUser(c.Request().Context(), params)
+	user, err := h.Db.CreateUser(c.Request().Context(), createUserParams)
 	if err != nil {
 		return c.String(http.StatusInternalServerError, "Cannot create new user")
+	}
+
+	accessToken, refreshToken, err := createDoubleTokens(c, user.ID, h.JWTSecret)
+	if err != nil {
+		return err
+	}
+
+	assignAuthCookies(c, h.Env == "production", accessToken, refreshToken)
+	refreshTokenParams := database.CreateRefreshTokenParams{
+		Token:     refreshToken,
+		UserID:    user.ID,
+		ExpiredAt: time.Now().Add(refreshExpireTime),
+	}
+
+	_, err = h.Db.CreateRefreshToken(c.Request().Context(), refreshTokenParams)
+	if err != nil {
+		c.Logger().Errorf("At handlePostSignUp, cannot add refresh token to db: %v", err)
+		return c.String(500, "Something wen wrong")
 	}
 
 	return render(http.StatusCreated, c, templates.SignUpSuccessMessage())

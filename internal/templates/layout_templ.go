@@ -152,7 +152,7 @@ func navbar() templ.Component {
 			templ_7745c5c3_Var4 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "<nav class=\"bg-flame-bg p-4 text-flame-text flex justify-between\"><div><img class=\"w-35 h-auto\" src=\"/static/img/driven_logo_cut.png\"></div><div class=\"mr-15\"><button hx-get=\"/week\" hx-target=\"#view\" class=\"hover:bg-gray-700 cursor-pointer bg-flame-surface p-3 rounded-md\">Week view</button> <button hx-get=\"/day\" hx-target=\"#view\" class=\"hover:bg-gray-700 cursor-pointer bg-flame-surface p-3 rounded-md\">Day view</button></div><div><button class=\"hover:bg-gray-700 cursor-pointer bg-gray-800 p-2 rounded-md\"><a href=\"/signin\">Sign in</a></button></div></nav>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "<nav class=\"bg-flame-bg p-4 text-flame-text flex justify-between\"><div><img class=\"w-35 h-auto\" src=\"/static/img/driven_logo_cut.png\"></div><div class=\"mr-15\"><button hx-get=\"/week\" hx-target=\"#view\" class=\"hover:bg-gray-700 cursor-pointer bg-flame-surface p-3 rounded-md\">Calendar</button> <button hx-get=\"/day\" hx-target=\"#view\" class=\"hover:bg-gray-700 cursor-pointer bg-flame-surface p-3 rounded-md\">Today</button></div><div><button class=\"hover:bg-gray-700 cursor-pointer bg-gray-800 p-2 rounded-md\"><a href=\"/signin\">Sign in</a></button></div></nav>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
