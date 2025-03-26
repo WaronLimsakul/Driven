@@ -29,7 +29,7 @@ func SignUpScript() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<script type=\"text/javascript\">\n\t\tdocument.addEventListener(\"DOMContentLoaded\", (event) => {\n\t\t  document.addEventListener(\"htmx:beforeSwap\", function(evt) {\n\t\t\t\tif (evt.detail.xhr.status == 409) {\n\t\t\t\t    console.log(\"setting status conflict to be able to swapt\");\n\t\t\t\t\tevt.detail.shouldSwap = true;\n\t\t\t\t\tevt.detail.isError = false;\n\t\t\t\t} else if (evt.detail.xhr.status == 201) {\n\t\t\t\t    // show success message, delay redirecting for a sec\n\t\t\t\t    evt.detail.target = document.querySelector(\"#form\");\n\t\t\t\t\tsetTimeout(() => {\n\t\t\t\t      window.location.replace(\"/home\");\n\t\t\t\t\t}, 1000);\n\t\t\t\t}\n\t\t\t})\n\t\t});\n\t</script>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<script type=\"text/javascript\">\n\t\tdocument.addEventListener(\"DOMContentLoaded\", (event) => {\n\t\t  document.addEventListener(\"htmx:beforeSwap\", (evt) => {\n\t\t\t\tif (evt.detail.xhr.status == 409) {\n\t\t\t\t    console.log(\"setting status conflict to be able to swapt\");\n\t\t\t\t\tevt.detail.shouldSwap = true;\n\t\t\t\t\tevt.detail.isError = false;\n\t\t\t\t} else if (evt.detail.xhr.status == 201) {\n\t\t\t\t    // show success message, delay redirecting for a sec\n\t\t\t\t    evt.detail.target = document.querySelector(\"#form\");\n\t\t\t\t\tsetTimeout(() => {\n\t\t\t\t      window.location.replace(\"/home\");\n\t\t\t\t\t}, 1000);\n\t\t\t\t}\n\t\t\t})\n\t\t});\n\t</script>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

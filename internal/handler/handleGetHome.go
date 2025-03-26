@@ -9,5 +9,7 @@ import (
 
 func HandleGetHome(c echo.Context) error {
 	page := templates.Home()
-	return render(http.StatusOK, c, templates.AppLayout(page))
+	script := templates.HomePageScript()
+	layout := templates.InjectedAppLayout
+	return render(http.StatusOK, c, layout(page, script))
 }

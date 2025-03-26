@@ -25,12 +25,19 @@ func CreateRefreshToken() (string, error) {
 	return token, nil
 }
 
+// func printRefreshToken(token database.RefreshToken) {
+// 	fmt.Printf("Token: %v\n", token.Token)
+// 	fmt.Printf("Revoked at: %v\n", token.RevokedAt)
+// 	fmt.Printf("Revoked is not NULL: %v\n", token.RevokedAt.Valid)
+// }
+
 func ValidateRefreshToken(token database.RefreshToken) error {
 	if time.Now().After(token.ExpiredAt) {
 		return fmt.Errorf("Refresh token expired")
 	}
 
-	if !token.RevokedAt.Valid {
+	// if valid = not null = revoked
+	if token.RevokedAt.Valid {
 		return fmt.Errorf("Refresh token revoked")
 	}
 	return nil

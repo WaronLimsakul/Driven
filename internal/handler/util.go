@@ -34,7 +34,13 @@ func createDoubleTokens(c echo.Context, userID uuid.UUID, secret string) (access
 	return accessToken, refreshToken, nil
 }
 
-func assignAuthCookies(c echo.Context, production bool, accessToken, refreshToken string) {
+func AssignAuthCookies(c echo.Context, production bool, accessToken, refreshToken string) {
+	AssignAccessTokenCookie(c, accessToken, production)
+	AssignRefreshTokenCookie(c, refreshToken, production)
+	return
+}
+
+func AssignAccessTokenCookie(c echo.Context, accessToken string, production bool) {
 	// normal browser will bind this cookie to only the server it got cookie from
 	accessTokenCookie := new(http.Cookie)
 	accessTokenCookie.Name = "driven-jwt"
@@ -45,7 +51,10 @@ func assignAuthCookies(c echo.Context, production bool, accessToken, refreshToke
 		accessTokenCookie.Secure = true
 	}
 	c.SetCookie(accessTokenCookie)
+	return
+}
 
+func AssignRefreshTokenCookie(c echo.Context, refreshToken string, production bool) {
 	refreshTokenCookie := new(http.Cookie)
 	refreshTokenCookie.Name = "driven-refresh-token"
 	refreshTokenCookie.Value = refreshToken

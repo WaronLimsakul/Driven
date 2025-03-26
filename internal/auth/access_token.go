@@ -42,7 +42,7 @@ func ValidateJWT(tokenString, secret string) (uuid.UUID, error, bool) {
 	// take the string, do the check in the function
 	token, err := jwt.ParseWithClaims(
 		tokenString,
-		jwt.RegisteredClaims{},
+		&jwt.RegisteredClaims{},
 		func(token *jwt.Token) (any, error) {
 			// check if the method what I expect
 			if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {

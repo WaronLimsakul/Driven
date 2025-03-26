@@ -45,7 +45,7 @@ func (h DBHandler) HandlePostSignUp(c echo.Context) error {
 		return err
 	}
 
-	assignAuthCookies(c, h.Env == "production", accessToken, refreshToken)
+	AssignAuthCookies(c, h.Env == "production", accessToken, refreshToken)
 	refreshTokenParams := database.CreateRefreshTokenParams{
 		Token:     refreshToken,
 		UserID:    user.ID,

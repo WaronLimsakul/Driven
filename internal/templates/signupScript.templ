@@ -3,7 +3,7 @@ package templates
 templ SignUpScript() {
 	<script type="text/javascript">
 		document.addEventListener("DOMContentLoaded", (event) => {
-		  document.addEventListener("htmx:beforeSwap", function(evt) {
+		  document.addEventListener("htmx:beforeSwap", (evt) => {
 				if (evt.detail.xhr.status == 409) {
 				    console.log("setting status conflict to be able to swapt");
 					evt.detail.shouldSwap = true;
