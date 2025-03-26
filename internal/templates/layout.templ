@@ -75,6 +75,22 @@ templ AppLayout(child templ.Component) {
 	<html>
 		@head()
 		<body>
+			<script>0</script> // dummy tag preventing FOUC in firefox
+			@navbar()
+			<main class="w-full h-full">
+				@child // don't have to call it, because it's already component
+			</main>
+			@footer()
+		</body>
+	</html>
+}
+
+templ InjectedAppLayout(child templ.Component, script templ.Component) {
+	<!doctype html>
+	<html>
+		@injectedHead(script)
+		<body>
+			<script>0</script> // dummy tag preventing FOUC in firefox
 			@navbar()
 			<main class="w-full h-full">
 				@child // don't have to call it, because it's already component
@@ -90,6 +106,7 @@ templ Layout(child templ.Component) {
 	<html>
 		@head()
 		<body>
+			<script>0</script>// dummy tag preventing FOUC in firefox
 			@child
 		</body>
 	</html>
@@ -101,6 +118,7 @@ templ InjectedLayout(child templ.Component, script templ.Component) {
 	<html>
 		@injectedHead(script)
 		<body>
+			<script>0</script>// dummy tag preventing FOUC in firefox
 			@child
 		</body>
 	</html>
