@@ -79,6 +79,12 @@ func (m ServerMiddleware) AuthMiddleware(handler echo.HandlerFunc) echo.HandlerF
 			}
 		}
 
+		jwtCookie, err = c.Cookie("driven-jwt") // assign again after refresh
+		if err != nil {
+			c.Logger().Errorf("at auth middleware: %v", err)
+			return err
+		}
+
 		userID, err, isExpired := auth.ValidateJWT(jwtCookie.Value, m.JWTSecret)
 		if err != nil {
 			c.Logger().Errorf("At auth middleware (validate jwt): %v", err)

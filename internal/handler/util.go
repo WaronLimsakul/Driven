@@ -50,6 +50,7 @@ func AssignAccessTokenCookie(c echo.Context, accessToken string, production bool
 	if production {
 		accessTokenCookie.Secure = true
 	}
+	accessTokenCookie.Path = "/"
 	c.SetCookie(accessTokenCookie)
 	return
 }

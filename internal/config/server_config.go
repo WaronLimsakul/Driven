@@ -3,8 +3,6 @@ package config
 import (
 	"fmt"
 	"os"
-
-	"github.com/joho/godotenv"
 )
 
 type ServerConfig struct {
@@ -13,10 +11,6 @@ type ServerConfig struct {
 }
 
 func NewServerConfig() (ServerConfig, error) {
-	err := godotenv.Load()
-	if err != nil {
-		return ServerConfig{}, fmt.Errorf("Couldn't load .env file")
-	}
 	port := os.Getenv("HOST")
 	if port == "" {
 		return ServerConfig{}, fmt.Errorf("Couldn't get host number")

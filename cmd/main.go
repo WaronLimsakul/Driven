@@ -6,12 +6,19 @@ import (
 	"github.com/WaronLimsakul/Driven/internal/config"
 	handlers "github.com/WaronLimsakul/Driven/internal/handler"
 	"github.com/WaronLimsakul/Driven/internal/middlewares"
+	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
 	e := echo.New()
+
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatalf("Couldn't load .env file: %v", err)
+	}
+
 	serverConfig, err := config.NewServerConfig()
 	if err != nil {
 		log.Fatal(err)
@@ -40,7 +47,7 @@ func main() {
 	e.File("/favicon.ico", "static/ico/favicon.ico")
 
 	e.GET("/", handlers.HandleLanding)
-	e.GET("/home", serverMiddleware.AuthMiddleware(handlers.HandleGetHome))
+	e.GET("/home", serverMiddleware.AuthMiddleware(serverDBHandlers.HandleGetHome))
 	e.GET("/week", handlers.HandleGetWeek) // need middleware
 	e.GET("/day", handlers.HandleGetDay)
 	e.GET("/signin", handlers.HandleGetSignin)
