@@ -41,7 +41,7 @@ func main() {
 
 	e.GET("/", handlers.HandleLanding)
 	e.GET("/home", serverMiddleware.AuthMiddleware(handlers.HandleGetHome))
-	e.GET("/week", handlers.HandleGetWeek)
+	e.GET("/week", handlers.HandleGetWeek) // need middleware
 	e.GET("/day", handlers.HandleGetDay)
 	e.GET("/signin", handlers.HandleGetSignin)
 	e.GET("/signup", handlers.HandleGetSignUp)
@@ -49,8 +49,8 @@ func main() {
 	e.POST("/signup", serverDBHandlers.HandlePostSignUp)
 	e.POST("/signin", serverDBHandlers.HandlePostSignin)
 
+	e.GET("/error", handlers.HandleLandError)
 	e.GET("/*", handlers.HandleNotFound) // for not found page
-	// e.GET("/error", handlers.TestError)
 
 	e.Start(serverConfig.Port)
 }
