@@ -79,8 +79,6 @@ func (m ServerMiddleware) AuthMiddleware(handler echo.HandlerFunc) echo.HandlerF
 			}
 		}
 
-		fmt.Printf("JWT: %v\n", jwtCookie.Value)
-
 		userID, err, isExpired := auth.ValidateJWT(jwtCookie.Value, m.JWTSecret)
 		if err != nil {
 			c.Logger().Errorf("At auth middleware (validate jwt): %v", err)
