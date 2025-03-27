@@ -6,6 +6,7 @@ CREATE TABLE tasks (
     keys TEXT,
     date DATE NOT NULL,
     priority INT NOT NULL,
+    isDone BOOL NOT NULL DEFAULT false,
     time_focus INT NOT NULL DEFAULT 0 -- time focus in minutes
 );
 
