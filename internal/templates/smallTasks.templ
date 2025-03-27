@@ -1,9 +1,18 @@
 package templates
 
-import "github.com/WaronLimsakul/Driven/internal/database"
+import (
+	"github.com/WaronLimsakul/Driven/internal/database"
+)
 
 templ SmallTask(task database.Task) {
-	<div class="p-2 bg-gray-800 rounded">{task.Name}</div>
+	<div id={ task.ID.String() } class="p-2 bg-gray-800 rounded hover:bg-gray-700 transition-colors flex gap-2" >
+		if task.Isdone {
+			<input type="checkbox" class="cursor-pointer" checked/>
+		} else {
+			<input type="checkbox" class="cursor-pointer"/>
+		}
+		<p>{task.Name}</p>
+	</div>
 }
 
 templ SmallTasksColumn(tasks []database.Task) {

@@ -21,7 +21,7 @@ templ HomePageScript() {
 				if (event.detail.xhr.status == 403) {
 			     event.detail.shouldSwap = true;
 				} else if (event.detail.target == document.querySelector("#task-form-msg")
-				  && event.detail.xhr.status == 201) {
+				  && event.detail.xhr.status == 201) { // creat task success
 					event.detail.shouldSwap = false;
 				}
 			})

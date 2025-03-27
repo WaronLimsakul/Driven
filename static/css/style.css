@@ -245,8 +245,14 @@
   .grid {
     display: grid;
   }
+  .inline {
+    display: inline;
+  }
   .inline-block {
     display: inline-block;
+  }
+  .inline-flex {
+    display: inline-flex;
   }
   .aspect-video {
     aspect-ratio: var(--aspect-video);
@@ -509,6 +515,13 @@
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-flame-hover);
+      }
+    }
+  }
+  .hover\:bg-gray-600 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-gray-600);
       }
     }
   }
