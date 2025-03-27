@@ -29,7 +29,7 @@ func Home() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"bg-flame-bg flex justify-center text-flame-text w-full h-screen\"><div class=\"w-100 text-lg\" id=\"view\"></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full bg-flame-bg h-screen\"><div class=\"bg-flame-bg flex justify-center w-full text-flame-text\"><div class=\"w-64 m-3 bg-flame-surface p-6 h-90 rounded flex flex-col gap-4\"><h2 class=\"text-lg font-bold text-center\">New tasks</h2><div class=\"p-3 border gap-1 border-flame-accent rounded\"><label class=\"block text-sm\">Day:</label> <input type=\"text\" class=\"w-full p-1 bg-gray-700 rounded text-white\"> <label class=\"block text-sm mt-2\">Task:</label> <input type=\"text\" class=\"w-full p-1 bg-gray-700 rounded text-white\"> <label class=\"block text-sm mt-2\">Keys:</label> <input type=\"text\" class=\"w-full p-1 bg-gray-700 rounded text-white\"></div><button class=\"bg-flame-primary hover:bg-flame-hover cursor-pointer text-white py-2 px-4 rounded\">Add Task</button></div><div class=\"w-full\" id=\"view\"></div></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
