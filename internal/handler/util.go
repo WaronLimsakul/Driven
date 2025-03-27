@@ -67,3 +67,13 @@ func AssignRefreshTokenCookie(c echo.Context, refreshToken string, production bo
 	c.SetCookie(refreshTokenCookie)
 	return
 }
+
+func getWeekRange(today time.Time) (monday, sunday time.Time) {
+	goBack := int(today.Weekday()) - 1 // Sunday is 0
+	if goBack < 0 {
+		goBack = 6
+	}
+
+	monday = today.AddDate(0, 0, -goBack)
+	sunday = today.AddDate(0, 0, 6-goBack)
+}

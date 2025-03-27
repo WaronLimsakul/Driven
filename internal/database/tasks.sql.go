@@ -20,7 +20,7 @@ INSERT INTO tasks (
     date,
     priority
 ) VALUES ($1, $2, $3, $4, $5) -- skip date and time focus
-RETURNING id, owner_id, name, keys, date, priority, time_focus
+RETURNING id, owner_id, name, keys, date, priority, isdone, time_focus
 `
 
 type CreateTaskParams struct {
@@ -47,6 +47,7 @@ func (q *Queries) CreateTask(ctx context.Context, arg CreateTaskParams) (Task, e
 		&i.Keys,
 		&i.Date,
 		&i.Priority,
+		&i.Isdone,
 		&i.TimeFocus,
 	)
 	return i, err
