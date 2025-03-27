@@ -75,19 +75,21 @@ func (m ServerMiddleware) AuthMiddleware(handler echo.HandlerFunc) echo.HandlerF
 		if err != nil {
 			err = m.refreshJWT(refreshToken.Token, c)
 			if err != nil {
+				c.Logger().Printf("catch at 1: %v", err)
 				return err
 			}
+			fmt.Printf("token refreshed\n")
 		}
 
 		jwtCookie, err = c.Cookie("driven-jwt") // assign again after refresh
 		if err != nil {
-			c.Logger().Errorf("at auth middleware: %v", err)
+			c.Logger().Printf("at auth middleware, catch 2: %v", err)
 			return err
 		}
 
 		userID, err, isExpired := auth.ValidateJWT(jwtCookie.Value, m.JWTSecret)
 		if err != nil {
-			c.Logger().Errorf("At auth middleware (validate jwt): %v", err)
+			c.Logger().Printf("At auth middleware (validate jwt): %v", err)
 			return c.Redirect(http.StatusSeeOther, "/error")
 		} else if isExpired {
 			err = m.refreshJWT(refreshToken.Token, c)

@@ -52,7 +52,11 @@ func AssignAccessTokenCookie(c echo.Context, accessToken string, production bool
 		accessTokenCookie.Secure = true
 	}
 	accessTokenCookie.Path = "/"
+	// c.SetCookie() set the response to tell client that they should include
+	// the cookie next time it makes request. It's not immediate.
 	c.SetCookie(accessTokenCookie)
+	// So I have to set in manually only for this request
+	c.Request().AddCookie(accessTokenCookie)
 	return
 }
 
