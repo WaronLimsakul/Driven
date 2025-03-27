@@ -7,6 +7,8 @@ import (
 	"time"
 
 	"github.com/WaronLimsakul/Driven/internal/database"
+	tasks "github.com/WaronLimsakul/Driven/internal/task"
+	"github.com/WaronLimsakul/Driven/internal/templates"
 	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
 )
@@ -66,12 +68,16 @@ func (h DBHandler) HandlePostTask(c echo.Context) error {
 		Date:     taskDate,
 	}
 
-	_, err = h.Db.CreateTask(c.Request().Context(), createTaskParams)
+	newTask, err := h.Db.CreateTask(c.Request().Context(), createTaskParams)
 	if err != nil {
 		c.Logger().Errorf("couldn't create task: %v", err)
 		msg := fmt.Sprintf("error: %s", err)
 		return c.String(http.StatusInternalServerError, msg)
 	}
 
-	return c.String(http.StatusCreated, "create task success")
+	weekDayStr := tasks.GetWeekDayStr(newTask.Date)
+	c.Response().Header().Add("HX-Reswap", "beforeend")
+	c.Response().Header().Add("HX-Retarget", fmt.Sprintf("#%s", weekDayStr))
+
+	return render(http.StatusCreated, c, templates.SmallTask(newTask))
 }

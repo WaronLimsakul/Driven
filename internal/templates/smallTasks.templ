@@ -15,8 +15,8 @@ templ SmallTask(task database.Task) {
 	</div>
 }
 
-templ SmallTasksColumn(tasks []database.Task) {
-	<div class="flex flex-col justify-start gap-2">
+templ SmallTasksColumn(tasks []database.Task, weekDay string) {
+	<div id={ weekDay } class="flex flex-col justify-start gap-2">
 		if tasks != nil {
 			for _, task := range tasks {
 				@SmallTask(task)

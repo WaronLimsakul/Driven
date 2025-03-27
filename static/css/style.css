@@ -203,6 +203,9 @@
   }
 }
 @layer utilities {
+  .row-span-1 {
+    grid-row: span 1 / span 1;
+  }
   .m-3 {
     margin: calc(var(--spacing) * 3);
   }
@@ -257,6 +260,9 @@
   .aspect-video {
     aspect-ratio: var(--aspect-video);
   }
+  .h-8 {
+    height: calc(var(--spacing) * 8);
+  }
   .h-auto {
     height: auto;
   }
@@ -299,8 +305,17 @@
   .cursor-pointer {
     cursor: pointer;
   }
+  .auto-rows-min {
+    grid-auto-rows: min-content;
+  }
   .grid-cols-7 {
     grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+  .grid-rows-\[40px\,1fr\] {
+    grid-template-rows: 40px,1fr;
+  }
+  .grid-rows-\[auto\,1fr\] {
+    grid-template-rows: auto,1fr;
   }
   .flex-col {
     flex-direction: column;

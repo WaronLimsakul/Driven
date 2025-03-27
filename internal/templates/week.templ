@@ -2,19 +2,17 @@ package templates
 
 import "github.com/WaronLimsakul/Driven/internal/database"
 
-templ Week(groupTasks [][]database.Task) {
-	<div class="grid grid-cols-7 gap-2 m-3 mr-5 p-4 border border-gray-700 rounded-lg h-full">
-            <!-- Days Header -->
-            <div class="text-center font-bold">Mon</div>
-            <div class="text-center font-bold">Tue</div>
-            <div class="text-center font-bold">Wed</div>
-            <div class="text-center font-bold">Thu</div>
-            <div class="text-center font-bold">Fri</div>
-            <div class="text-center font-bold">Sat</div>
-            <div class="text-center font-bold">Sun</div>
 
-            for i := 0; i < 7; i++ {
-			    @SmallTasksColumn(groupTasks[i])
+var days [7]string = [7]string{"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"}
+
+templ Week(groupTasks [][]database.Task) {
+	<div class="grid grid-cols-7 auto-rows-min gap-2 m-3 mr-5 p-4 border border-gray-700 rounded-lg h-full">
+            for _, day := range days {
+            	<div class="text-center h-8 font-bold">{ day }</div>
+            }
+
+            for i, day := range days {
+			    @SmallTasksColumn(groupTasks[i], day)
             }
     </div>
 }

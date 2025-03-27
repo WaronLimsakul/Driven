@@ -8,7 +8,7 @@ templ NewTaskForm() {
 		hx-on::after-request="if(event.detail.successful) this.reset()"
 		class="w-1/5 m-3 bg-flame-surface p-6 h-auto rounded flex flex-col gap-4">
         <h2 class="text-lg font-bold text-center">New tasks</h2>
-        <div class="p-3 border gap-1 border-flame-accent rounded">
+        <div class="p-3 gap-1 rounded">
             <label class="block text-sm mt-2" for="task-name">Task:</label>
             <input
 				type="text"
