@@ -203,9 +203,6 @@
   }
 }
 @layer utilities {
-  .row-span-1 {
-    grid-row: span 1 / span 1;
-  }
   .m-3 {
     margin: calc(var(--spacing) * 3);
   }
@@ -248,14 +245,8 @@
   .grid {
     display: grid;
   }
-  .inline {
-    display: inline;
-  }
   .inline-block {
     display: inline-block;
-  }
-  .inline-flex {
-    display: inline-flex;
   }
   .aspect-video {
     aspect-ratio: var(--aspect-video);
@@ -311,12 +302,6 @@
   .grid-cols-7 {
     grid-template-columns: repeat(7, minmax(0, 1fr));
   }
-  .grid-rows-\[40px\,1fr\] {
-    grid-template-rows: 40px,1fr;
-  }
-  .grid-rows-\[auto\,1fr\] {
-    grid-template-rows: auto,1fr;
-  }
   .flex-col {
     flex-direction: column;
   }
@@ -364,9 +349,6 @@
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
-  .border-flame-accent {
-    border-color: var(--color-flame-accent);
-  }
   .border-flame-dark {
     border-color: var(--color-flame-dark);
   }
@@ -379,11 +361,20 @@
   .bg-blue-700 {
     background-color: var(--color-blue-700);
   }
+  .bg-flame-accent\/90 {
+    background-color: color-mix(in oklab, var(--color-flame-accent) 90%, transparent);
+  }
   .bg-flame-bg {
     background-color: var(--color-flame-bg);
   }
+  .bg-flame-dark\/80 {
+    background-color: color-mix(in oklab, var(--color-flame-dark) 80%, transparent);
+  }
   .bg-flame-primary {
     background-color: var(--color-flame-primary);
+  }
+  .bg-flame-primary\/90 {
+    background-color: color-mix(in oklab, var(--color-flame-primary) 90%, transparent);
   }
   .bg-flame-surface {
     background-color: var(--color-flame-surface);
@@ -526,10 +517,31 @@
       }
     }
   }
+  .hover\:bg-flame-accent {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-flame-accent);
+      }
+    }
+  }
+  .hover\:bg-flame-dark {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-flame-dark);
+      }
+    }
+  }
   .hover\:bg-flame-hover {
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-flame-hover);
+      }
+    }
+  }
+  .hover\:bg-flame-primary {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-flame-primary);
       }
     }
   }

@@ -1,11 +1,20 @@
 package templates
 
-import (
-	"github.com/WaronLimsakul/Driven/internal/database"
-)
+import  "github.com/WaronLimsakul/Driven/internal/database"
+import "fmt"
+
+func getTaskClass(priority int32) string {
+	colors := [4]string{
+		"bg-gray-800 hover:bg-gray-700",
+		"bg-gray-700 hover:bg-gray-600",
+		"bg-flame-dark/80 hover:bg-flame-dark",
+		"bg-flame-primary/90 hover:bg-flame-primary",
+	}
+	return fmt.Sprintf("p-2 rounded %s transition-colors flex gap-2", colors[priority])
+}
 
 templ SmallTask(task database.Task) {
-	<div id={ task.ID.String() } class="p-2 bg-gray-800 rounded hover:bg-gray-700 transition-colors flex gap-2" >
+	<div id={ task.ID.String() } class={ getTaskClass(task.Priority) }>
 		if task.Isdone {
 			<input type="checkbox" class="cursor-pointer" checked/>
 		} else {

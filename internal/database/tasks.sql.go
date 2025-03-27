@@ -77,6 +77,7 @@ func (q *Queries) GetTaskByID(ctx context.Context, id uuid.UUID) (Task, error) {
 const getUserTasksWeek = `-- name: GetUserTasksWeek :many
 SELECT id, owner_id, name, keys, date, priority, isdone, time_focus FROM tasks
 WHERE owner_id = $1 AND date >= $2 AND date <= $3
+ORDER BY priority DESC
 `
 
 type GetUserTasksWeekParams struct {

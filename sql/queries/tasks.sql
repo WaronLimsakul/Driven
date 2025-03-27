@@ -10,7 +10,8 @@ RETURNING *;
 
 -- name: GetUserTasksWeek :many
 SELECT * FROM tasks
-WHERE owner_id = $1 AND date >= $2 AND date <= $3;
+WHERE owner_id = $1 AND date >= $2 AND date <= $3
+ORDER BY priority DESC;
 
 -- name: GetTaskByID :one
 SELECT * FROM tasks
