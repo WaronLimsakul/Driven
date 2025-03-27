@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/WaronLimsakul/Driven/internal/auth"
+	"github.com/WaronLimsakul/Driven/internal/database"
 	"github.com/a-h/templ"
 	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
@@ -76,4 +77,19 @@ func getWeekRange(today time.Time) (monday, sunday time.Time) {
 
 	monday = today.AddDate(0, 0, -goBack)
 	sunday = today.AddDate(0, 0, 6-goBack)
+	return monday, sunday
+}
+
+// Get tasks in a week and return [][]task. Start by monday.
+// Not guarantee that all inner slices are not nil.
+func groupTaskDate(tasks []database.Task) [][]database.Task {
+	week := make([][]database.Task, 7)
+	for _, task := range tasks {
+		i := task.Date.Weekday() - 1
+		if i < 0 {
+			i = 6
+		}
+		week[i] = append(week[i], task)
+	}
+	return week
 }

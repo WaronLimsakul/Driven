@@ -48,7 +48,7 @@ func main() {
 
 	e.GET("/", handlers.HandleLanding)
 	e.GET("/home", serverMiddleware.AuthMiddleware(serverDBHandlers.HandleGetHome))
-	e.GET("/week", handlers.HandleGetWeek) // need middleware
+	e.GET("/week", serverMiddleware.AuthMiddleware(serverDBHandlers.HandleGetWeek))
 	e.GET("/day", handlers.HandleGetDay)
 	e.GET("/signin", handlers.HandleGetSignin)
 	e.GET("/signup", handlers.HandleGetSignUp)

@@ -7,3 +7,11 @@ INSERT INTO tasks (
     priority
 ) VALUES ($1, $2, $3, $4, $5) -- skip date and time focus
 RETURNING *;
+
+-- name: GetUserTasksWeek :many
+SELECT * FROM tasks
+WHERE owner_id = $1 AND date >= $2 AND date <= $3;
+
+-- name: GetTaskByID :one
+SELECT * FROM tasks
+WHERE id = $1;

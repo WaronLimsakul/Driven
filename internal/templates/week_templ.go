@@ -8,7 +8,9 @@ package templates
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-func Week() templ.Component {
+import "github.com/WaronLimsakul/Driven/internal/database"
+
+func Week(groupTasks [][]database.Task) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -29,7 +31,17 @@ func Week() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"grid grid-cols-7 gap-2 m-3 mr-5 p-4 border border-gray-700 rounded-lg h-full\"><!-- Days Header --><div class=\"text-center font-bold\">Mon</div><div class=\"text-center font-bold\">Tue</div><div class=\"text-center font-bold\">Wed</div><div class=\"text-center font-bold\">Thu</div><div class=\"text-center font-bold\">Fri</div><div class=\"text-center font-bold\">Sat</div><div class=\"text-center font-bold\">Sun</div><!-- Tasks for each day --><div class=\"flex flex-col justify-start gap-2\"><div class=\"p-2 bg-gray-800 rounded\">t1 ✅</div><div class=\"p-2 bg-gray-800 rounded\">t2 ✅</div><div class=\"p-2 bg-gray-800 rounded\">t3 ✅</div></div><div class=\"flex flex-col gap-2\"><div class=\"p-2 bg-gray-800 rounded\">t1 ✅</div><div class=\"p-2 bg-gray-800 rounded\">t2 ✅</div><div class=\"p-2 bg-gray-800 rounded\">t3 ✅</div><div class=\"p-2 bg-gray-800 rounded\">t4 ✅</div></div><div class=\"flex flex-col gap-2\"><div class=\"p-2 bg-gray-800 rounded\">t1 ✅</div><div class=\"p-2 bg-gray-800 rounded\">t2</div></div><div class=\"flex flex-col gap-2\"><div class=\"p-2 bg-gray-800 rounded\">t1</div><div class=\"p-2 bg-gray-800 rounded\">t2</div><div class=\"p-2 bg-gray-800 rounded\">t3</div></div><div class=\"flex flex-col gap-2\"><div class=\"p-2 bg-gray-800 rounded\">t1</div></div><div class=\"flex flex-col gap-2\"><div class=\"p-2 bg-gray-800 rounded\">t1</div><div class=\"p-2 bg-gray-800 rounded\">t2</div><div class=\"p-2 bg-gray-800 rounded\">t3</div></div><div class=\"flex flex-col gap-2\"><div class=\"p-2 bg-gray-800 rounded\">t1</div><div class=\"p-2 bg-gray-800 rounded\">t2</div></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"grid grid-cols-7 gap-2 m-3 mr-5 p-4 border border-gray-700 rounded-lg h-full\"><!-- Days Header --><div class=\"text-center font-bold\">Mon</div><div class=\"text-center font-bold\">Tue</div><div class=\"text-center font-bold\">Wed</div><div class=\"text-center font-bold\">Thu</div><div class=\"text-center font-bold\">Fri</div><div class=\"text-center font-bold\">Sat</div><div class=\"text-center font-bold\">Sun</div>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		for i := 0; i < 7; i++ {
+			templ_7745c5c3_Err = SmallTasksColumn(groupTasks[i]).Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "</div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
