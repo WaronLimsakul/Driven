@@ -56,6 +56,7 @@ func main() {
 	e.POST("/signup", serverDBHandlers.HandlePostSignUp)
 	e.POST("/signin", serverDBHandlers.HandlePostSignin)
 
+	e.POST("/tasks", serverMiddleware.AuthMiddleware(serverDBHandlers.HandlePostTask))
 	e.GET("/error", handlers.HandleLandError)
 	e.GET("/*", handlers.HandleNotFound) // for not found page
 
