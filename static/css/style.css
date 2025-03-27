@@ -7,8 +7,6 @@
     monospace;
     --color-red-500: oklch(0.637 0.237 25.331);
     --color-blue-400: oklch(0.707 0.165 254.624);
-    --color-blue-500: oklch(0.623 0.214 259.815);
-    --color-blue-600: oklch(0.546 0.245 262.881);
     --color-blue-700: oklch(0.488 0.243 264.376);
     --color-blue-800: oklch(0.424 0.199 265.638);
     --color-gray-300: oklch(0.872 0.01 258.338);
@@ -204,24 +202,6 @@
   }
 }
 @layer utilities {
-  .container {
-    width: 100%;
-    @media (width >= 40rem) {
-      max-width: 40rem;
-    }
-    @media (width >= 48rem) {
-      max-width: 48rem;
-    }
-    @media (width >= 64rem) {
-      max-width: 64rem;
-    }
-    @media (width >= 80rem) {
-      max-width: 80rem;
-    }
-    @media (width >= 96rem) {
-      max-width: 96rem;
-    }
-  }
   .m-3 {
     margin: calc(var(--spacing) * 3);
   }
@@ -267,12 +247,6 @@
   .aspect-video {
     aspect-ratio: var(--aspect-video);
   }
-  .h-50 {
-    height: calc(var(--spacing) * 50);
-  }
-  .h-70 {
-    height: calc(var(--spacing) * 70);
-  }
   .h-90 {
     height: calc(var(--spacing) * 90);
   }
@@ -285,26 +259,14 @@
   .h-screen {
     height: 100vh;
   }
-  .min-h-1\/2 {
-    min-height: calc(1/2 * 100%);
-  }
   .min-h-screen {
     min-height: 100vh;
-  }
-  .w-1 {
-    width: calc(var(--spacing) * 1);
-  }
-  .w-3\/4 {
-    width: calc(3/4 * 100%);
   }
   .w-35 {
     width: calc(var(--spacing) * 35);
   }
   .w-64 {
     width: calc(var(--spacing) * 64);
-  }
-  .w-100 {
-    width: calc(var(--spacing) * 100);
   }
   .w-full {
     width: 100%;
@@ -329,9 +291,6 @@
   }
   .cursor-pointer {
     cursor: pointer;
-  }
-  .grid-cols-4 {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
   .grid-cols-7 {
     grid-template-columns: repeat(7, minmax(0, 1fr));
@@ -395,9 +354,6 @@
   .border-gray-700 {
     border-color: var(--color-gray-700);
   }
-  .bg-blue-500 {
-    background-color: var(--color-blue-500);
-  }
   .bg-blue-700 {
     background-color: var(--color-blue-700);
   }
@@ -409,9 +365,6 @@
   }
   .bg-flame-surface {
     background-color: var(--color-flame-surface);
-  }
-  .bg-gray-600 {
-    background-color: var(--color-gray-600);
   }
   .bg-gray-700 {
     background-color: var(--color-gray-700);
@@ -540,13 +493,6 @@
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
-  }
-  .hover\:bg-blue-600 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-blue-600);
-      }
-    }
   }
   .hover\:bg-blue-800 {
     &:hover {
