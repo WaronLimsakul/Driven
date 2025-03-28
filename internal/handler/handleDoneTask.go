@@ -4,6 +4,8 @@ import (
 	"net/http"
 
 	"github.com/WaronLimsakul/Driven/internal/database"
+	tasks "github.com/WaronLimsakul/Driven/internal/task"
+	"github.com/WaronLimsakul/Driven/internal/templates"
 	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
 )
@@ -35,5 +37,9 @@ func (h DBHandler) HandleDoneTask(c echo.Context) error {
 		return c.String(http.StatusUnauthorized, "something went wrong")
 	}
 
-	return nil
+	taskWeekDay := tasks.GetWeekDayStr(updatedTask.Date)
+
+	return render(
+		http.StatusCreated, c,
+		templates.DoneTaskResponse(updatedTask, taskWeekDay))
 }

@@ -18,7 +18,13 @@ templ SmallTask(task database.Task) {
 		if task.IsDone {
 			<input type="checkbox" class="cursor-pointer" checked/>
 		} else {
-			<input type="checkbox" class="cursor-pointer"/>
+			<input
+				type="checkbox"
+				class="cursor-pointer"
+				hx-put={ fmt.Sprintf("/tasks/done/%s", task.ID.String()) }
+				hx-swap="outerHTML"
+				hx-target="closest div"
+				/>
 		}
 		<p>{task.Name}</p>
 	</div>
@@ -31,5 +37,19 @@ templ SmallTasksColumn(tasks []database.Task, weekDay string) {
 				@SmallTask(task)
 			}
 		}
+	</div>
+}
+
+templ DoneTaskResponse(task database.Task, weekDay string) {
+	// this hx-swap-oob is like telling the browser like it needs to
+	// be swapped but not at the target. so we basically we can
+	// many things at once using this attribute.
+	<div hx-swap-oob={ fmt.Sprintf("beforeend:#%s", weekDay)} >
+		<div
+			id={ task.ID.String() }
+			class={ getTaskClass(task.Priority) }>
+			<input type="checkbox" class="cursor-pointer" checked/>
+			<p>{task.Name}</p>
+		</div>
 	</div>
 }
