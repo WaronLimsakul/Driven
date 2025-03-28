@@ -20,7 +20,7 @@ INSERT INTO tasks (
     date,
     priority
 ) VALUES ($1, $2, $3, $4, $5) -- skip date and time focus
-RETURNING id, owner_id, name, keys, date, priority, isdone, time_focus
+RETURNING id, owner_id, name, keys, date, priority, is_done, time_focus
 `
 
 type CreateTaskParams struct {
@@ -47,14 +47,42 @@ func (q *Queries) CreateTask(ctx context.Context, arg CreateTaskParams) (Task, e
 		&i.Keys,
 		&i.Date,
 		&i.Priority,
-		&i.Isdone,
+		&i.IsDone,
+		&i.TimeFocus,
+	)
+	return i, err
+}
+
+const doneTaskByID = `-- name: DoneTaskByID :one
+UPDATE tasks
+SET is_done = true
+WHERE id = $1 AND owner_id = $2
+RETURNING id, owner_id, name, keys, date, priority, is_done, time_focus
+`
+
+type DoneTaskByIDParams struct {
+	ID      uuid.UUID
+	OwnerID uuid.UUID
+}
+
+func (q *Queries) DoneTaskByID(ctx context.Context, arg DoneTaskByIDParams) (Task, error) {
+	row := q.db.QueryRowContext(ctx, doneTaskByID, arg.ID, arg.OwnerID)
+	var i Task
+	err := row.Scan(
+		&i.ID,
+		&i.OwnerID,
+		&i.Name,
+		&i.Keys,
+		&i.Date,
+		&i.Priority,
+		&i.IsDone,
 		&i.TimeFocus,
 	)
 	return i, err
 }
 
 const getTaskByID = `-- name: GetTaskByID :one
-SELECT id, owner_id, name, keys, date, priority, isdone, time_focus FROM tasks
+SELECT id, owner_id, name, keys, date, priority, is_done, time_focus FROM tasks
 WHERE id = $1
 `
 
@@ -68,16 +96,16 @@ func (q *Queries) GetTaskByID(ctx context.Context, id uuid.UUID) (Task, error) {
 		&i.Keys,
 		&i.Date,
 		&i.Priority,
-		&i.Isdone,
+		&i.IsDone,
 		&i.TimeFocus,
 	)
 	return i, err
 }
 
 const getUserTasksWeek = `-- name: GetUserTasksWeek :many
-SELECT id, owner_id, name, keys, date, priority, isdone, time_focus FROM tasks
+SELECT id, owner_id, name, keys, date, priority, is_done, time_focus FROM tasks
 WHERE owner_id = $1 AND date >= $2 AND date <= $3
-ORDER BY priority DESC
+ORDER BY is_done ASC, priority DESC
 `
 
 type GetUserTasksWeekParams struct {
@@ -102,7 +130,7 @@ func (q *Queries) GetUserTasksWeek(ctx context.Context, arg GetUserTasksWeekPara
 			&i.Keys,
 			&i.Date,
 			&i.Priority,
-			&i.Isdone,
+			&i.IsDone,
 			&i.TimeFocus,
 		); err != nil {
 			return nil, err

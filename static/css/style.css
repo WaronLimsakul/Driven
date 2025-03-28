@@ -56,7 +56,6 @@
     --color-flame-primary: #0095ff;
     --color-flame-hover: #1aa3ff;
     --color-flame-dark: #0077cc;
-    --color-flame-accent: #33bbff;
     --color-flame-text: #e0f4ff;
     --color-flame-muted: #6b90a0;
   }
@@ -361,9 +360,6 @@
   .bg-blue-700 {
     background-color: var(--color-blue-700);
   }
-  .bg-flame-accent\/90 {
-    background-color: color-mix(in oklab, var(--color-flame-accent) 90%, transparent);
-  }
   .bg-flame-bg {
     background-color: var(--color-flame-bg);
   }
@@ -514,13 +510,6 @@
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-blue-800);
-      }
-    }
-  }
-  .hover\:bg-flame-accent {
-    &:hover {
-      @media (hover: hover) {
-        background-color: var(--color-flame-accent);
       }
     }
   }

@@ -15,7 +15,7 @@ func getTaskClass(priority int32) string {
 
 templ SmallTask(task database.Task) {
 	<div id={ task.ID.String() } class={ getTaskClass(task.Priority) }>
-		if task.Isdone {
+		if task.IsDone {
 			<input type="checkbox" class="cursor-pointer" checked/>
 		} else {
 			<input type="checkbox" class="cursor-pointer"/>

@@ -77,7 +77,7 @@ func SmallTask(task database.Task) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		if task.Isdone {
+		if task.IsDone {
 			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "<input type=\"checkbox\" class=\"cursor-pointer\" checked>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err

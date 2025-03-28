@@ -11,8 +11,14 @@ RETURNING *;
 -- name: GetUserTasksWeek :many
 SELECT * FROM tasks
 WHERE owner_id = $1 AND date >= $2 AND date <= $3
-ORDER BY priority DESC;
+ORDER BY is_done ASC, priority DESC;
 
 -- name: GetTaskByID :one
 SELECT * FROM tasks
 WHERE id = $1;
+
+-- name: DoneTaskByID :one
+UPDATE tasks
+SET is_done = true
+WHERE id = $1 AND owner_id = $2
+RETURNING *;

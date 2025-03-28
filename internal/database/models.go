@@ -27,7 +27,7 @@ type Task struct {
 	Keys      sql.NullString
 	Date      time.Time
 	Priority  int32
-	Isdone    bool
+	IsDone    bool
 	TimeFocus int32
 }
 
