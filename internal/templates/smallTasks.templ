@@ -1,7 +1,10 @@
 package templates
 
-import  "github.com/WaronLimsakul/Driven/internal/database"
-import "fmt"
+import (
+	"github.com/WaronLimsakul/Driven/internal/database"
+	tasks "github.com/WaronLimsakul/Driven/internal/task"
+	"fmt"
+)
 
 func getTaskClass(priority int32) string {
 	colors := [4]string{
@@ -16,12 +19,18 @@ func getTaskClass(priority int32) string {
 templ SmallTask(task database.Task) {
 	<div id={ task.ID.String() } class={ getTaskClass(task.Priority) }>
 		if task.IsDone {
-			<input type="checkbox" class="cursor-pointer" checked/>
+			<input
+				type="checkbox"
+				class="cursor-pointer"
+				hx-put={ fmt.Sprintf("/tasks/%s/undone", task.ID.String()) }
+				hx-target={ fmt.Sprintf("#%s", tasks.GetWeekDayStr(task.Date)) }
+				hx-swap="outerHTML"
+				checked/>
 		} else {
 			<input
 				type="checkbox"
 				class="cursor-pointer"
-				hx-put={ fmt.Sprintf("/tasks/done/%s", task.ID.String()) }
+				hx-put={ fmt.Sprintf("/tasks/%s/done", task.ID.String()) }
 				hx-swap="outerHTML"
 				hx-target="closest div"
 				/>

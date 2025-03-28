@@ -22,3 +22,14 @@ UPDATE tasks
 SET is_done = true
 WHERE id = $1 AND owner_id = $2
 RETURNING *;
+
+-- name: UndoneTaskByID :one
+UPDATE tasks
+SET is_done = false
+WHERE id = $1 AND owner_id = $2
+RETURNING *;
+
+-- name: GetTaskByDate :many
+SELECT * FROM tasks
+WHERE owner_id = $1 AND date = $2
+ORDER BY is_done ASC, priority DESC;

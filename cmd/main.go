@@ -57,7 +57,8 @@ func main() {
 	e.POST("/signin", serverDBHandlers.HandlePostSignin)
 
 	e.POST("/tasks", serverMiddleware.AuthMiddleware(serverDBHandlers.HandlePostTask))
-	e.PUT("/tasks/done/:id", serverMiddleware.AuthMiddleware(serverDBHandlers.HandleDoneTask))
+	e.PUT("/tasks/:id/done", serverMiddleware.AuthMiddleware(serverDBHandlers.HandleDoneTask))
+	e.PUT("/tasks/:id/undone", serverMiddleware.AuthMiddleware(serverDBHandlers.HandleUndoneTask))
 	e.GET("/error", handlers.HandleLandError)
 	e.GET("/*", handlers.HandleNotFound) // for not found page
 

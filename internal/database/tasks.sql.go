@@ -81,6 +81,49 @@ func (q *Queries) DoneTaskByID(ctx context.Context, arg DoneTaskByIDParams) (Tas
 	return i, err
 }
 
+const getTaskByDate = `-- name: GetTaskByDate :many
+SELECT id, owner_id, name, keys, date, priority, is_done, time_focus FROM tasks
+WHERE owner_id = $1 AND date = $2
+ORDER BY is_done ASC, priority DESC
+`
+
+type GetTaskByDateParams struct {
+	OwnerID uuid.UUID
+	Date    time.Time
+}
+
+func (q *Queries) GetTaskByDate(ctx context.Context, arg GetTaskByDateParams) ([]Task, error) {
+	rows, err := q.db.QueryContext(ctx, getTaskByDate, arg.OwnerID, arg.Date)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Task
+	for rows.Next() {
+		var i Task
+		if err := rows.Scan(
+			&i.ID,
+			&i.OwnerID,
+			&i.Name,
+			&i.Keys,
+			&i.Date,
+			&i.Priority,
+			&i.IsDone,
+			&i.TimeFocus,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const getTaskByID = `-- name: GetTaskByID :one
 SELECT id, owner_id, name, keys, date, priority, is_done, time_focus FROM tasks
 WHERE id = $1
@@ -144,4 +187,32 @@ func (q *Queries) GetUserTasksWeek(ctx context.Context, arg GetUserTasksWeekPara
 		return nil, err
 	}
 	return items, nil
+}
+
+const undoneTaskByID = `-- name: UndoneTaskByID :one
+UPDATE tasks
+SET is_done = false
+WHERE id = $1 AND owner_id = $2
+RETURNING id, owner_id, name, keys, date, priority, is_done, time_focus
+`
+
+type UndoneTaskByIDParams struct {
+	ID      uuid.UUID
+	OwnerID uuid.UUID
+}
+
+func (q *Queries) UndoneTaskByID(ctx context.Context, arg UndoneTaskByIDParams) (Task, error) {
+	row := q.db.QueryRowContext(ctx, undoneTaskByID, arg.ID, arg.OwnerID)
+	var i Task
+	err := row.Scan(
+		&i.ID,
+		&i.OwnerID,
+		&i.Name,
+		&i.Keys,
+		&i.Date,
+		&i.Priority,
+		&i.IsDone,
+		&i.TimeFocus,
+	)
+	return i, err
 }
