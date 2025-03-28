@@ -10,7 +10,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func (h DBHandler) HandleUndoneTask(c echo.Context) error {
+func (h DBHandler) HandleUndoneTaskWeek(c echo.Context) error {
 	userIDStr := c.Request().Header.Get("Driven-userID")
 	userUUID, err := uuid.Parse(userIDStr)
 	if err != nil {

@@ -10,7 +10,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-func (h DBHandler) HandleDoneTask(c echo.Context) error {
+func (h DBHandler) HandleDoneTaskWeek(c echo.Context) error {
 	taskIDStr := c.Param("id")
 	taskUUID, err := uuid.Parse(taskIDStr)
 	if err != nil {

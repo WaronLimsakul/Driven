@@ -22,7 +22,7 @@ templ SmallTask(task database.Task) {
 			<input
 				type="checkbox"
 				class="cursor-pointer"
-				hx-put={ fmt.Sprintf("/tasks/%s/undone", task.ID.String()) }
+				hx-put={ fmt.Sprintf("/tasks/week/%s/undone", task.ID.String()) }
 				hx-target={ fmt.Sprintf("#%s", tasks.GetWeekDayStr(task.Date)) }
 				hx-swap="outerHTML"
 				checked/>
@@ -30,7 +30,7 @@ templ SmallTask(task database.Task) {
 			<input
 				type="checkbox"
 				class="cursor-pointer"
-				hx-put={ fmt.Sprintf("/tasks/%s/done", task.ID.String()) }
+				hx-put={ fmt.Sprintf("/tasks/week/%s/done", task.ID.String()) }
 				hx-swap="outerHTML"
 				hx-target="closest div"
 				/>
