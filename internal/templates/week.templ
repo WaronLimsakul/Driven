@@ -25,7 +25,7 @@ templ Week(groupTasks [][]database.Task) {
 templ NewTaskFormWeek(today time.Time) {
 	<form
 		id="task-form"
-		hx-post="/tasks"
+		hx-post="/tasks/week"
 		hx-target="#task-form-msg"
 		hx-on::after-request="if(event.detail.successful) this.reset()"
 		hx-swap-oob="true"

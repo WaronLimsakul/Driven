@@ -56,7 +56,8 @@ func main() {
 	e.POST("/signup", serverDBHandlers.HandlePostSignUp)
 	e.POST("/signin", serverDBHandlers.HandlePostSignin)
 
-	e.POST("/tasks", serverMiddleware.AuthMiddleware(serverDBHandlers.HandlePostTask))
+	e.POST("/tasks/day", serverMiddleware.AuthMiddleware(serverDBHandlers.HandlePostTaskDay))
+	e.POST("/tasks/week", serverMiddleware.AuthMiddleware(serverDBHandlers.HandlePostTaskWeek))
 	e.PUT("/tasks/week/:id/done", serverMiddleware.AuthMiddleware(serverDBHandlers.HandleDoneTaskWeek))
 	e.PUT("/tasks/week/:id/undone", serverMiddleware.AuthMiddleware(serverDBHandlers.HandleUndoneTaskWeek))
 	e.GET("/error", handlers.HandleLandError)

@@ -22,7 +22,7 @@ templ Day(tasks []database.Task, day time.Time) {
 templ NewTaskFormDay(today time.Time) {
 	<form
 		id="task-form"
-		hx-post="/tasks"
+		hx-post="/tasks/day"
 		hx-target="#task-form-msg"
 		hx-on::after-request="if(event.detail.successful) this.reset()"
 		hx-swap-oob="true"
