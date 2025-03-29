@@ -152,7 +152,7 @@ func navbar(isSignedIn bool, userName string) templ.Component {
 			templ_7745c5c3_Var4 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "<nav class=\"bg-flame-bg p-4 text-flame-text flex justify-between\"><div><img class=\"w-35 h-auto\" src=\"/static/img/driven_logo_cut.png\"></div><div class=\"mr-15\"><button hx-get=\"/week\" hx-target=\"#view\" hx-disabled-elt=\"this\" class=\"hover:bg-gray-700 cursor-pointer bg-flame-surface p-3 rounded-md\">Calendar</button> <button hx-get=\"/day\" hx-target=\"#view\" hx-disabled-elt=\"this\" class=\"hover:bg-gray-700 cursor-pointer bg-flame-surface p-3 rounded-md\">Today</button></div><div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "<nav class=\"bg-flame-bg p-4 text-flame-text flex justify-between\"><div><img class=\"w-35 h-auto\" src=\"/static/img/driven_logo_cut.png\"></div><div class=\"mr-15\"><button hx-get=\"/week\" hx-target=\"#view\" hx-disabled-elt=\"this\" class=\"bg-blue-600 hover:bg-blue-500 disabled:bg-gray-500 cursor-pointer p-3 rounded-md\">Calendar</button> <button hx-get=\"/day\" hx-target=\"#view\" hx-disabled-elt=\"this\" class=\"bg-blue-600 hover:bg-blue-500 disabled:bg-gray-500 cursor-pointer p-3 rounded-md\">Today</button></div><div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

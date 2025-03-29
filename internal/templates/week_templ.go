@@ -112,7 +112,7 @@ func NewTaskFormWeek(today time.Time) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "\" required class=\"w-full p-1 bg-gray-700 rounded text-white\"></div><p class=\"text-red-400 text-sm\" id=\"task-form-msg\"></p><button id=\"add-task-button\" type=\"submit\" class=\"bg-flame-primary hover:bg-flame-hover cursor-pointer text-white py-2 px-4 rounded\">Add Task</button></form>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "\" required class=\"w-full p-1 bg-gray-700 rounded text-white\"></div><p class=\"text-red-400 text-sm\" id=\"task-form-msg\"></p><button id=\"add-task-button\" type=\"submit\" class=\"bg-flame-primary hover:bg-flame-hover disabled:bg-gray-500 cursor-pointer text-white py-2 px-4 rounded\">Add Task</button></form>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
