@@ -47,12 +47,14 @@ templ navbar(isSignedIn bool, userName string) {
 			<button
 				hx-get="/week"
 				hx-target="#view"
+				hx-disabled-elt="this"
 				class="hover:bg-gray-700 cursor-pointer bg-flame-surface p-3 rounded-md">
 					Calendar
 			</button>
 			<button
 				hx-get="/day"
 				hx-target="#view"
+				hx-disabled-elt="this"
 				class="hover:bg-gray-700 cursor-pointer bg-flame-surface p-3 rounded-md">
 					Today
 			</button>

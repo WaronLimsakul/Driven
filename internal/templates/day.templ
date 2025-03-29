@@ -15,4 +15,49 @@ templ Day(tasks []database.Task, day time.Time) {
 		<div class="text-center text-lg font-semibold mb-4">{ timeTemplate(day) }</div>
         @BigTasksColumn(tasks)
 	</div>
+	@NewTaskFormDay(day)
+}
+
+templ NewTaskFormDay(today time.Time) {
+	<form
+		id="task-form"
+		hx-post="/tasks"
+		hx-target="#task-form-msg"
+		hx-on::after-request="if(event.detail.successful) this.reset()"
+		hx-swap-oob="true"
+		hx-disabled-elt="#add-task-button"
+		class="w-1/5 m-3 bg-flame-surface p-6 h-full rounded flex flex-col justify-center gap-4">
+        <h2 class="text-lg font-bold text-center">New tasks</h2>
+        <div class="p-3 gap-1 rounded">
+            <label class="block text-sm mt-2" for="task-name">Task:</label>
+            <input
+				type="text"
+				name="task-name"
+				required
+				class="w-full p-1 bg-gray-700 rounded text-white"/>
+            <label class="block text-sm mt-2" for="task-priority">Priority:</label>
+            <input
+				type="number"
+				min="0" max="3"
+				name="task-priority"
+				value="0"
+				required
+				class="w-full p-1 bg-gray-700 rounded text-white"/>
+            <input
+				type="date"
+				name="task-date"
+				id="task-date"
+				value={ fmt.Sprintf("%04d-%02d-%02d", today.Year(), today.Month(), today.Day()) }
+				required
+				hidden
+				class="w-full p-1 bg-gray-700 rounded text-white"/>
+        </div>
+		<p class="text-red-400 text-sm" id="task-form-msg"></p>
+		<button
+        	id="add-task-button"
+        	type="submit"
+         	class="bg-flame-primary hover:bg-flame-hover cursor-pointer text-white py-2 px-4 rounded">
+          Add Task
+        </button>
+	</form>
 }
