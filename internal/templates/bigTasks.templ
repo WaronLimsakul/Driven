@@ -1,0 +1,27 @@
+package templates
+
+import (
+	"github.com/WaronLimsakul/Driven/internal/database"
+	// "strconv"
+)
+
+templ BigTask(task database.Task) {
+	<div class="bg-gray-800 p-4 rounded-lg">
+        <div class="mb-2 font-semibold">{ task.Name }</div>
+        <div class="text-sm">Prior: <span class="text-yellow-400">***</span></div>
+        // <div class="text-sm mb-2">Timer: ....</div>
+        <textarea class="w-full p-2 bg-gray-700 text-white rounded" placeholder="- key1\n- key2\n- ..."></textarea>
+        <div class="flex justify-between items-center mt-2">
+            <input type="checkbox" class="w-6 h-6">
+            <button class="bg-blue-500 px-4 py-1 rounded">Save</button>
+        </div>
+    </div>
+}
+
+templ BigTasksColumn(tasks []database.Task) {
+    <div class="space-y-4">
+    for _, task := range tasks {
+       	@BigTask(task)
+    }
+    </div>
+}

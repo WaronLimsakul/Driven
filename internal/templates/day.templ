@@ -1,5 +1,12 @@
 package templates
 
-templ Day() {
-	<h1 class="m-5"> Day view </h1>
+import (
+	"github.com/WaronLimsakul/Driven/internal/database"
+)
+
+templ Day(tasks []database.Task) {
+	<div class="max-w-lg mx-auto">
+        <div class="text-center text-lg font-semibold mb-4">Sat 15/3/2025</div>
+        @BigTasksColumn(tasks)
+	</div>
 }
