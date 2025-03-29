@@ -29,5 +29,5 @@ func (h DBHandler) HandleGetDay(c echo.Context) error {
 
 	todaysTasks, err := h.Db.GetTaskByDate(c.Request().Context(), getTasksParams)
 
-	return render(http.StatusOK, c, templates.Day(todaysTasks))
+	return render(http.StatusOK, c, templates.Day(todaysTasks, today))
 }

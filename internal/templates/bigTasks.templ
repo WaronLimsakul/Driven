@@ -5,16 +5,30 @@ import (
 	// "strconv"
 )
 
+templ priorityStars(prior int32) {
+	switch prior {
+		case 3:
+			<span class="text-yellow-400 mb-2">***</span>
+		case 2:
+			<span class="text-yellow-400 mb-2">**</span>
+		case 1:
+			<span class="text-yellow-400 mb-2">*</span>
+		default:
+			<div></div>
+	}
+}
+
 templ BigTask(task database.Task) {
 	<div class="bg-gray-800 p-4 rounded-lg">
-        <div class="mb-2 font-semibold">{ task.Name }</div>
-        <div class="text-sm">Prior: <span class="text-yellow-400">***</span></div>
+		<div class="flex items-center gap-1 my-2">
+		    <input type="checkbox" class="w-6 h-6 rounded cursor-pointer">
+		    <div class="my-auto ml-2 font-semibold">{ task.Name }</div>
+			@priorityStars(task.Priority)
+		</div>
         // <div class="text-sm mb-2">Timer: ....</div>
-        <textarea class="w-full p-2 bg-gray-700 text-white rounded" placeholder="- key1\n- key2\n- ..."></textarea>
-        <div class="flex justify-between items-center mt-2">
-            <input type="checkbox" class="w-6 h-6">
-            <button class="bg-blue-500 px-4 py-1 rounded">Save</button>
-        </div>
+	        <textarea class="w-full h-20 p-2 bg-gray-700 text-white rounded my-2" placeholder="task keys"></textarea>
+			<br/>
+	        <button class="bg-flame-primary hover:bg-flame-accent cursor-pointer w-auto px-4 py-1 rounded">Save</button>
     </div>
 }
 

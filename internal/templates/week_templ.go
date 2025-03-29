@@ -33,7 +33,7 @@ func Week(groupTasks [][]database.Task) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"grid grid-cols-7 auto-rows-min gap-2 m-3 mr-5 p-4 border border-gray-700 rounded-lg h-full\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"grid grid-cols-7 auto-rows-min gap-2 m-3 mr-5 p-4 bg-flame-surface rounded-lg h-full\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
