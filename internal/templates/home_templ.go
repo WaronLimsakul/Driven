@@ -29,7 +29,7 @@ func NewTaskForm() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<form id=\"task-form\" hx-post=\"/tasks\" hx-target=\"#task-form-msg\" hx-on::after-request=\"if(event.detail.successful) this.reset()\" class=\"w-1/5 m-3 bg-flame-surface p-6 h-auto rounded flex flex-col gap-4\"><h2 class=\"text-lg font-bold text-center\">New tasks</h2><div class=\"p-3 gap-1 rounded\"><label class=\"block text-sm mt-2\" for=\"task-name\">Task:</label> <input type=\"text\" name=\"task-name\" required class=\"w-full p-1 bg-gray-700 rounded text-white\"> <label class=\"block text-sm mt-2\" for=\"task-priority\">Priority:</label> <input type=\"number\" min=\"0\" max=\"3\" name=\"task-priority\" required class=\"w-full p-1 bg-gray-700 rounded text-white\"> <label class=\"block text-sm\" for=\"task-date\">Date:</label> <input type=\"date\" name=\"task-date\" id=\"task-date\" required class=\"w-full p-1 bg-gray-700 rounded text-white\"></div><p class=\"text-red-400 text-sm\" id=\"task-form-msg\"></p><button type=\"submit\" class=\"bg-flame-primary hover:bg-flame-hover cursor-pointer text-white py-2 px-4 rounded\">Add Task</button></form>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<form id=\"task-form\" hx-post=\"/tasks\" hx-target=\"#task-form-msg\" hx-on::after-request=\"if(event.detail.successful) this.reset()\" class=\"w-1/5 m-3 bg-flame-surface p-6 h-full rounded flex flex-col justify-center gap-4\"><h2 class=\"text-lg font-bold text-center\">New tasks</h2><div class=\"p-3 gap-1 rounded\"><label class=\"block text-sm mt-2\" for=\"task-name\">Task:</label> <input type=\"text\" name=\"task-name\" required class=\"w-full p-1 bg-gray-700 rounded text-white\"> <label class=\"block text-sm mt-2\" for=\"task-priority\">Priority:</label> <input type=\"number\" min=\"0\" max=\"3\" name=\"task-priority\" value=\"0\" required class=\"w-full p-1 bg-gray-700 rounded text-white\"> <label class=\"block text-sm\" for=\"task-date\">Date:</label> <input type=\"date\" name=\"task-date\" id=\"task-date\" required class=\"w-full p-1 bg-gray-700 rounded text-white\"></div><p class=\"text-red-400 text-sm\" id=\"task-form-msg\"></p><button type=\"submit\" class=\"bg-flame-primary hover:bg-flame-hover cursor-pointer text-white py-2 px-4 rounded\">Add Task</button></form>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -58,7 +58,7 @@ func Home() templ.Component {
 			templ_7745c5c3_Var2 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<div class=\"w-full bg-flame-bg h-screen\"><div class=\"bg-flame-bg flex justify-center w-full text-flame-text\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<div class=\"w-full bg-flame-bg min-h-screen h-auto p-2\"><div class=\"bg-flame-bg flex justify-center w-full text-flame-text\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

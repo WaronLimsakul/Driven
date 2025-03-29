@@ -17,6 +17,10 @@ templ HomePageScript() {
                   // console.log("no task date");
               }
             });
+
+            let today = new Date().toISOString().split('T')[0];
+            document.getElementById("task-date").value = today;
+
 		    document.addEventListener("htmx:beforeSwap", (event) => {
 				if (event.detail.xhr.status == 403) {
 			     event.detail.shouldSwap = true;

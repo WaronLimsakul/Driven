@@ -40,7 +40,7 @@ func Day(tasks []database.Task, day time.Time) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"m-3 mr-5 p-4 bg-flame-surface rounded-lg h-full\"><div class=\"text-center text-lg font-semibold mb-4\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"my-3 mr-5 p-4 bg-flame-surface rounded-lg h-auto\"><div class=\"text-center text-lg font-semibold mb-4\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
