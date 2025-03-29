@@ -3,6 +3,7 @@ package templates
 import (
 	"github.com/WaronLimsakul/Driven/internal/database"
 	"fmt"
+	"database/sql"
 )
 
 templ priorityStars(prior int32) {
@@ -15,6 +16,17 @@ templ priorityStars(prior int32) {
 			<span class="text-yellow-400 mb-2">*</span>
 		default:
 			<div></div>
+	}
+}
+
+templ keysArea(keys sql.NullString) {
+	if keys.Valid {
+		<textarea class="w-full h-20 p-2 bg-gray-700 text-white rounded my-2"  placeholder="task keys">
+			{ keys.String }
+		</textarea>
+	} else {
+		<textarea class="w-full h-20 p-2 bg-gray-700 text-white rounded my-2"  placeholder="task keys">
+		</textarea>
 	}
 }
 
@@ -41,9 +53,19 @@ templ BigTask(task database.Task) {
 			@priorityStars(task.Priority)
 		</div>
         // <div class="text-sm mb-2">Timer: ....</div>
-	        <textarea class="w-full h-20 p-2 bg-gray-700 text-white rounded my-2" placeholder="task keys"></textarea>
-			<br/>
-	        <button class="bg-flame-primary hover:bg-flame-accent text-white cursor-pointer w-auto px-4 py-1 rounded">Save</button>
+        <form
+	        hx-put={ fmt.Sprintf("/tasks/day/%s/keys", task.ID.String()) }
+			hx-target="next p"
+			hx-disabled-elt="next button"
+    		class="flex flex-col gap-2">
+      		@keysArea(task.Keys)
+	        <button
+				type="submit"
+				class="bg-flame-primary hover:bg-flame-accent disabled=bg-gray-500 text-white cursor-pointer px-4 py-1 rounded self-start" >
+				Save
+			</button>
+			<p class="text-white"></p>
+        </form>
     </div>
 }
 

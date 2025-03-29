@@ -303,6 +303,9 @@
   .w-6 {
     width: calc(var(--spacing) * 6);
   }
+  .w-30 {
+    width: calc(var(--spacing) * 30);
+  }
   .w-35 {
     width: calc(var(--spacing) * 35);
   }
@@ -376,6 +379,9 @@
       margin-block-start: calc(calc(var(--spacing) * 6) * var(--tw-space-y-reverse));
       margin-block-end: calc(calc(var(--spacing) * 6) * calc(1 - var(--tw-space-y-reverse)));
     }
+  }
+  .self-start {
+    align-self: flex-start;
   }
   .rounded {
     border-radius: 0.25rem;

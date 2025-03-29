@@ -3,7 +3,7 @@ CREATE TABLE tasks (
     id UUID PRIMARY KEY,
     owner_id UUID NOT NULL REFERENCES users (id) ON DELETE CASCADE,
     name TEXT UNIQUE NOT NULL,
-    keys TEXT,
+    keys TEXT, -- postgres TEXT support multi-line text, so it works fine with textarea
     date DATE NOT NULL,
     priority INT NOT NULL,
     is_done BOOL NOT NULL DEFAULT false,
