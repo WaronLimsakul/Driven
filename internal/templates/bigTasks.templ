@@ -21,11 +21,17 @@ templ priorityStars(prior int32) {
 
 templ keysArea(keys sql.NullString) {
 	if keys.Valid {
-		<textarea class="w-full h-20 p-2 bg-gray-700 text-white rounded my-2"  placeholder="task keys">
+		<textarea
+			class="w-full h-20 p-2 bg-gray-700 text-white rounded my-2"
+			name="task-keys"
+			placeholder="task keys">
 			{ keys.String }
 		</textarea>
 	} else {
-		<textarea class="w-full h-20 p-2 bg-gray-700 text-white rounded my-2"  placeholder="task keys">
+		<textarea
+			class="w-full h-20 p-2 bg-gray-700 text-white rounded my-2"
+			name="task-keys"
+			placeholder="task keys">
 		</textarea>
 	}
 }
@@ -56,8 +62,8 @@ templ BigTask(task database.Task) {
         // <div class="text-sm mb-2">Timer: ....</div>
         <form
 	        hx-put={ fmt.Sprintf("/tasks/day/%s/keys", task.ID.String()) }
-			hx-target="next p"
-			hx-disabled-elt="next button"
+			hx-target="find p"
+			hx-disabled-elt="find button"
     		class="flex flex-col gap-2">
       		@keysArea(task.Keys)
 	        <button

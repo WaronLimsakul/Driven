@@ -63,6 +63,7 @@ func main() {
 	e.POST("/tasks/day", serverMiddleware.AuthMiddleware(serverDBHandlers.HandlePostTaskDay))
 	e.PUT("/tasks/day/:id/done", serverMiddleware.AuthMiddleware(serverDBHandlers.HandleDoneTaskDay))
 	e.PUT("/tasks/day/:id/undone", serverMiddleware.AuthMiddleware(serverDBHandlers.HandleUndoneTaskDay))
+	e.PUT("/tasks/day/:id/keys", serverMiddleware.AuthMiddleware(serverDBHandlers.HandlePutTaskKeys))
 
 	e.GET("/error", handlers.HandleLandError)
 	e.GET("/*", handlers.HandleNotFound) // for not found page

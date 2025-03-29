@@ -7,6 +7,7 @@ package database
 
 import (
 	"context"
+	"database/sql"
 	"time"
 
 	"github.com/google/uuid"
@@ -203,6 +204,35 @@ type UndoneTaskByIDParams struct {
 
 func (q *Queries) UndoneTaskByID(ctx context.Context, arg UndoneTaskByIDParams) (Task, error) {
 	row := q.db.QueryRowContext(ctx, undoneTaskByID, arg.ID, arg.OwnerID)
+	var i Task
+	err := row.Scan(
+		&i.ID,
+		&i.OwnerID,
+		&i.Name,
+		&i.Keys,
+		&i.Date,
+		&i.Priority,
+		&i.IsDone,
+		&i.TimeFocus,
+	)
+	return i, err
+}
+
+const updateTaskKeys = `-- name: UpdateTaskKeys :one
+UPDATE tasks
+SET keys = $1
+WHERE owner_id = $2 AND id = $3
+RETURNING id, owner_id, name, keys, date, priority, is_done, time_focus
+`
+
+type UpdateTaskKeysParams struct {
+	Keys    sql.NullString
+	OwnerID uuid.UUID
+	ID      uuid.UUID
+}
+
+func (q *Queries) UpdateTaskKeys(ctx context.Context, arg UpdateTaskKeysParams) (Task, error) {
+	row := q.db.QueryRowContext(ctx, updateTaskKeys, arg.Keys, arg.OwnerID, arg.ID)
 	var i Task
 	err := row.Scan(
 		&i.ID,

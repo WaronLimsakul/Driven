@@ -33,3 +33,9 @@ RETURNING *;
 SELECT * FROM tasks
 WHERE owner_id = $1 AND date = $2
 ORDER BY is_done ASC, priority DESC;
+
+-- name: UpdateTaskKeys :one
+UPDATE tasks
+SET keys = $1
+WHERE owner_id = $2 AND id = $3
+RETURNING *;
