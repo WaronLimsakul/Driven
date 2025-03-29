@@ -41,5 +41,5 @@ func (h DBHandler) HandleDoneTaskWeek(c echo.Context) error {
 
 	return render(
 		http.StatusCreated, c,
-		templates.DoneTaskResponse(updatedTask, taskWeekDay))
+		templates.DoneSmallTaskResponse(updatedTask, taskWeekDay))
 }

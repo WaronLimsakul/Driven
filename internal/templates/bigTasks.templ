@@ -2,7 +2,6 @@ package templates
 
 import (
 	"github.com/WaronLimsakul/Driven/internal/database"
-	// "strconv"
 )
 
 templ priorityStars(prior int32) {
@@ -19,23 +18,33 @@ templ priorityStars(prior int32) {
 }
 
 templ BigTask(task database.Task) {
-	<div class="bg-gray-800 p-4 rounded-lg">
+	<div class="bg-gray-800 p-4 mx-2 rounded-lg">
 		<div class="flex items-center gap-1 my-2">
-		    <input type="checkbox" class="w-6 h-6 rounded cursor-pointer">
+			if task.IsDone {
+    			<input type="checkbox" class="w-6 h-6 rounded cursor-pointer" checked>
+			} else {
+		    	<input type="checkbox" class="w-6 h-6 rounded cursor-pointer">
+			}
 		    <div class="my-auto ml-2 font-semibold">{ task.Name }</div>
 			@priorityStars(task.Priority)
 		</div>
         // <div class="text-sm mb-2">Timer: ....</div>
 	        <textarea class="w-full h-20 p-2 bg-gray-700 text-white rounded my-2" placeholder="task keys"></textarea>
 			<br/>
-	        <button class="bg-flame-primary hover:bg-flame-accent cursor-pointer w-auto px-4 py-1 rounded">Save</button>
+	        <button class="bg-flame-primary hover:bg-flame-accent text-white cursor-pointer w-auto px-4 py-1 rounded">Save</button>
     </div>
 }
 
 templ BigTasksColumn(tasks []database.Task) {
-    <div class="space-y-4">
+    <div id="big-tasks-column" class="space-y-4">
     for _, task := range tasks {
        	@BigTask(task)
     }
     </div>
+}
+
+templ DoneBigTaskResponse(task database.Task) {
+	<div hx-swap-oob="beforeend:#big-tasks-column">
+		@BigTask(task)
+	</div>
 }

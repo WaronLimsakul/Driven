@@ -14,7 +14,7 @@ import (
 	tasks "github.com/WaronLimsakul/Driven/internal/task"
 )
 
-func getTaskClass(priority int32) string {
+func getSmallTaskClass(priority int32) string {
 	colors := [4]string{
 		"bg-gray-800 hover:bg-gray-700",
 		"bg-gray-700 hover:bg-gray-600",
@@ -45,7 +45,7 @@ func SmallTask(task database.Task) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		var templ_7745c5c3_Var2 = []any{getTaskClass(task.Priority)}
+		var templ_7745c5c3_Var2 = []any{getSmallTaskClass(task.Priority)}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var2...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
@@ -205,7 +205,7 @@ func SmallTasksColumn(tasks []database.Task, weekDay string) templ.Component {
 	})
 }
 
-func DoneTaskResponse(task database.Task, weekDay string) templ.Component {
+func DoneSmallTaskResponse(task database.Task, weekDay string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -243,7 +243,7 @@ func DoneTaskResponse(task database.Task, weekDay string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var13 = []any{getTaskClass(task.Priority)}
+		var templ_7745c5c3_Var13 = []any{getSmallTaskClass(task.Priority)}
 		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var13...)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err

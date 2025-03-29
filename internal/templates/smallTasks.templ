@@ -6,7 +6,7 @@ import (
 	"fmt"
 )
 
-func getTaskClass(priority int32) string {
+func getSmallTaskClass(priority int32) string {
 	colors := [4]string{
 		"bg-gray-800 hover:bg-gray-700",
 		"bg-gray-700 hover:bg-gray-600",
@@ -17,7 +17,7 @@ func getTaskClass(priority int32) string {
 }
 
 templ SmallTask(task database.Task) {
-	<div id={ task.ID.String() } class={ getTaskClass(task.Priority) }>
+	<div id={ task.ID.String() } class={ getSmallTaskClass(task.Priority) }>
 		if task.IsDone {
 			<input
 				type="checkbox"
@@ -49,14 +49,14 @@ templ SmallTasksColumn(tasks []database.Task, weekDay string) {
 	</div>
 }
 
-templ DoneTaskResponse(task database.Task, weekDay string) {
+templ DoneSmallTaskResponse(task database.Task, weekDay string) {
 	// this hx-swap-oob is like telling the browser like it needs to
 	// be swapped but not at the target. so we basically we can
 	// many things at once using this attribute.
 	<div hx-swap-oob={ fmt.Sprintf("beforeend:#%s", weekDay)} >
 		<div
 			id={ task.ID.String() }
-			class={ getTaskClass(task.Priority) }>
+			class={ getSmallTaskClass(task.Priority) }>
 			<input
 				type="checkbox"
 				class="cursor-pointer"
