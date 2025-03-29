@@ -57,7 +57,13 @@ templ DoneTaskResponse(task database.Task, weekDay string) {
 		<div
 			id={ task.ID.String() }
 			class={ getTaskClass(task.Priority) }>
-			<input type="checkbox" class="cursor-pointer" checked/>
+			<input
+				type="checkbox"
+				class="cursor-pointer"
+				hx-put={ fmt.Sprintf("/tasks/week/%s/undone", task.ID.String()) }
+				hx-target={ fmt.Sprintf("#%s", tasks.GetWeekDayStr(task.Date)) }
+				hx-swap="outerHTML"
+				checked/>
 			<p>{task.Name}</p>
 		</div>
 	</div>
