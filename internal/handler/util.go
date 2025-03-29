@@ -169,3 +169,44 @@ func (h DBHandler) doneTaskForUser(c echo.Context) (database.Task, error) {
 
 	return updatedTask, nil
 }
+
+func (h DBHandler) undoneTaskForUser(c echo.Context) ([]database.Task, error) {
+	userIDStr := c.Request().Header.Get("Driven-userID")
+	userUUID, err := uuid.Parse(userIDStr)
+	if err != nil {
+		c.Logger().Printf("at undoneTaskForUser: couldn't parse user id: %v", err)
+		return []database.Task{}, c.String(http.StatusInternalServerError, "something went wrong")
+	}
+
+	taskIDStr := c.Param("id")
+	taskUUID, err := uuid.Parse(taskIDStr)
+	if err != nil {
+		c.Logger().Printf("at undoneTaskForUser: couldn't parse task id: %v", err)
+		return []database.Task{}, c.String(http.StatusInternalServerError, "something went wrong")
+	}
+
+	undoneTaskParams := database.UndoneTaskByIDParams{
+		ID:      taskUUID,
+		OwnerID: userUUID,
+	}
+
+	updatedTask, err := h.Db.UndoneTaskByID(c.Request().Context(), undoneTaskParams)
+	if err != nil {
+		return []database.Task{}, c.String(http.StatusUnauthorized, "couldn't undone task: user not the owner")
+	}
+
+	// Have to render entire column again because we don't know where to put it back
+	taskDate := updatedTask.Date
+	getDayTasksParam := database.GetTaskByDateParams{
+		OwnerID: updatedTask.OwnerID,
+		Date:    taskDate,
+	}
+	dayTasks, err := h.Db.GetTaskByDate(c.Request().Context(), getDayTasksParam)
+
+	if err != nil {
+		c.Logger().Printf("couldn't get user tasks by date: %v", err)
+		return []database.Task{}, c.String(http.StatusInternalServerError, "something went wrong")
+	}
+
+	return dayTasks, nil
+}

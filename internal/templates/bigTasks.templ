@@ -37,8 +37,9 @@ templ BigTask(task database.Task) {
 			if task.IsDone {
 				<input
        				type="checkbox"
-           			hx-put={ fmt.Sprintf("/tasks/day/%s/done", task.ID.String()) }
+           			hx-put={ fmt.Sprintf("/tasks/day/%s/undone", task.ID.String()) }
             		hx-swap="outerHTML"
+              		hx-target="#big-tasks-column"
               		class="w-6 h-6 rounded cursor-pointer"
                 	checked>
 			} else {
