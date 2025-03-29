@@ -2,6 +2,7 @@ package templates
 
 import (
 	"github.com/WaronLimsakul/Driven/internal/database"
+	"fmt"
 )
 
 templ priorityStars(prior int32) {
@@ -18,12 +19,23 @@ templ priorityStars(prior int32) {
 }
 
 templ BigTask(task database.Task) {
-	<div class="bg-gray-800 p-4 mx-2 rounded-lg">
+	// the id doesn't work with query selector, so I have to use name
+	<div id={ task.Name } class="bg-gray-800 p-4 mx-2 rounded-lg">
 		<div class="flex items-center gap-1 my-2">
 			if task.IsDone {
-    			<input type="checkbox" class="w-6 h-6 rounded cursor-pointer" checked>
+				<input
+       				type="checkbox"
+           			hx-put={ fmt.Sprintf("/tasks/day/%s/done", task.ID.String()) }
+            		hx-swap="outerHTML"
+              		class="w-6 h-6 rounded cursor-pointer"
+                	checked>
 			} else {
-		    	<input type="checkbox" class="w-6 h-6 rounded cursor-pointer">
+   				<input
+       				type="checkbox"
+           			hx-put={ fmt.Sprintf("/tasks/day/%s/done", task.ID.String()) }
+              		hx-swap="outerHTML"
+                	hx-target={ fmt.Sprintf("#%s", task.Name) }
+              		class="w-6 h-6 rounded cursor-pointer">
 			}
 		    <div class="my-auto ml-2 font-semibold">{ task.Name }</div>
 			@priorityStars(task.Priority)

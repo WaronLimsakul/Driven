@@ -29,7 +29,7 @@ templ NewTaskFormWeek(today time.Time) {
 		hx-target="#task-form-msg"
 		hx-on::after-request="if(event.detail.successful) this.reset()"
 		hx-swap-oob="true"
-		hx-disabled-elt="add-task-button"
+		hx-disabled-elt="#add-task-button"
 		class="w-1/5 m-3 bg-flame-surface p-6 h-full rounded flex flex-col justify-center gap-4">
         <h2 class="text-lg font-bold text-center">New tasks</h2>
         <div class="p-3 gap-1">
