@@ -11,12 +11,27 @@ func timeTemplate(day time.Time) string {
 	return fmt.Sprintf("%s  %d/%d/%d", tasks.GetWeekDayStr(day), day.Day(), day.Month(), day.Year())
 }
 
+// make the message dissappear after 1.5 sec
+templ keysAreaScript() {
+	<script>
+		document.querySelector(".keys-area").addEventListener("htmx:afterRequest", (event) => {
+	        if (event.detail.successful) {
+	          let msg = event.detail.target;
+	          setTimeout(() => {
+	            msg.style.display = 'none';
+	          }, 1500)
+	        }
+	    });
+	</script>
+}
+
 templ Day(tasks []database.Task, day time.Time) {
+	@NewTaskFormDay(day)
 	<div class="my-3 mr-5 p-4 bg-flame-surface rounded-lg h-auto">
 		<div class="text-center text-lg font-semibold mb-4">{ timeTemplate(day) }</div>
         @BigTasksColumn(tasks)
 	</div>
-	@NewTaskFormDay(day)
+	@keysAreaScript()
 }
 
 templ NewTaskFormDay(today time.Time) {

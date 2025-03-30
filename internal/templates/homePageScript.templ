@@ -13,8 +13,6 @@ templ HomePageScript() {
                   let utcDate = new Date(Date.UTC(localDate.getFullYear(), localDate.getMonth(), localDate.getDate()));
                   formData["task-date"] = utcDate.toISOString().split("T")[0]; // Convert to UTC format
                   // console.log("task-date: ", formData["task-date"]);
-              } else {
-                  // console.log("no task date");
               }
             });
 
@@ -25,7 +23,7 @@ templ HomePageScript() {
 				  && event.detail.xhr.status == 201) { // creat task success
 					event.detail.shouldSwap = false;
 				}
-			})
+			});
 		});
 	</script>
 }

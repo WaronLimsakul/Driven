@@ -256,7 +256,7 @@ func BigTask(task database.Task) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 19, "\" hx-target=\"find p\" hx-disabled-elt=\"find button\" class=\"flex flex-col gap-2\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 19, "\" hx-target=\"find p\" hx-disabled-elt=\"find button\" hx-on::after-request=\"if(event.detail.successful) \" class=\"keys-area flex flex-col gap-2\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -264,7 +264,7 @@ func BigTask(task database.Task) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 20, "<button type=\"submit\" class=\"bg-flame-primary hover:bg-flame-accent disabled=bg-gray-500 text-white cursor-pointer px-4 py-1 rounded self-start\">Save</button><p class=\"text-white\"></p></form></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 20, "<div class=\"flex flex-row gap-2 items-center\"><button type=\"submit\" class=\"bg-flame-primary hover:bg-flame-accent disabled:bg-gray-500 text-white cursor-pointer px-4 py-1 rounded self-start\">Save</button><p id=\"t\" class=\"text-white\"></p></div></form></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
