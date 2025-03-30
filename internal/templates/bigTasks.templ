@@ -37,7 +37,7 @@ templ keysArea(keys sql.NullString) {
 			name="task-keys"
 			rows={ strconv.Itoa(getTextHeight(keys.String)) }
 			oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'"
-			placeholder="task keys">
+			placeholder="what should know when doing this?">
 			{ keys.String }
 		</textarea>
 	} else {
@@ -45,7 +45,7 @@ templ keysArea(keys sql.NullString) {
 			class="w-full h-auto min-h-20 p-2 bg-gray-700 text-white rounded my-2 resize-none overflow-hidden"
 			name="task-keys"
 			oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'"
-			placeholder="task keys">
+			placeholder="what should know when doing this?">
 		</textarea>
 	}
 }

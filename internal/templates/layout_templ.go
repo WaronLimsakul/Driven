@@ -152,7 +152,7 @@ func navbar(isSignedIn bool, userName string) templ.Component {
 			templ_7745c5c3_Var4 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "<nav class=\"bg-flame-bg p-4 text-flame-text flex justify-between\"><div><img class=\"w-35 h-auto\" src=\"/static/img/driven_logo_cut.png\"></div><div class=\"mr-15\"><button hx-get=\"/week\" hx-target=\"#view\" hx-disabled-elt=\"this\" class=\"bg-blue-600 hover:bg-blue-500 disabled:bg-gray-500 cursor-pointer p-3 rounded-md\">Calendar</button> <button hx-get=\"/day\" hx-target=\"#view\" hx-disabled-elt=\"this\" class=\"bg-blue-600 hover:bg-blue-500 disabled:bg-gray-500 cursor-pointer p-3 rounded-md\">Today</button></div><div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "<nav class=\"bg-flame-bg p-4 text-flame-text flex justify-between\"><div><img class=\"w-35 h-auto\" src=\"/static/img/driven_logo_cut.png\"></div><div class=\"mr-15\"><button hx-get=\"/week\" hx-target=\"#view\" hx-disabled-elt=\"this\" class=\"bg-blue-600 hover:bg-blue-500 disabled:bg-gray-500 cursor-pointer p-3 rounded-md\">Calendar</button> <button hx-get=\"/day\" hx-target=\"#view\" hx-disabled-elt=\"this\" class=\"bg-blue-600 hover:bg-blue-500 disabled:bg-gray-500 cursor-pointer p-3 rounded-md\">Today</button></div><div class=\"flex items-center gap-2\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -170,7 +170,7 @@ func navbar(isSignedIn bool, userName string) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 12, "</p>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 12, "</p><button class=\"w-12 hover:bg-gray-700 p-2 rounded-full transition-colors cursor-pointer\" hx-post=\"/signout\" hx-confirm=\"Are you sure you want to sign out?\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"><path d=\"M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z\" fill=\"#1a73e8\"></path></svg></button>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

@@ -107,7 +107,7 @@ func keysArea(keys sql.NullString) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "\" oninput=\"this.style.height = &#39;&#39;; this.style.height = this.scrollHeight + &#39;px&#39;\" placeholder=\"task keys\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "\" oninput=\"this.style.height = &#39;&#39;; this.style.height = this.scrollHeight + &#39;px&#39;\" placeholder=\"what should know when doing this?\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -125,7 +125,7 @@ func keysArea(keys sql.NullString) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		} else {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "<textarea class=\"w-full h-auto min-h-20 p-2 bg-gray-700 text-white rounded my-2 resize-none overflow-hidden\" name=\"task-keys\" oninput=\"this.style.height = &#39;&#39;; this.style.height = this.scrollHeight + &#39;px&#39;\" placeholder=\"task keys\"></textarea>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "<textarea class=\"w-full h-auto min-h-20 p-2 bg-gray-700 text-white rounded my-2 resize-none overflow-hidden\" name=\"task-keys\" oninput=\"this.style.height = &#39;&#39;; this.style.height = this.scrollHeight + &#39;px&#39;\" placeholder=\"what should know when doing this?\"></textarea>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

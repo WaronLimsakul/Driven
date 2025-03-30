@@ -55,6 +55,7 @@ func main() {
 
 	e.POST("/signup", serverDBHandlers.HandlePostSignUp)
 	e.POST("/signin", serverDBHandlers.HandlePostSignin)
+	e.POST("/signout", serverDBHandlers.HandlePostSignOut)
 
 	e.POST("/tasks/week", serverMiddleware.AuthMiddleware(serverDBHandlers.HandlePostTaskWeek))
 	e.PUT("/tasks/week/:id/done", serverMiddleware.AuthMiddleware(serverDBHandlers.HandleDoneTaskWeek))

@@ -16,3 +16,7 @@ WHERE token = $1;
 UPDATE refresh_tokens
 SET revoked_at = NOW(), updated_at = NOW()
 WHERE user_id = $1 RETURNING *;
+
+-- name: DeleteToken :exec
+DELETE FROM refresh_tokens
+WHERE token = $1;
