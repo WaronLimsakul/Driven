@@ -15,8 +15,12 @@ import (
 	"time"
 )
 
-func timeTemplate(day time.Time) string {
+func weekDayTemplate(day time.Time) string {
 	return fmt.Sprintf("%s  %d/%d/%d", tasks.GetWeekDayStr(day), day.Day(), day.Month(), day.Year())
+}
+
+func dayTemplate(day time.Time) string {
+	return fmt.Sprintf("%4d-%02d-%02d", day.Year(), day.Month(), day.Day())
 }
 
 // make the message dissappear after 1.5 sec
@@ -74,20 +78,85 @@ func Day(tasks []database.Task, day time.Time) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<div class=\"my-3 mr-5 p-4 bg-flame-surface rounded-lg h-auto\"><div class=\"flex justify-between items-center\"><button class=\"ml-4 mb-2 cursor-pointer rounded-full p-2 hover:bg-gray-700 flex items-center justify-center h-10 w-10 transition-colors\"><span class=\"text-lg font-semibold\">&lt</span></button><div class=\"text-center text-lg font-semibold mb-4\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<div id=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var3 string
-		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(timeTemplate(day))
+		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(dayTemplate(day))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/day.templ`, Line: 35, Col: 74}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/day.templ`, Line: 34, Col: 27}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</div><button class=\"mr-4 mb-2 cursor-pointer rounded-full p-2 hover:bg-gray-700 flex items-center justify-center h-10 w-10 transition-colors\"><span class=\"text-lg font-semibold\">&gt</span></button></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\" class=\"my-3 mr-5 p-4 bg-flame-surface rounded-lg h-auto\"><div class=\"flex justify-between items-center\"><button class=\"ml-4 mb-2 cursor-pointer rounded-full p-2 hover:bg-gray-700 flex items-center justify-center h-10 w-10 transition-colors\" hx-get=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var4 string
+		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("/day/%s", dayTemplate(day.Add(-24*time.Hour))))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/day.templ`, Line: 38, Col: 74}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "\" hx-target=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var5 string
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("[id='%s']", dayTemplate(day)))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/day.templ`, Line: 39, Col: 58}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "\" hx-swap=\"outerHTML\"><span class=\"text-lg font-semibold\">&lt</span></button><div class=\"text-center text-lg font-semibold mb-4\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var6 string
+		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(weekDayTemplate(day))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/day.templ`, Line: 44, Col: 77}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "</div><button class=\"mr-4 mb-2 cursor-pointer rounded-full p-2 hover:bg-gray-700 flex items-center justify-center h-10 w-10 transition-colors\" hx-get=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var7 string
+		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("/day/%s", dayTemplate(day.Add(24*time.Hour))))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/day.templ`, Line: 47, Col: 73}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 7, "\" hx-target=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var8 string
+		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("[id='%s']", dayTemplate(day)))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/day.templ`, Line: 48, Col: 58}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "\" hx-swap=\"outerHTML\"><span class=\"text-lg font-semibold\">&gt</span></button></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -95,11 +164,11 @@ func Day(tasks []database.Task, day time.Time) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</div>")
+		templ_7745c5c3_Err = keysAreaScript().Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = keysAreaScript().Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "</div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -123,25 +192,25 @@ func NewTaskFormDay(day time.Time) templ.Component {
 			}()
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var4 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var4 == nil {
-			templ_7745c5c3_Var4 = templ.NopComponent
+		templ_7745c5c3_Var9 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var9 == nil {
+			templ_7745c5c3_Var9 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<form id=\"task-form\" hx-post=\"/tasks/day\" hx-target=\"#task-form-msg\" hx-on::after-request=\"if(event.detail.successful) this.reset()\" hx-swap-oob=\"true\" hx-disabled-elt=\"#add-task-button\" class=\"w-1/5 m-3 bg-flame-surface p-6 h-full rounded flex flex-col justify-center gap-4\"><h2 class=\"text-lg font-bold text-center\">New tasks</h2><div class=\"p-3 gap-1 rounded\"><label class=\"block text-sm mt-2\" for=\"task-name\">Task:</label> <input type=\"text\" name=\"task-name\" required class=\"w-full p-1 bg-gray-700 rounded text-white\"> <label class=\"block text-sm mt-2\" for=\"task-priority\">Priority:</label> <input type=\"number\" min=\"0\" max=\"3\" name=\"task-priority\" value=\"0\" required class=\"w-full p-1 bg-gray-700 rounded text-white\"> <input type=\"date\" name=\"task-date\" id=\"task-date\" value=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "<form id=\"task-form\" hx-post=\"/tasks/day\" hx-target=\"#task-form-msg\" hx-on::after-request=\"if(event.detail.successful) this.reset()\" hx-swap-oob=\"true\" hx-disabled-elt=\"#add-task-button\" class=\"w-1/5 m-3 bg-flame-surface p-6 h-full rounded flex flex-col justify-center gap-4\"><h2 class=\"text-lg font-bold text-center\">New tasks</h2><div class=\"p-3 gap-1 rounded\"><label class=\"block text-sm mt-2\" for=\"task-name\">Task:</label> <input type=\"text\" name=\"task-name\" required class=\"w-full p-1 bg-gray-700 rounded text-white\"> <label class=\"block text-sm mt-2\" for=\"task-priority\">Priority:</label> <input type=\"number\" min=\"0\" max=\"3\" name=\"task-priority\" value=\"0\" required class=\"w-full p-1 bg-gray-700 rounded text-white\"> <input type=\"date\" name=\"task-date\" id=\"task-date\" value=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		var templ_7745c5c3_Var5 string
-		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("%04d-%02d-%02d", day.Year(), day.Month(), day.Day()))
+		var templ_7745c5c3_Var10 string
+		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("%04d-%02d-%02d", day.Year(), day.Month(), day.Day()))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/day.templ`, Line: 74, Col: 77}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/day.templ`, Line: 88, Col: 77}
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "\" required hidden class=\"w-full p-1 bg-gray-700 rounded text-white\"></div><p class=\"text-red-400 text-sm\" id=\"task-form-msg\"></p><button id=\"add-task-button\" type=\"submit\" class=\"bg-flame-primary hover:bg-flame-hover disabled:bg-gray-500 cursor-pointer text-white py-2 px-4 rounded\">Add Task</button></form>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, "\" required hidden class=\"w-full p-1 bg-gray-700 rounded text-white\"></div><p class=\"text-red-400 text-sm\" id=\"task-form-msg\"></p><button id=\"add-task-button\" type=\"submit\" class=\"bg-flame-primary hover:bg-flame-hover disabled:bg-gray-500 cursor-pointer text-white py-2 px-4 rounded\">Add Task</button></form>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
