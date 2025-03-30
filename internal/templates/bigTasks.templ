@@ -4,6 +4,7 @@ import (
 	"github.com/WaronLimsakul/Driven/internal/database"
 	"fmt"
 	"database/sql"
+	"strconv"
 )
 
 templ priorityStars(prior int32) {
@@ -19,18 +20,31 @@ templ priorityStars(prior int32) {
 	}
 }
 
+func getTextHeight(text string) int {
+	i := 1
+	for _, char := range text {
+		if char == '\n' {
+			i++
+		}
+	}
+	return i
+}
+
 templ keysArea(keys sql.NullString) {
 	if keys.Valid {
 		<textarea
-			class="w-full h-20 p-2 bg-gray-700 text-white rounded my-2"
+			class="w-full h-auto min-h-20 p-2 bg-gray-700 text-white rounded my-2 resize-none overflow-hidden"
 			name="task-keys"
+			rows={ strconv.Itoa(getTextHeight(keys.String)) }
+			oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'"
 			placeholder="task keys">
 			{ keys.String }
 		</textarea>
 	} else {
 		<textarea
-			class="w-full h-20 p-2 bg-gray-700 text-white rounded my-2"
+			class="w-full h-auto min-h-20 p-2 bg-gray-700 text-white rounded my-2 resize-none overflow-hidden"
 			name="task-keys"
+			oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'"
 			placeholder="task keys">
 		</textarea>
 	}
