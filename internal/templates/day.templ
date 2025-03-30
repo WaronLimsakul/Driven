@@ -28,13 +28,21 @@ templ keysAreaScript() {
 templ Day(tasks []database.Task, day time.Time) {
 	@NewTaskFormDay(day)
 	<div class="my-3 mr-5 p-4 bg-flame-surface rounded-lg h-auto">
-		<div class="text-center text-lg font-semibold mb-4">{ timeTemplate(day) }</div>
+		<div class="flex justify-between items-center">
+			<button class="ml-4 mb-2 cursor-pointer rounded-full p-2 hover:bg-gray-700 flex items-center justify-center h-10 w-10 transition-colors">
+    			<span class="text-lg font-semibold">&lt</span>
+			</button>
+			<div class="text-center text-lg font-semibold mb-4">{ timeTemplate(day) }</div>
+			<button class="mr-4 mb-2 cursor-pointer rounded-full p-2 hover:bg-gray-700 flex items-center justify-center h-10 w-10 transition-colors">
+    			<span class="text-lg font-semibold">&gt</span>
+			</button>
+		</div>
         @BigTasksColumn(tasks)
 	</div>
 	@keysAreaScript()
 }
 
-templ NewTaskFormDay(today time.Time) {
+templ NewTaskFormDay(day time.Time) {
 	<form
 		id="task-form"
 		hx-post="/tasks/day"
@@ -63,7 +71,7 @@ templ NewTaskFormDay(today time.Time) {
 				type="date"
 				name="task-date"
 				id="task-date"
-				value={ fmt.Sprintf("%04d-%02d-%02d", today.Year(), today.Month(), today.Day()) }
+				value={ fmt.Sprintf("%04d-%02d-%02d", day.Year(), day.Month(), day.Day()) }
 				required
 				hidden
 				class="w-full p-1 bg-gray-700 rounded text-white"/>
