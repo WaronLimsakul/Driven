@@ -11,7 +11,7 @@ func weekDayTemplate(day time.Time) string {
 	return fmt.Sprintf("%s  %d/%d/%d", tasks.GetWeekDayStr(day), day.Day(), day.Month(), day.Year())
 }
 
-func dayTemplate(day time.Time) string {
+func dateFormat(day time.Time) string {
 	return fmt.Sprintf("%4d-%02d-%02d", day.Year(), day.Month(), day.Day())
 }
 
@@ -31,12 +31,12 @@ templ keysAreaScript() {
 
 templ Day(tasks []database.Task, day time.Time) {
 	@NewTaskFormDay(day)
-	<div id={ dayTemplate(day) } class="my-3 mr-5 p-4 bg-flame-surface rounded-lg h-auto">
+	<div id={ dateFormat(day) } class="my-3 mr-5 p-4 bg-flame-surface rounded-lg h-auto">
 		<div class="flex justify-between items-center">
 			<button
 				class="ml-4 mb-2 cursor-pointer rounded-full p-2 hover:bg-gray-700 flex items-center justify-center h-10 w-10 transition-colors"
-				hx-get={ fmt.Sprintf("/day/%s", dayTemplate(day.Add(-24 * time.Hour))) }
-				hx-target={ fmt.Sprintf("[id='%s']", dayTemplate(day)) }
+				hx-get={ fmt.Sprintf("/day/%s", dateFormat(day.Add(-24 * time.Hour))) }
+				hx-target={ fmt.Sprintf("[id='%s']", dateFormat(day)) }
 				hx-swap="outerHTML"
 			>
     			<span class="text-lg font-semibold">&lt</span>
@@ -44,8 +44,8 @@ templ Day(tasks []database.Task, day time.Time) {
 			<div class="text-center text-lg font-semibold mb-4">{ weekDayTemplate(day) }</div>
 			<button
 				class="mr-4 mb-2 cursor-pointer rounded-full p-2 hover:bg-gray-700 flex items-center justify-center h-10 w-10 transition-colors"
-				hx-get={ fmt.Sprintf("/day/%s", dayTemplate(day.Add(24 * time.Hour))) }
-				hx-target={ fmt.Sprintf("[id='%s']", dayTemplate(day)) }
+				hx-get={ fmt.Sprintf("/day/%s", dateFormat(day.Add(24 * time.Hour))) }
+				hx-target={ fmt.Sprintf("[id='%s']", dateFormat(day)) }
 				hx-swap="outerHTML"
 			>
     			<span class="text-lg font-semibold">&gt</span>

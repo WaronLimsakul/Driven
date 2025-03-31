@@ -19,7 +19,7 @@ func weekDayTemplate(day time.Time) string {
 	return fmt.Sprintf("%s  %d/%d/%d", tasks.GetWeekDayStr(day), day.Day(), day.Month(), day.Year())
 }
 
-func dayTemplate(day time.Time) string {
+func dateFormat(day time.Time) string {
 	return fmt.Sprintf("%4d-%02d-%02d", day.Year(), day.Month(), day.Day())
 }
 
@@ -83,9 +83,9 @@ func Day(tasks []database.Task, day time.Time) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var3 string
-		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(dayTemplate(day))
+		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(dateFormat(day))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/day.templ`, Line: 34, Col: 27}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/day.templ`, Line: 34, Col: 26}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
@@ -96,9 +96,9 @@ func Day(tasks []database.Task, day time.Time) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var4 string
-		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("/day/%s", dayTemplate(day.Add(-24*time.Hour))))
+		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("/day/%s", dateFormat(day.Add(-24*time.Hour))))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/day.templ`, Line: 38, Col: 74}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/day.templ`, Line: 38, Col: 73}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
@@ -109,9 +109,9 @@ func Day(tasks []database.Task, day time.Time) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var5 string
-		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("[id='%s']", dayTemplate(day)))
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("[id='%s']", dateFormat(day)))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/day.templ`, Line: 39, Col: 58}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/day.templ`, Line: 39, Col: 57}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
@@ -135,9 +135,9 @@ func Day(tasks []database.Task, day time.Time) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var7 string
-		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("/day/%s", dayTemplate(day.Add(24*time.Hour))))
+		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("/day/%s", dateFormat(day.Add(24*time.Hour))))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/day.templ`, Line: 47, Col: 73}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/day.templ`, Line: 47, Col: 72}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 		if templ_7745c5c3_Err != nil {
@@ -148,9 +148,9 @@ func Day(tasks []database.Task, day time.Time) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var8 string
-		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("[id='%s']", dayTemplate(day)))
+		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("[id='%s']", dateFormat(day)))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/day.templ`, Line: 48, Col: 58}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/day.templ`, Line: 48, Col: 57}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 		if templ_7745c5c3_Err != nil {

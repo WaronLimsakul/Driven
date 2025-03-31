@@ -210,6 +210,9 @@
   .row-span-2 {
     grid-row: span 2 / span 2;
   }
+  .m-2 {
+    margin: calc(var(--spacing) * 2);
+  }
   .m-3 {
     margin: calc(var(--spacing) * 3);
   }
