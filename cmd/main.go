@@ -49,6 +49,7 @@ func main() {
 	e.GET("/", handlers.HandleLanding)
 	e.GET("/home", serverMiddleware.AuthMiddleware(serverDBHandlers.HandleGetHome))
 	e.GET("/week", serverMiddleware.AuthMiddleware(serverDBHandlers.HandleGetWeek))
+	e.GET("/week/:date", serverMiddleware.AuthMiddleware(serverDBHandlers.HandleGetSpecifiedWeek))
 	e.GET("/day", serverMiddleware.AuthMiddleware(serverDBHandlers.HandleGetToday))
 	e.GET("/day/:date", serverMiddleware.AuthMiddleware(serverDBHandlers.HandleGetSpecifiedDay))
 	e.GET("/signin", handlers.HandleGetSignin)
