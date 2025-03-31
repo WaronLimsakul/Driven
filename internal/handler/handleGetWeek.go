@@ -35,5 +35,5 @@ func (h DBHandler) HandleGetWeek(c echo.Context) error {
 	userTasks, _ := h.Db.GetUserTasksWeek(c.Request().Context(), params)
 	groupedTasks := tasks.GroupTaskDate(userTasks)
 
-	return render(http.StatusOK, c, templates.Week(groupedTasks))
+	return render(http.StatusOK, c, templates.Week(groupedTasks, monday))
 }

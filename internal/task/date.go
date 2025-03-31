@@ -18,6 +18,7 @@ func GetWeekRange(today time.Time) (monday, sunday time.Time) {
 
 // Get tasks in a week and return [][]task. Start by monday.
 // Not guarantee that all inner slices are not nil.
+// time: O(n)
 func GroupTaskDate(tasks []database.Task) [][]database.Task {
 	week := make([][]database.Task, 7)
 	for _, task := range tasks {
@@ -38,4 +39,16 @@ func GetWeekDayNum(day time.Time) int {
 func GetWeekDayStr(day time.Time) string {
 	dayNum := GetWeekDayNum(day)
 	return weekDaysArray[dayNum]
+}
+
+// get monday (any time) and return the string
+// slice for date in dd/mm format
+func SpanWeekDate(monday time.Time, format func(time.Time) string) []string {
+	week := []string{}
+	cur := monday
+	for range 7 {
+		week = append(week, format(cur))
+		cur = cur.Add(24 * time.Hour)
+	}
+	return week
 }
