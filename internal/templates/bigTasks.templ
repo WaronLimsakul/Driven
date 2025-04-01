@@ -58,17 +58,21 @@ templ BigTask(task database.Task) {
 				<input
        				type="checkbox"
            			hx-put={ fmt.Sprintf("/tasks/day/%s/undone", task.ID.String()) }
-            		hx-swap="outerHTML"
+            		hx-swap="outerHTML swap:550ms"
               		hx-target="#big-tasks-column"
-              		class="w-6 h-6 rounded cursor-pointer"
+	                class="h-6 w-6 border-white-400/20 scale-100
+					transition-all duration-500 ease-in-out hover:scale-110
+					checked:scale-100"
                 	checked>
 			} else {
    				<input
        				type="checkbox"
            			hx-put={ fmt.Sprintf("/tasks/day/%s/done", task.ID.String()) }
-              		hx-swap="outerHTML"
+              		hx-swap="outerHTML swap:550ms"
                 	hx-target={ fmt.Sprintf("[id='%s']", task.ID.String()) }
-              		class="w-6 h-6 rounded cursor-pointer">
+                 	class="h-6 w-6 border-white-400/20 scale-100
+					transition-all duration-500 ease-in-out hover:scale-110
+					checked:scale-100">
 			}
 		    <div class="my-auto ml-2 font-semibold">{ task.Name }</div>
 			@priorityStars(task.Priority)

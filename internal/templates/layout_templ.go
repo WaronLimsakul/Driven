@@ -152,7 +152,7 @@ func navbar(isSignedIn bool, userName string) templ.Component {
 			templ_7745c5c3_Var4 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "<nav class=\"bg-flame-bg p-4 text-flame-text flex justify-between\"><div><img class=\"w-35 h-auto\" src=\"/static/img/driven_logo_cut.png\"></div><div class=\"mr-15\"><button hx-get=\"/week\" hx-target=\"#view\" hx-disabled-elt=\"this\" class=\"bg-blue-600 hover:bg-blue-500 disabled:bg-gray-500 cursor-pointer p-3 rounded-md\">Calendar</button> <button hx-get=\"/day\" hx-target=\"#view\" hx-disabled-elt=\"this\" class=\"bg-blue-600 hover:bg-blue-500 disabled:bg-gray-500 cursor-pointer p-3 rounded-md\">Today</button></div><div class=\"flex items-center gap-2\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "<nav class=\"bg-flame-bg p-4 text-flame-text flex justify-between\"><div><img class=\"w-35 h-auto\" src=\"/static/img/driven_logo_cut.png\"></div><div class=\"mr-15\"><button hx-get=\"/week\" hx-target=\"#view\" hx-disabled-elt=\"this\" class=\"cursor-pointer bg-flame-dark hover:bg-flame-primary rounded-md duration-100 p-3\">Calendar</button> <button hx-get=\"/day\" hx-target=\"#view\" hx-disabled-elt=\"this\" class=\"cursor-pointer bg-flame-dark hover:bg-flame-primary rounded-md duration-100 p-3\">Today</button></div><div class=\"flex items-center gap-2\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -164,7 +164,7 @@ func navbar(isSignedIn bool, userName string) templ.Component {
 			var templ_7745c5c3_Var5 string
 			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(userName)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/layout.templ`, Line: 65, Col: 20}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/layout.templ`, Line: 66, Col: 20}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 			if templ_7745c5c3_Err != nil {
