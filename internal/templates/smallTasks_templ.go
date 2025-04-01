@@ -261,9 +261,9 @@ func DoneSmallTaskResponse(task database.Task, weekDay string) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var14 string
-		templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("beforeend:#%s", weekDay))
+		templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("beforeend:[id='%s']", GetSmallTasksColumnID(task.Date)))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/smallTasks.templ`, Line: 72, Col: 57}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/smallTasks.templ`, Line: 72, Col: 88}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var14))
 		if templ_7745c5c3_Err != nil {

@@ -69,7 +69,7 @@ templ DoneSmallTaskResponse(task database.Task, weekDay string) {
 	// this hx-swap-oob is like telling the browser like it needs to
 	// be swapped but not at the target. so we basically we can
 	// many things at once using this attribute.
-	<div hx-swap-oob={ fmt.Sprintf("beforeend:#%s", weekDay)} >
+	<div hx-swap-oob={ fmt.Sprintf("beforeend:[id='%s']", GetSmallTasksColumnID(task.Date)) }>
 		<div
 			id={ task.ID.String() }
 			class={ getSmallTaskClass(task.Priority) }>
