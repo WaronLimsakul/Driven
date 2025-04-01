@@ -25,13 +25,13 @@ templ Week(groupTasks [][]database.Task, monday time.Time) {
 			<span class="text-lg font-semibold">&lt</span>
 		</button>
 		<div class="grid grid-cols-7 auto-rows-min gap-2 h-full w-full">
-	            for i, formattedDate := range taskpkg.SpanWeekDate(monday, dateFormatWeek) {
+	            for i, formattedDate := range taskpkg.SpanWeekDateByFormat(monday, dateFormatWeek) {
 	            	<div class="text-center h-8 font-bold mb-3 row-span-2">
 	               		{ weekDays[i] } <br/> { formattedDate }
 	             	</div>
 	            }
 
-	            for i, day := range weekDays {
+	            for i, day := range taskpkg.SpanWeekDate(monday) {
 				    @SmallTasksColumn(groupTasks[i], day)
 	            }
 	    </div>
@@ -54,7 +54,6 @@ templ NewTaskFormWeek(today time.Time) {
 		hx-target="#task-form-msg"
 		hx-on::after-request="if(event.detail.successful) this.reset()"
 		hx-swap-oob="true"
-		hx-disabled-elt="#add-task-button"
 		class="w-1/5 m-3 bg-flame-surface p-6 h-full rounded flex flex-col justify-center gap-4">
         <h2 class="text-lg font-bold text-center">New tasks</h2>
         <div class="p-3 gap-1">
@@ -88,7 +87,7 @@ templ NewTaskFormWeek(today time.Time) {
         <button
         	id="add-task-button"
         	type="submit"
-        	class="bg-flame-dark hover:bg-flame-primary transition-colors disabled:bg-gray-500 cursor-pointer text-white py-2 px-4 rounded">
+         	class="bg-flame-primary hover:bg-flame-hover disabled:bg-gray-500 cursor-pointer text-white py-2 px-4 rounded">
           Add Task
         </button>
 	</form>

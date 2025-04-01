@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/http"
 
-	tasks "github.com/WaronLimsakul/Driven/internal/task"
 	"github.com/WaronLimsakul/Driven/internal/templates"
 	"github.com/labstack/echo/v4"
 )
@@ -14,9 +13,10 @@ func (h DBHandler) HandlePostTaskWeek(c echo.Context) error {
 	if err != nil {
 		return c.String(statusCode, err.Error())
 	}
-	weekDayStr := tasks.GetWeekDayStr(newTask.Date)
 	c.Response().Header().Add("HX-Reswap", "beforeend")
-	c.Response().Header().Add("HX-Retarget", fmt.Sprintf("#%s", weekDayStr))
+	c.Response().Header().Add(
+		"HX-Retarget",
+		fmt.Sprintf("[id='%s']", templates.GetSmallTasksColumnID(newTask.Date)))
 
 	return render(http.StatusCreated, c, templates.SmallTask(newTask))
 }

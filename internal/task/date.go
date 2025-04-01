@@ -43,11 +43,21 @@ func GetWeekDayStr(day time.Time) string {
 
 // get monday (any time) and return the string
 // slice for date in dd/mm format
-func SpanWeekDate(monday time.Time, format func(time.Time) string) []string {
+func SpanWeekDateByFormat(monday time.Time, format func(time.Time) string) []string {
 	week := []string{}
 	cur := monday
 	for range 7 {
 		week = append(week, format(cur))
+		cur = cur.Add(24 * time.Hour)
+	}
+	return week
+}
+
+func SpanWeekDate(monday time.Time) []time.Time {
+	week := []time.Time{}
+	cur := monday
+	for range 7 {
+		week = append(week, cur)
 		cur = cur.Add(24 * time.Hour)
 	}
 	return week

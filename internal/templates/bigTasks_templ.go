@@ -186,7 +186,7 @@ func BigTask(task database.Task) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 12, "\" hx-swap=\"outerHTML swap:550ms\" hx-target=\"#big-tasks-column\" class=\"h-6 w-6 border-white-400/20 scale-100\n\t\t\t\t\ttransition-all duration-500 ease-in-out hover:scale-110\n\t\t\t\t\tchecked:scale-100\" checked>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 12, "\" hx-swap=\"outerHTML swap:500ms\" hx-target=\"#big-tasks-column\" class=\"h-6 w-6 border-white-400/20 scale-100\n\t\t\t\t\ttransition-all duration-500 ease-in-out hover:scale-110\n\t\t\t\t\tchecked:scale-100\" checked>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -204,7 +204,7 @@ func BigTask(task database.Task) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 14, "\" hx-swap=\"outerHTML swap:550ms\" hx-target=\"")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 14, "\" hx-swap=\"outerHTML swap:500ms\" hx-target=\"")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

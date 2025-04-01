@@ -2,8 +2,8 @@ package templates
 
 import (
 	"github.com/WaronLimsakul/Driven/internal/database"
-	tasks "github.com/WaronLimsakul/Driven/internal/task"
 	"fmt"
+	"time"
 )
 
 func getSmallTaskClass(priority int32) string {
@@ -14,6 +14,10 @@ func getSmallTaskClass(priority int32) string {
 		"bg-flame-primary/90 hover:bg-flame-primary",
 	}
 	return fmt.Sprintf("p-2 rounded %s transition-colors flex items-center gap-2", colors[priority])
+}
+
+func GetSmallTasksColumnID(day time.Time) string {
+	return fmt.Sprintf("day-%s", dateFormat(day))
 }
 
 templ SmallTask(task database.Task) {
@@ -31,8 +35,8 @@ templ SmallTask(task database.Task) {
 				transition-all duration-500 ease-in-out hover:scale-110
 				checked:scale-100"
 				hx-put={ fmt.Sprintf("/tasks/week/%s/undone", task.ID.String()) }
-				hx-target={ fmt.Sprintf("#%s", tasks.GetWeekDayStr(task.Date)) }
-				hx-swap="outerHTML swap:550ms"
+				hx-target={ fmt.Sprintf("[id='%s']", GetSmallTasksColumnID(task.Date)) }
+				hx-swap="outerHTML swap:500ms"
 				hx-on:click="event.stopPropagation()"
 				checked/>
 		} else {
@@ -51,8 +55,8 @@ templ SmallTask(task database.Task) {
 	</div>
 }
 
-templ SmallTasksColumn(tasks []database.Task, weekDay string) {
-	<div id={ weekDay } class="flex flex-col justify-start gap-2">
+templ SmallTasksColumn(tasks []database.Task, day time.Time) {
+	<div id={ GetSmallTasksColumnID(day) } class="flex flex-col justify-start gap-2">
 		if tasks != nil {
 			for _, task := range tasks {
 				@SmallTask(task)
@@ -71,10 +75,12 @@ templ DoneSmallTaskResponse(task database.Task, weekDay string) {
 			class={ getSmallTaskClass(task.Priority) }>
 			<input
 				type="checkbox"
-				class="cursor-pointer h-5 w-5"
+				class="h-5 w-5 border-white-400/20 scale-100
+				transition-all duration-500 ease-in-out hover:scale-110
+				checked:scale-100"
 				hx-put={ fmt.Sprintf("/tasks/week/%s/undone", task.ID.String()) }
-				hx-target={ fmt.Sprintf("#%s", tasks.GetWeekDayStr(task.Date)) }
-				hx-swap="outerHTML"
+				hx-target={ fmt.Sprintf("[id='%s']", GetSmallTasksColumnID(task.Date)) }
+				hx-swap="outerHTML swap:500ms"
 				checked/>
 			<p>{task.Name}</p>
 		</div>
