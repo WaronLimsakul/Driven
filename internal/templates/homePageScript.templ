@@ -12,16 +12,16 @@ templ HomePageScript() {
 				}
 			});
 
-			// function scrollToBigTask(taskID) {
-			//     const taskElement = document.getElementById(taskID);
-			// 	if (taskElement) {
-			// 	   taskElement.scrollIntoView({ behavior: "smooth" });
-			// 	}
-			// }
+			function scrollToBigTask(taskID) {
+			    const taskElement = document.getElementById(taskID);
+				if (taskElement) {
+				   taskElement.scrollIntoView({ behavior: "smooth", block: "center" });
+				}
+			}
 
-			// document.addEventListener("scrollToTask", (event) => {
-			//    scrollToBigTask(event.detail.value);
-			// });
+			document.addEventListener("scrollToTask", (event) => {
+			   scrollToBigTask(event.detail.value);
+			});
 		});
 
 	</script>

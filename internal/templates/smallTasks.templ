@@ -22,7 +22,7 @@ templ SmallTask(task database.Task) {
 		class={ getSmallTaskClass(task.Priority) }
 		hx-get={ fmt.Sprintf("/day/%s", dateFormat(task.Date)) }
 		hx-target="#view"
-		// hx-headers={ fmt.Sprintf("{\"scrollTarget\":\"%s\"}", task.ID.String()) }
+		hx-headers={ fmt.Sprintf("{\"scrollTarget\":\"%s\"}", task.ID.String()) }
 	>
 		if task.IsDone {
 			<input

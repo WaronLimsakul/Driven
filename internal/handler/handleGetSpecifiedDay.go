@@ -35,7 +35,7 @@ func (h DBHandler) HandleGetSpecifiedDay(c echo.Context) error {
 	scrollTarget := c.Request().Header.Get("scrollTarget")
 	if scrollTarget != "" {
 		scrollHeaderVal := fmt.Sprintf("{\"scrollToTask\": \"%s\"}", scrollTarget)
-		c.Response().Header().Set("HX-Trigger-After-Swap", scrollHeaderVal)
+		c.Response().Header().Set("HX-Trigger-After-Settle", scrollHeaderVal)
 	}
 
 	return render(http.StatusOK, c, templates.Day(todaysTasks, date))

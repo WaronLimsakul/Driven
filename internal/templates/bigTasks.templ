@@ -52,7 +52,7 @@ templ keysArea(keys sql.NullString) {
 
 templ BigTask(task database.Task) {
 	// the id doesn't work with query selector, so I have to use name
-	<div id={ task.Name } class="bg-gray-800 p-4 mx-2 rounded-lg">
+	<div id={ task.ID.String() } class="bg-gray-800 p-4 mx-2 rounded-lg">
 		<div class="flex items-center gap-1 my-2">
 			if task.IsDone {
 				<input
@@ -67,7 +67,7 @@ templ BigTask(task database.Task) {
        				type="checkbox"
            			hx-put={ fmt.Sprintf("/tasks/day/%s/done", task.ID.String()) }
               		hx-swap="outerHTML"
-                	hx-target={ fmt.Sprintf("#%s", task.Name) }
+                	hx-target={ fmt.Sprintf("[id='%s']", task.ID.String()) }
               		class="w-6 h-6 rounded cursor-pointer">
 			}
 		    <div class="my-auto ml-2 font-semibold">{ task.Name }</div>
@@ -78,7 +78,6 @@ templ BigTask(task database.Task) {
 	        hx-put={ fmt.Sprintf("/tasks/day/%s/keys", task.ID.String()) }
 			hx-target="find p"
 			hx-disabled-elt="find button"
-			hx-on::after-request="if(event.detail.successful) "
     		class="keys-area flex flex-col gap-2">
       		@keysArea(task.Keys)
        		<div class="flex flex-row gap-2 items-center">
