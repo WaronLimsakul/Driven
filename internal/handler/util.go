@@ -75,17 +75,17 @@ func AssignRefreshTokenCookie(c echo.Context, refreshToken string, production bo
 	return
 }
 
-func (h DBHandler) CreateTaskForUser(c echo.Context) (database.Task, error) {
+func (h DBHandler) CreateTaskForUser(c echo.Context) (database.Task, int, error) {
 	userID := c.Request().Header.Get("Driven-userID")
 	if userID == "" {
 		c.Logger().Errorf("couldn't find user id even after auth middleware")
-		return database.Task{}, c.String(http.StatusInternalServerError, "something went wrong, try again later")
+		return database.Task{}, http.StatusInternalServerError, fmt.Errorf("something went wrong, try again later")
 	}
 
 	userUUID, err := uuid.Parse(userID)
 	if err != nil {
 		c.Logger().Errorf("couldn't parse user id: %v", err)
-		return database.Task{}, c.String(http.StatusInternalServerError, "something went wrong, try again later")
+		return database.Task{}, http.StatusInternalServerError, fmt.Errorf("something went wrong, try again later")
 	}
 
 	taskName := c.FormValue("task-name")
@@ -94,11 +94,11 @@ func (h DBHandler) CreateTaskForUser(c echo.Context) (database.Task, error) {
 	taskPriority, err := strconv.Atoi(priority)
 	if err != nil {
 		c.Logger().Errorf("couldn't parse task priority: %v", err)
-		return database.Task{}, c.String(http.StatusInternalServerError, "something went wrong, try again later")
+		return database.Task{}, http.StatusInternalServerError, fmt.Errorf("something went wrong, try again later")
 	}
 
 	if taskPriority < 0 || taskPriority > 3 {
-		return database.Task{}, c.String(http.StatusForbidden, "invalid priority value")
+		return database.Task{}, http.StatusForbidden, fmt.Errorf("invalid priority value")
 	}
 
 	date := c.FormValue("task-date")
@@ -106,20 +106,21 @@ func (h DBHandler) CreateTaskForUser(c echo.Context) (database.Task, error) {
 	taskDate, err := time.Parse(time.DateOnly, date)
 	if err != nil {
 		c.Logger().Errorf("couldn't parse task date: %v", err)
-		return database.Task{}, c.String(http.StatusInternalServerError, "something went wrong, try again later")
+		c.String(http.StatusInternalServerError, "something went wrong, try again later")
+		return database.Task{}, http.StatusBadRequest, fmt.Errorf("couldn't parse task date")
 	}
 
 	now := time.Now().UTC()
 	// today time at midnight
 	today := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, time.UTC)
 	moreThanYear := taskDate.After(today.AddDate(1, 0, 0))
-	inThePast := taskDate.Before(today)
+	inThePast := taskDate.Before(today.Add(-24 * time.Hour))
 	// don't allow any task later than a year
 	if moreThanYear || inThePast {
-		// fmt.Printf("than year: %v | past: %v\n", moreThanYear, inThePast)
-		// fmt.Printf("today: %v\n", today)
-		// fmt.Printf("task date: %v\n", taskDate)
-		return database.Task{}, c.String(http.StatusForbidden, "invalid task date")
+		fmt.Printf("than year: %v | past: %v\n", moreThanYear, inThePast)
+		fmt.Printf("today: %v\n", today)
+		fmt.Printf("task date: %v\n", taskDate)
+		return database.Task{}, http.StatusForbidden, fmt.Errorf("invalid task date")
 	}
 
 	createTaskParams := database.CreateTaskParams{
@@ -133,11 +134,10 @@ func (h DBHandler) CreateTaskForUser(c echo.Context) (database.Task, error) {
 	newTask, err := h.Db.CreateTask(c.Request().Context(), createTaskParams)
 	if err != nil {
 		c.Logger().Errorf("couldn't create task: %v", err)
-		msg := fmt.Sprintf("error: %s", err)
-		return database.Task{}, c.String(http.StatusInternalServerError, msg)
+		return database.Task{}, http.StatusInternalServerError, fmt.Errorf("something went wrong, try again")
 	}
 
-	return newTask, nil
+	return newTask, http.StatusCreated, nil
 }
 
 func (h DBHandler) doneTaskForUser(c echo.Context) (database.Task, error) {

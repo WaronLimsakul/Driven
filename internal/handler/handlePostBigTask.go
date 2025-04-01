@@ -8,9 +8,9 @@ import (
 )
 
 func (h DBHandler) HandlePostTaskDay(c echo.Context) error {
-	newTask, err := h.CreateTaskForUser(c)
+	newTask, statusCode, err := h.CreateTaskForUser(c)
 	if err != nil {
-		return err
+		return c.String(statusCode, err.Error())
 	}
 
 	c.Response().Header().Add("HX-Reswap", "beforeend")

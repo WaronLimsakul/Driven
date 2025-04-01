@@ -3,19 +3,6 @@ package templates
 templ HomePageScript() {
 	<script type="text/javascript">
 		document.addEventListener("DOMContentLoaded", (e) => {
-		    // force client machine to send UTC time.
-  		    document.querySelector("#task-form").addEventListener("htmx:configRequest", (event) => {
-              let formData = event.detail.parameters; // This is the form data HTMX will send
-              // console.log(formData);
-
-              if (formData["task-date"]) {
-                  let localDate = new Date(formData["task-date"] + "T00:00:00");
-                  let utcDate = new Date(Date.UTC(localDate.getFullYear(), localDate.getMonth(), localDate.getDate()));
-                  formData["task-date"] = utcDate.toISOString().split("T")[0]; // Convert to UTC format
-                  // console.log("task-date: ", formData["task-date"]);
-              }
-            });
-
 		    document.addEventListener("htmx:beforeSwap", (event) => {
 				if (event.detail.xhr.status == 403) {
 			     event.detail.shouldSwap = true;
@@ -24,6 +11,18 @@ templ HomePageScript() {
 					event.detail.shouldSwap = false;
 				}
 			});
+
+			// function scrollToBigTask(taskID) {
+			//     const taskElement = document.getElementById(taskID);
+			// 	if (taskElement) {
+			// 	   taskElement.scrollIntoView({ behavior: "smooth" });
+			// 	}
+			// }
+
+			// document.addEventListener("scrollToTask", (event) => {
+			//    scrollToBigTask(event.detail.value);
+			// });
 		});
+
 	</script>
 }

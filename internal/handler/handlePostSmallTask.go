@@ -10,9 +10,9 @@ import (
 )
 
 func (h DBHandler) HandlePostTaskWeek(c echo.Context) error {
-	newTask, err := h.CreateTaskForUser(c)
+	newTask, statusCode, err := h.CreateTaskForUser(c)
 	if err != nil {
-		return err
+		return c.String(statusCode, err.Error())
 	}
 	weekDayStr := tasks.GetWeekDayStr(newTask.Date)
 	c.Response().Header().Add("HX-Reswap", "beforeend")

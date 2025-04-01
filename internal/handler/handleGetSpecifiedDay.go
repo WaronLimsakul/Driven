@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 
@@ -30,6 +31,12 @@ func (h DBHandler) HandleGetSpecifiedDay(c echo.Context) error {
 	}
 
 	todaysTasks, err := h.Db.GetTaskByDate(c.Request().Context(), getTasksParams)
+
+	scrollTarget := c.Request().Header.Get("scrollTarget")
+	if scrollTarget != "" {
+		scrollHeaderVal := fmt.Sprintf("{\"scrollToTask\": \"%s\"}", scrollTarget)
+		c.Response().Header().Set("HX-Trigger-After-Swap", scrollHeaderVal)
+	}
 
 	return render(http.StatusOK, c, templates.Day(todaysTasks, date))
 }
