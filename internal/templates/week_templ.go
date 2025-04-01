@@ -143,14 +143,14 @@ func NewTaskFormWeek(today time.Time) templ.Component {
 			templ_7745c5c3_Var6 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "<form id=\"task-form\" hx-post=\"/tasks/week\" hx-target=\"#task-form-msg\" hx-on::after-request=\"if(event.detail.successful) this.reset()\" hx-swap-oob=\"true\" hx-disabled-elt=\"#add-task-button\" class=\"w-1/5 m-3 bg-flame-surface p-6 h-full rounded flex flex-col justify-center gap-4\"><h2 class=\"text-lg font-bold text-center\">New tasks</h2><div class=\"p-3 gap-1\"><label class=\"block text-sm mt-2\" for=\"task-name\">Task:</label> <input type=\"text\" name=\"task-name\" required class=\"w-full p-1 bg-gray-700 rounded text-white\"> <label class=\"block text-sm mt-2\" for=\"task-priority\">Priority:</label> <input type=\"number\" min=\"0\" max=\"3\" name=\"task-priority\" value=\"0\" required class=\"w-full p-1 bg-gray-700 rounded text-white\"> <label class=\"block text-sm mt-2\" for=\"task-date\">Date:</label> <input type=\"date\" name=\"task-date\" id=\"task-date\" value=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "<form id=\"task-form\" hx-post=\"/tasks/week\" hx-target=\"#task-form-msg\" hx-on::after-request=\"if(event.detail.successful) this.reset()\" hx-swap-oob=\"true\" hx-disabled-elt=\"#add-task-button\" class=\"w-1/5 m-3 bg-flame-surface p-6 h-full rounded flex flex-col justify-center gap-4\"><h2 class=\"text-lg font-bold text-center\">New tasks</h2><div class=\"p-3 gap-1\"><label class=\"block text-sm mt-2\" for=\"task-name\">Task:</label> <input type=\"text\" name=\"task-name\" required class=\"w-full p-1 bg-gray-700 rounded text-white\"> <label class=\"block text-sm mt-2\" for=\"task-priority\">Priority: </label> <select name=\"task-priority\" class=\"w-full p-1 bg-gray-700 rounded text-white\" required><option value=\"0\">0</option> <option value=\"1\">1</option> <option value=\"2\">2</option> <option value=\"3\">3</option></select> <label class=\"block text-sm mt-2\" for=\"task-date\">Date:</label> <input type=\"date\" name=\"task-date\" id=\"task-date\" value=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var7 string
 		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("%04d-%02d-%02d", today.Year(), today.Month(), today.Day()))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/week.templ`, Line: 80, Col: 83}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/week.templ`, Line: 83, Col: 83}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 		if templ_7745c5c3_Err != nil {

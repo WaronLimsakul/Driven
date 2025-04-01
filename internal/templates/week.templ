@@ -64,14 +64,17 @@ templ NewTaskFormWeek(today time.Time) {
 				name="task-name"
 				required
 				class="w-full p-1 bg-gray-700 rounded text-white"/>
-            <label class="block text-sm mt-2" for="task-priority">Priority:</label>
-            <input
-				type="number"
-				min="0" max="3"
-				name="task-priority"
-				value="0"
-				required
-				class="w-full p-1 bg-gray-700 rounded text-white"/>
+            <label class="block text-sm mt-2" for="task-priority">Priority: </label>
+            <select
+            	name="task-priority"
+            	class="w-full p-1 bg-gray-700 rounded text-white"
+             	required
+            >
+	           	<option value="0">0</option>
+	           	<option value="1">1</option>
+	           	<option value="2">2</option>
+	           	<option value="3">3</option>
+            </select>
             <label class="block text-sm mt-2" for="task-date">Date:</label>
             <input
 				type="date"
