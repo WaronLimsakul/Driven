@@ -20,11 +20,6 @@ func NewServerConfig() (ServerConfig, error) {
 		return ServerConfig{}, fmt.Errorf("Couldn't get env config")
 	}
 
-	dbURL := os.Getenv("DB_URL")
-	if dbURL == "" {
-		return ServerConfig{}, fmt.Errorf("Couldn't get database url")
-	}
-
 	return ServerConfig{
 		Port: port,
 		Env:  env,
