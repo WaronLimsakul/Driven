@@ -42,7 +42,7 @@ func Week(groupTasks [][]database.Task, monday time.Time) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div id=\"calendar\" class=\"m-3 mr-5 p-4 flex bg-flame-surface rounded-lg h-full\"><button class=\"m-2 cursor-pointer rounded-full p-2 hover:bg-gray-700 flex items-center justify-center h-10 w-10 transition-colors\" hx-get=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div id=\"calendar\" class=\"m-3 p-4 flex bg-flame-surface rounded-lg h-full\"><button class=\"m-2 cursor-pointer rounded-full p-2 hover:bg-gray-700 flex items-center justify-center h-10 w-10 transition-colors\" hx-get=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -143,7 +143,7 @@ func NewTaskFormWeek(today time.Time) templ.Component {
 			templ_7745c5c3_Var6 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "<form id=\"task-form\" hx-post=\"/tasks/week\" hx-target=\"#task-form-msg\" hx-on::after-request=\"if(event.detail.successful) this.reset()\" hx-swap-oob=\"true\" class=\"w-1/5 m-3 bg-flame-surface p-6 h-full rounded flex flex-col justify-center gap-4\"><h2 class=\"text-lg font-bold text-center\">New tasks</h2><div class=\"p-3 gap-1\"><label class=\"block text-sm mt-2\" for=\"task-name\">Task:</label> <input type=\"text\" name=\"task-name\" required class=\"w-full p-1 bg-gray-700 rounded text-white\"> <label class=\"block text-sm mt-2\" for=\"task-priority\">Priority: </label> <select name=\"task-priority\" class=\"w-full p-1 bg-gray-700 rounded text-white\" required><option value=\"0\">0</option> <option value=\"1\">1</option> <option value=\"2\">2</option> <option value=\"3\">3</option></select> <label class=\"block text-sm mt-2\" for=\"task-date\">Date:</label> <input type=\"date\" name=\"task-date\" id=\"task-date\" value=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "<form id=\"task-form\" hx-post=\"/tasks/week\" hx-target=\"#task-form-msg\" hx-on::after-request=\"if(event.detail.successful) this.reset()\" hx-swap-oob=\"true\" class=\"w-full m-3 bg-flame-surface p-6 h-auto rounded flex flex-col justify-center gap-4\"><h2 class=\"text-lg font-bold text-center\">New tasks</h2><div class=\"p-3 gap-1\"><label class=\"block text-sm mt-2\" for=\"task-name\">Task:</label> <input type=\"text\" name=\"task-name\" required class=\"w-full p-1 bg-gray-700 rounded text-white\"> <label class=\"block text-sm mt-2\" for=\"task-priority\">Priority: </label> <select name=\"task-priority\" class=\"w-full p-1 bg-gray-700 rounded text-white\" required><option value=\"0\">0</option> <option value=\"1\">1</option> <option value=\"2\">2</option> <option value=\"3\">3</option></select> <label class=\"block text-sm mt-2\" for=\"task-date\">Date:</label> <input type=\"date\" name=\"task-date\" id=\"task-date\" value=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -156,7 +156,7 @@ func NewTaskFormWeek(today time.Time) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "\" required class=\"w-full p-1 bg-gray-700 rounded text-white\"></div><p class=\"text-red-400 text-sm\" id=\"task-form-msg\"></p><button id=\"add-task-button\" type=\"submit\" class=\"bg-flame-primary hover:bg-flame-hover disabled:bg-gray-500 cursor-pointer text-white py-2 px-4 rounded\">Add Task</button></form>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 9, "\" required class=\"w-full p-1 bg-gray-700 rounded text-white\"></div><p class=\"text-red-400 text-sm\" id=\"task-form-msg\"></p><button id=\"add-task-button\" type=\"submit\" class=\"bg-flame-dark hover:bg-flame-primary disabled:bg-gray-500 cursor-pointer text-white py-2 px-4 rounded\">Add Task</button></form>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

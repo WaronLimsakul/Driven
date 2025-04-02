@@ -31,7 +31,7 @@ templ keysAreaScript() {
 
 templ Day(tasks []database.Task, day time.Time) {
 	@NewTaskFormDay(day)
-	<div id={ dateFormat(day) } class="my-3 mr-5 p-4 bg-flame-surface rounded-lg h-auto">
+	<div id={ dateFormat(day) } class="m-3 p-4 bg-flame-surface rounded-lg h-auto">
 		<div class="flex justify-between items-center">
 			<button
 				class="ml-4 mb-2 cursor-pointer rounded-full p-2 hover:bg-gray-700 flex items-center justify-center h-10 w-10 transition-colors"
@@ -64,7 +64,7 @@ templ NewTaskFormDay(day time.Time) {
 		hx-on::after-request="if(event.detail.successful) this.reset()"
 		hx-swap-oob="true"
 		hx-disabled-elt="#add-task-button"
-		class="w-1/5 m-3 bg-flame-surface p-6 h-full rounded flex flex-col justify-center gap-4">
+		class="w-full m-3 bg-flame-surface p-6 h-auto rounded flex flex-col justify-center gap-4">
         <h2 class="text-lg font-bold text-center">New tasks</h2>
         <div class="p-3 gap-1 rounded">
             <label class="block text-sm mt-2" for="task-name">Task:</label>

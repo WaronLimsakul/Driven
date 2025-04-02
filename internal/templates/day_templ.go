@@ -91,7 +91,7 @@ func Day(tasks []database.Task, day time.Time) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\" class=\"my-3 mr-5 p-4 bg-flame-surface rounded-lg h-auto\"><div class=\"flex justify-between items-center\"><button class=\"ml-4 mb-2 cursor-pointer rounded-full p-2 hover:bg-gray-700 flex items-center justify-center h-10 w-10 transition-colors\" hx-get=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\" class=\"m-3 p-4 bg-flame-surface rounded-lg h-auto\"><div class=\"flex justify-between items-center\"><button class=\"ml-4 mb-2 cursor-pointer rounded-full p-2 hover:bg-gray-700 flex items-center justify-center h-10 w-10 transition-colors\" hx-get=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -197,7 +197,7 @@ func NewTaskFormDay(day time.Time) templ.Component {
 			templ_7745c5c3_Var9 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "<form id=\"task-form\" hx-post=\"/tasks/day\" hx-target=\"#task-form-msg\" hx-on::after-request=\"if(event.detail.successful) this.reset()\" hx-swap-oob=\"true\" hx-disabled-elt=\"#add-task-button\" class=\"w-1/5 m-3 bg-flame-surface p-6 h-full rounded flex flex-col justify-center gap-4\"><h2 class=\"text-lg font-bold text-center\">New tasks</h2><div class=\"p-3 gap-1 rounded\"><label class=\"block text-sm mt-2\" for=\"task-name\">Task:</label> <input type=\"text\" name=\"task-name\" required class=\"w-full p-1 bg-gray-700 rounded text-white\"> <label class=\"block text-sm mt-2\" for=\"task-priority\">Priority:</label> <select name=\"task-priority\" class=\"w-full p-1 bg-gray-700 rounded text-white\" required><option value=\"0\">0</option> <option value=\"1\">1</option> <option value=\"2\">2</option> <option value=\"3\">3</option></select> <input type=\"date\" name=\"task-date\" id=\"task-date\" value=\"")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 10, "<form id=\"task-form\" hx-post=\"/tasks/day\" hx-target=\"#task-form-msg\" hx-on::after-request=\"if(event.detail.successful) this.reset()\" hx-swap-oob=\"true\" hx-disabled-elt=\"#add-task-button\" class=\"w-full m-3 bg-flame-surface p-6 h-auto rounded flex flex-col justify-center gap-4\"><h2 class=\"text-lg font-bold text-center\">New tasks</h2><div class=\"p-3 gap-1 rounded\"><label class=\"block text-sm mt-2\" for=\"task-name\">Task:</label> <input type=\"text\" name=\"task-name\" required class=\"w-full p-1 bg-gray-700 rounded text-white\"> <label class=\"block text-sm mt-2\" for=\"task-priority\">Priority:</label> <select name=\"task-priority\" class=\"w-full p-1 bg-gray-700 rounded text-white\" required><option value=\"0\">0</option> <option value=\"1\">1</option> <option value=\"2\">2</option> <option value=\"3\">3</option></select> <input type=\"date\" name=\"task-date\" id=\"task-date\" value=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

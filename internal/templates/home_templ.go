@@ -29,7 +29,7 @@ func Home() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full bg-flame-bg min-h-screen h-auto p-2\"><div class=\"bg-flame-bg flex justify-center w-full text-flame-text\"><form id=\"task-form\"></form><div hx-get=\"/week\" hx-trigger=\"load\" class=\"w-full\" id=\"view\"></div></div></div>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<div class=\"w-full bg-flame-bg min-h-screen h-auto p-2\"><div class=\"bg-flame-bg flex justify-center w-full gap-2 text-flame-text\"><div class=\"flex-col w-1/5\"><form id=\"task-form\"></form><form class=\"w-full m-3 bg-flame-surface p-6 h-auto rounded flex flex-col justify-center gap-4\" hx-get=\"/day/\" hx-target=\"#view\" hx-on::config-request=\"event.detail.path += document.querySelector(&#39;#quick-date&#39;).value\"><label class=\"block text-sm mt-2\" for=\"quick-date\">Quick navigate:</label> <input type=\"date\" name=\"quick-date\" id=\"quick-date\" required class=\"w-full p-1 bg-gray-700 rounded text-white\"> <button type=\"submit\" class=\"bg-flame-dark hover:bg-flame-primary disabled:bg-gray-500 cursor-pointer text-white py-1 px-2 rounded\">Go</button></form></div><div hx-get=\"/week\" hx-trigger=\"load\" class=\"w-full\" id=\"view\"></div></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

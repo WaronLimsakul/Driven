@@ -15,7 +15,7 @@ func dateFormatWeek(date time.Time) string {
 }
 
 templ Week(groupTasks [][]database.Task, monday time.Time) {
-	<div id="calendar" class="m-3 mr-5 p-4 flex bg-flame-surface rounded-lg h-full">
+	<div id="calendar" class="m-3 p-4 flex bg-flame-surface rounded-lg h-full">
 		<button
 			class="m-2 cursor-pointer rounded-full p-2 hover:bg-gray-700 flex items-center justify-center h-10 w-10 transition-colors"
 			hx-get={ fmt.Sprintf("/week/%s", dateFormat(monday.Add(-7 * 24 * time.Hour))) }
@@ -54,7 +54,7 @@ templ NewTaskFormWeek(today time.Time) {
 		hx-target="#task-form-msg"
 		hx-on::after-request="if(event.detail.successful) this.reset()"
 		hx-swap-oob="true"
-		class="w-1/5 m-3 bg-flame-surface p-6 h-full rounded flex flex-col justify-center gap-4">
+		class="w-full m-3 bg-flame-surface p-6 h-auto rounded flex flex-col justify-center gap-4">
         <h2 class="text-lg font-bold text-center">New tasks</h2>
         <div class="p-3 gap-1">
             <label class="block text-sm mt-2" for="task-name">Task:</label>
@@ -87,7 +87,7 @@ templ NewTaskFormWeek(today time.Time) {
         <button
         	id="add-task-button"
         	type="submit"
-         	class="bg-flame-primary hover:bg-flame-hover disabled:bg-gray-500 cursor-pointer text-white py-2 px-4 rounded">
+         	class="bg-flame-dark hover:bg-flame-primary disabled:bg-gray-500 cursor-pointer text-white py-2 px-4 rounded">
           Add Task
         </button>
 	</form>
