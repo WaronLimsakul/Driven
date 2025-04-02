@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"errors"
 	"fmt"
 	"time"
 
@@ -11,7 +12,12 @@ import (
 // jwt is a data. If in string, it looks like this <method>.<payload>.<signature>
 // the method and payload is only base 64 strings
 // the signature is method(secret, message).
+
+// this function create jwt with 4 claims: issuer, issued at, expired at, and user id
 func CreateJWT(userID uuid.UUID, expiredIn time.Duration, secret string) (string, error) {
+	if userID == uuid.Nil {
+		return "", fmt.Errorf("user ID not found")
+	}
 	// claims are the <payload> part
 	// RegisteredClaims is standard claim lib gives us. Great for access token.
 	claims := jwt.RegisteredClaims{
@@ -27,6 +33,9 @@ func CreateJWT(userID uuid.UUID, expiredIn time.Duration, secret string) (string
 	// RSA and ECDSA are good for microservices, but we are not them.
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
+	if secret == "" {
+		return "", fmt.Errorf("secret is empty")
+	}
 	// now we signed the <signature> part in token.
 	signedToken, err := token.SignedString([]byte(secret))
 	if err != nil {
@@ -52,8 +61,13 @@ func ValidateJWT(tokenString, secret string) (uuid.UUID, error, bool) {
 			return []byte(secret), nil
 		})
 
+	isExpired := false
+	// this parse token already check the expired time
 	if err != nil {
-		return uuid.UUID{}, fmt.Errorf("Validate token: Couldn't parse token: %v", err), false
+		if errors.Is(err, jwt.ErrTokenExpired) {
+			isExpired = true
+		}
+		return uuid.UUID{}, fmt.Errorf("Validate token: Couldn't parse token: %v", err), isExpired
 	}
 
 	// check issuer
@@ -64,24 +78,15 @@ func ValidateJWT(tokenString, secret string) (uuid.UUID, error, bool) {
 		return uuid.UUID{}, fmt.Errorf("Validate token: Unexpected issuer: %v", issuer), false
 	}
 
-	isExpired := false
-	// check expire date
-	expiredTime, err := token.Claims.GetExpirationTime()
-	if err != nil {
-		return uuid.UUID{}, fmt.Errorf("Validate token: Couldn't get expire time: %v", err), false
-	} else if time.Now().After(expiredTime.Time) {
-		isExpired = true
-	}
-
 	userID, err := token.Claims.GetSubject()
 	if err != nil {
-		return uuid.UUID{}, fmt.Errorf("Validate token: Couldn't get user id: %v", err), isExpired
+		return uuid.UUID{}, fmt.Errorf("Validate token: Couldn't get user id: %v", err), false
 	}
 
 	userUUID, err := uuid.Parse(userID)
 	if err != nil {
-		return uuid.UUID{}, fmt.Errorf("Validate token: Couldn't parse user id: %v", err), isExpired
+		return uuid.UUID{}, fmt.Errorf("Validate token: Couldn't parse user id: %v", err), false
 	}
 
-	return userUUID, nil, isExpired
+	return userUUID, nil, false
 }
