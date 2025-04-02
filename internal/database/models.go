@@ -24,6 +24,8 @@ type Task struct {
 	ID        uuid.UUID
 	OwnerID   uuid.UUID
 	Name      string
+	UpdatedAt time.Time
+	CreatedAt time.Time
 	Keys      sql.NullString
 	Date      time.Time
 	Priority  int32
