@@ -53,6 +53,7 @@ func NewServerMiddlware() (ServerMiddleware, error) {
 // pass if jwt valid
 func (m ServerMiddleware) AuthMiddleware(handler echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
+		fmt.Printf("point 3")
 		refreshCookie, err := c.Cookie("driven-refresh-token")
 		// it err != nil when don't found the cookie
 		if err != nil {
@@ -120,4 +121,9 @@ func (m ServerMiddleware) refreshJWT(refreshToken string, c echo.Context) error 
 
 	handlers.AssignAccessTokenCookie(c, newAccessToken, m.Env == "production")
 	return nil
+}
+
+// combined version of HXFilter and Auth middleware
+func (m ServerMiddleware) HXAuthMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
+	return HXFilterMiddleWare(m.AuthMiddleware(next))
 }
