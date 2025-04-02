@@ -53,7 +53,6 @@ func NewServerMiddlware() (ServerMiddleware, error) {
 // pass if jwt valid
 func (m ServerMiddleware) AuthMiddleware(handler echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
-		fmt.Printf("point 3")
 		refreshCookie, err := c.Cookie("driven-refresh-token")
 		// it err != nil when don't found the cookie
 		if err != nil {

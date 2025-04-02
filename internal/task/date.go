@@ -8,6 +8,7 @@ import (
 
 var weekDaysArray [7]string = [7]string{"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"}
 
+// Return the monday (start) and sunday (end) of the week today is in
 func GetWeekRange(today time.Time) (monday, sunday time.Time) {
 	goBack := GetWeekDayNum(today)
 
@@ -28,6 +29,7 @@ func GroupTaskDate(tasks []database.Task) [][]database.Task {
 	return week
 }
 
+// Monday is 0, until Sunday is 6
 func GetWeekDayNum(day time.Time) int {
 	i := int(day.Weekday()) - 1 //sunday is 0
 	if i < 0 {
@@ -36,6 +38,7 @@ func GetWeekDayNum(day time.Time) int {
 	return i
 }
 
+// Shorten week day name to just 3 characters
 func GetWeekDayStr(day time.Time) string {
 	dayNum := GetWeekDayNum(day)
 	return weekDaysArray[dayNum]
@@ -53,6 +56,7 @@ func SpanWeekDateByFormat(monday time.Time, format func(time.Time) string) []str
 	return week
 }
 
+// return a slice with 7 days start with monday (it can be anyday though)
 func SpanWeekDate(monday time.Time) []time.Time {
 	week := []time.Time{}
 	cur := monday
