@@ -33,12 +33,12 @@ func CreateRefreshToken() (string, error) {
 
 func ValidateRefreshToken(token database.RefreshToken) error {
 	if time.Now().After(token.ExpiredAt) {
-		return fmt.Errorf("Refresh token expired")
+		return fmt.Errorf("refresh token expired")
 	}
 
 	// if valid = not null = revoked
 	if token.RevokedAt.Valid {
-		return fmt.Errorf("Refresh token revoked")
+		return fmt.Errorf("refresh token revoked")
 	}
 	return nil
 }

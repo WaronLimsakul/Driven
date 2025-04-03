@@ -20,7 +20,7 @@ func NewDBHandler() (DBHandler, error) {
 
 	dbURL := os.Getenv("DB_URL")
 	if dbURL == "" {
-		return DBHandler{}, fmt.Errorf("Database URL not set")
+		return DBHandler{}, fmt.Errorf("database URL not set")
 	}
 
 	db, err := sql.Open("postgres", dbURL)
@@ -31,12 +31,12 @@ func NewDBHandler() (DBHandler, error) {
 
 	jwtSecret := os.Getenv("JWT_SECRET")
 	if jwtSecret == "" {
-		return DBHandler{}, fmt.Errorf("Couldn't find a Jwt secret config")
+		return DBHandler{}, fmt.Errorf("couldn't find a Jwt secret config")
 	}
 
 	env := os.Getenv("ENV")
 	if env == "" {
-		return DBHandler{}, fmt.Errorf("Couldn't get env config")
+		return DBHandler{}, fmt.Errorf("couldn't get env config")
 	}
 
 	return DBHandler{

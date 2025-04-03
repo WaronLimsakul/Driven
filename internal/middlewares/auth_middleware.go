@@ -22,7 +22,7 @@ type ServerMiddleware struct {
 func NewServerMiddlware() (ServerMiddleware, error) {
 	dbURL := os.Getenv("DB_URL")
 	if dbURL == "" {
-		return ServerMiddleware{}, fmt.Errorf("Database URL not set")
+		return ServerMiddleware{}, fmt.Errorf("database URL not set")
 	}
 
 	db, err := sql.Open("postgres", dbURL)
@@ -33,12 +33,12 @@ func NewServerMiddlware() (ServerMiddleware, error) {
 
 	jwtSecret := os.Getenv("JWT_SECRET")
 	if jwtSecret == "" {
-		return ServerMiddleware{}, fmt.Errorf("Couldn't find a Jwt secret config")
+		return ServerMiddleware{}, fmt.Errorf("couldn't find a Jwt secret config")
 	}
 
 	env := os.Getenv("ENV")
 	if env == "" {
-		return ServerMiddleware{}, fmt.Errorf("Couldn't find ENV config")
+		return ServerMiddleware{}, fmt.Errorf("couldn't find ENV config")
 	}
 
 	return ServerMiddleware{
@@ -70,7 +70,8 @@ func (m ServerMiddleware) AuthMiddleware(handler echo.HandlerFunc) echo.HandlerF
 			return c.Redirect(http.StatusSeeOther, "/signin")
 		}
 
-		jwtCookie, err := c.Cookie("driven-jwt")
+		// don't care when check the first time, we will reassign anyway
+		_, err = c.Cookie("driven-jwt")
 		// there is refresh token but not jwt
 		if err != nil {
 			err = m.refreshJWT(refreshToken.Token, c)
@@ -78,15 +79,13 @@ func (m ServerMiddleware) AuthMiddleware(handler echo.HandlerFunc) echo.HandlerF
 				c.Logger().Printf("catch at 1: %v", err)
 				return err
 			}
-			// fmt.Printf("token refreshed\n")
 		}
 
-		jwtCookie, err = c.Cookie("driven-jwt") // assign again after refresh
+		jwtCookie, err := c.Cookie("driven-jwt") // assign again after (potential) refresh
 		if err != nil {
 			c.Logger().Printf("at auth middleware, catch 2: %v", err)
 			return err
 		}
-
 		userID, err, isExpired := auth.ValidateJWT(jwtCookie.Value, m.JWTSecret)
 		if err != nil {
 			c.Logger().Printf("At auth middleware (validate jwt): %v", err)

@@ -10,7 +10,9 @@ import (
 )
 
 const jwtExpireTime time.Duration = 15 * time.Minute
-const refreshExpireTime time.Duration = 7 * 24 * time.Hour
+
+// don't have chance to use this because I determine it in the queries
+// const refreshExpireTime time.Duration = 7 * 24 * time.Hour
 
 func middlewareCreateAccessToken(c echo.Context, userID uuid.UUID, secret string) (string, error) {
 	accessToken, err := auth.CreateJWT(userID, jwtExpireTime, secret)
@@ -21,12 +23,12 @@ func middlewareCreateAccessToken(c echo.Context, userID uuid.UUID, secret string
 	return accessToken, nil
 }
 
-// don't know if we need this
-func middlwareCreateRefreshToken(c echo.Context) (string, error) {
-	refreshToken, err := auth.CreateRefreshToken()
-	if err != nil {
-		c.Logger().Errorf("Couldn't create refresh token: %v", err)
-		return "", c.Redirect(http.StatusSeeOther, "/error")
-	}
-	return refreshToken, err
-}
+// don't know if we need this because we only can refresh access token in middleware
+// func middlwareCreateRefreshToken(c echo.Context) (string, error) {
+// 	refreshToken, err := auth.CreateRefreshToken()
+// 	if err != nil {
+// 		c.Logger().Errorf("Couldn't create refresh token: %v", err)
+// 		return "", c.Redirect(http.StatusSeeOther, "/error")
+// 	}
+// 	return refreshToken, err
+// }

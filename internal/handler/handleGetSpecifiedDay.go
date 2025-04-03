@@ -30,8 +30,10 @@ func (h DBHandler) HandleGetSpecifiedDay(c echo.Context) error {
 		Date:    date,
 	}
 
-	todaysTasks, err := h.Db.GetTaskByDate(c.Request().Context(), getTasksParams)
+	// don't care the error because we might not found task, but still want to render
+	todaysTasks, _ := h.Db.GetTaskByDate(c.Request().Context(), getTasksParams)
 
+	// if found scroll target, set the header of the response to trigger scroll event
 	scrollTarget := c.Request().Header.Get("scrollTarget")
 	if scrollTarget != "" {
 		scrollHeaderVal := fmt.Sprintf("{\"scrollToTask\": \"%s\"}", scrollTarget)

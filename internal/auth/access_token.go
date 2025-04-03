@@ -55,7 +55,7 @@ func ValidateJWT(tokenString, secret string) (uuid.UUID, error, bool) {
 		func(token *jwt.Token) (any, error) {
 			// check if the method what I expect
 			if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
-				return nil, fmt.Errorf("Token invalid: Unexpected sigin method: %v", token.Method.Alg())
+				return nil, fmt.Errorf("token invalid: Unexpected sigin method: %v", token.Method.Alg())
 			}
 
 			return []byte(secret), nil
@@ -67,25 +67,25 @@ func ValidateJWT(tokenString, secret string) (uuid.UUID, error, bool) {
 		if errors.Is(err, jwt.ErrTokenExpired) {
 			isExpired = true
 		}
-		return uuid.UUID{}, fmt.Errorf("Validate token: Couldn't parse token: %v", err), isExpired
+		return uuid.UUID{}, fmt.Errorf("validate token: Couldn't parse token: %v", err), isExpired
 	}
 
 	// check issuer
 	issuer, err := token.Claims.GetIssuer()
 	if err != nil {
-		return uuid.UUID{}, fmt.Errorf("Validate token: No issuer found"), false
+		return uuid.UUID{}, fmt.Errorf("validate token: No issuer found"), false
 	} else if issuer != "Driven" {
-		return uuid.UUID{}, fmt.Errorf("Validate token: Unexpected issuer: %v", issuer), false
+		return uuid.UUID{}, fmt.Errorf("validate token: Unexpected issuer: %v", issuer), false
 	}
 
 	userID, err := token.Claims.GetSubject()
 	if err != nil {
-		return uuid.UUID{}, fmt.Errorf("Validate token: Couldn't get user id: %v", err), false
+		return uuid.UUID{}, fmt.Errorf("validate token: Couldn't get user id: %v", err), false
 	}
 
 	userUUID, err := uuid.Parse(userID)
 	if err != nil {
-		return uuid.UUID{}, fmt.Errorf("Validate token: Couldn't parse user id: %v", err), false
+		return uuid.UUID{}, fmt.Errorf("validate token: Couldn't parse user id: %v", err), false
 	}
 
 	return userUUID, nil, false

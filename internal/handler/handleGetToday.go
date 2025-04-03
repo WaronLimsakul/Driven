@@ -27,7 +27,8 @@ func (h DBHandler) HandleGetToday(c echo.Context) error {
 		Date:    today,
 	}
 
-	todaysTasks, err := h.Db.GetTaskByDate(c.Request().Context(), getTasksParams)
+	// don't care error, still want to render when today's task not found
+	todaysTasks, _ := h.Db.GetTaskByDate(c.Request().Context(), getTasksParams)
 
 	return render(http.StatusOK, c, templates.Day(todaysTasks, today))
 }
