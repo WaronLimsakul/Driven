@@ -13,11 +13,11 @@ type ServerConfig struct {
 func NewServerConfig() (ServerConfig, error) {
 	port := os.Getenv("HOST")
 	if port == "" {
-		return ServerConfig{}, fmt.Errorf("Couldn't get host number")
+		return ServerConfig{}, fmt.Errorf("couldn't get host number")
 	}
 	env := os.Getenv("ENV")
 	if env == "" {
-		return ServerConfig{}, fmt.Errorf("Couldn't get env config")
+		return ServerConfig{}, fmt.Errorf("couldn't get env config")
 	}
 
 	return ServerConfig{

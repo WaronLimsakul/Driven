@@ -1,0 +1,33 @@
+name: Driven_CD
+on:
+  push:
+    branches: [main]
+jobs:
+  deploy:
+    name: Deploy new version
+    runs-on: ubuntu-latest # have docker and aws installed
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.24.1"
+      - name: Set up Goose
+        run: go install github.com/pressly/goose/v3/cmd/goose@latest
+      - name: Migrate DB to new version
+        run: goose -dir "sql/schema" postgres "${{ secrets.DB_URL }}" up
+      - name: Build product
+        run: go build -o driven
+      - name: Config AWS ECR
+        run: >
+          aws ecr get-login-password
+          --region ${{ secrets.ECR_REGION }} | docker login
+          --username AWS --password-stdin ${{ secrets.ECR_PASSWORD }}
+      - name: Build container
+        run: docker build -t driven .
+      - name: Tag image
+        run: docker tag driven:latest ${{ secrets.IMG_SOURCE }}
+      - name: Push image
+        run: docker push ${{ secrets.IMG_SOURCE }}

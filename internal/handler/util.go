@@ -40,7 +40,6 @@ func createDoubleTokens(c echo.Context, userID uuid.UUID, secret string) (access
 func AssignAuthCookies(c echo.Context, production bool, accessToken, refreshToken string) {
 	AssignAccessTokenCookie(c, accessToken, production)
 	AssignRefreshTokenCookie(c, refreshToken, production)
-	return
 }
 
 func AssignAccessTokenCookie(c echo.Context, accessToken string, production bool) {
@@ -59,7 +58,6 @@ func AssignAccessTokenCookie(c echo.Context, accessToken string, production bool
 	c.SetCookie(accessTokenCookie)
 	// So I have to set in manually only for this request
 	c.Request().AddCookie(accessTokenCookie)
-	return
 }
 
 func AssignRefreshTokenCookie(c echo.Context, refreshToken string, production bool) {
@@ -72,7 +70,6 @@ func AssignRefreshTokenCookie(c echo.Context, refreshToken string, production bo
 		refreshTokenCookie.Secure = true
 	}
 	c.SetCookie(refreshTokenCookie)
-	return
 }
 
 func (h DBHandler) CreateTaskForUser(c echo.Context) (database.Task, int, error) {
@@ -108,7 +105,7 @@ func (h DBHandler) CreateTaskForUser(c echo.Context) (database.Task, int, error)
 	if err != nil {
 		c.Logger().Printf("couldn't parse task date: %v", err)
 		// Just to avoid gosec
-		err = c.String(http.StatusInternalServerError, "something went wrong, try again later")
+		_ = c.String(http.StatusInternalServerError, "something went wrong, try again later")
 		return database.Task{}, http.StatusBadRequest, fmt.Errorf("couldn't parse task date")
 	}
 
