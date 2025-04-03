@@ -1,3 +1,4 @@
 .env
 tmp/*
 /internal/templates/*.txt
+driven

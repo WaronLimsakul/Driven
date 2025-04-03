@@ -11,7 +11,6 @@ import (
 )
 
 func (h DBHandler) HandleGetToday(c echo.Context) error {
-
 	now := time.Now()
 	today := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, time.UTC)
 
