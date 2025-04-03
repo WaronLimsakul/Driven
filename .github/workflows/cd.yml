@@ -2,6 +2,10 @@ name: Driven_CD
 on:
   push:
     branches: [main]
+env:
+  GOOSE_DRIVER: postgres
+  GOOSE_MIGRATION_DIR: sql/schema
+  GOOSE_DBSTRING: ${{ secrets.DB_URL }}
 jobs:
   deploy:
     name: Deploy new version
@@ -17,9 +21,9 @@ jobs:
       - name: Set up Goose
         run: go install github.com/pressly/goose/v3/cmd/goose@latest
       - name: Migrate DB to new version
-        run: goose -dir "sql/schema" postgres "${{ secrets.DB_URL }}" up
+        run: goose up
       - name: Build product
-        run: go build -o driven
+        run: go build -o driven cmd/main.go
       - name: Config AWS ECR
         run: >
           aws ecr get-login-password
