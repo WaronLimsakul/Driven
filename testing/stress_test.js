@@ -14,6 +14,13 @@ export const options = {
   },
 };
 
+const baseUrl = "http://localhost:8080";
+const params = {
+  headers: {
+    "HX-Request": "true",
+  },
+}; // some route will check HTMX header
+
 // 1. go to landing page
 // 2. get sign in page
 // 3. sign in
@@ -24,13 +31,6 @@ export const options = {
 // 8. delete the task
 // 9. sign out
 export default function () {
-  const baseUrl = "http://localhost:8080";
-  const params = {
-    headers: {
-      "HX-Request": "true",
-    },
-  }; // some route will check HTMX header
-
   let res = http.get(baseUrl);
   check(res, {
     "get home page": (r) => r.status == 200,

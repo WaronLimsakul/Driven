@@ -7,9 +7,9 @@ export const options = {
   duration: "15s",
 };
 
-export default function () {
-  const baseUrl = "http://localhost:8080";
+const baseUrl = "http://localhost:8080";
 
+export default function () {
   let res = http.get(baseUrl);
   check(res, {
     "get home page": (r) => r.status == 200,
