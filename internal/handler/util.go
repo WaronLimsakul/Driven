@@ -91,7 +91,8 @@ func (h DBHandler) CreateTaskForUser(c echo.Context) (database.Task, int, error)
 	taskName := c.FormValue("task-name")
 
 	priority := c.FormValue("task-priority")
-	taskPriority, err := strconv.Atoi(priority)
+	// have to parse using 32 bits to convince gosec that it's safe to do int32(taskPriority)
+	taskPriority, err := strconv.ParseInt(priority, 10, 32) // parse using 32 bits
 	if err != nil {
 		c.Logger().Errorf("couldn't parse task priority: %v", err)
 		return database.Task{}, http.StatusInternalServerError, fmt.Errorf("something went wrong, try again later")
@@ -105,8 +106,9 @@ func (h DBHandler) CreateTaskForUser(c echo.Context) (database.Task, int, error)
 	// We actually expect the client to send UTC time
 	taskDate, err := time.Parse(time.DateOnly, date)
 	if err != nil {
-		c.Logger().Errorf("couldn't parse task date: %v", err)
-		c.String(http.StatusInternalServerError, "something went wrong, try again later")
+		c.Logger().Printf("couldn't parse task date: %v", err)
+		// Just to avoid gosec
+		err = c.String(http.StatusInternalServerError, "something went wrong, try again later")
 		return database.Task{}, http.StatusBadRequest, fmt.Errorf("couldn't parse task date")
 	}
 

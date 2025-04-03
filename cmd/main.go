@@ -73,5 +73,8 @@ func main() {
 	e.GET("/error", handlers.HandleLandError)
 	e.GET("/*", handlers.HandleNotFound) // for not found page
 
-	e.Start(serverConfig.Port)
+	err = e.Start(serverConfig.Port)
+	if err != nil {
+		log.Fatalf("Couldn't start the server: %v", err)
+	}
 }
