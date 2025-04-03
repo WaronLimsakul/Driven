@@ -1,0 +1,59 @@
+
+         /\      Grafana   /‾‾/
+    /\  /  \     |\  __   /  /
+   /  \/    \    | |/ /  /   ‾‾\
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/
+
+     execution: local
+        script: stress_test.js
+        output: -
+
+     scenarios: (100.00%) 1 scenario, 100 max VUs, 8m30s max duration (incl. graceful stop):
+              * default: Up to 100 looping VUs for 8m0s over 3 stages (gracefulRampDown: 30s, gracefulStop: 30s)
+  █ THRESHOLDS
+
+    http_req_duration
+    ✗ 'p(95)<200' p(95)=284.95ms
+
+    http_req_failed
+    ✓ 'rate<0.01' rate=0.00%
+
+
+  █ TOTAL RESULTS
+
+    checks_total.......................: 416223  867.094175/s
+    checks_succeeded...................: 100.00% 416223 out of 416223
+    checks_failed......................: 0.00%   0 out of 416223
+
+    ✓ get home page
+    ✓ get signin page
+    ✓ is signed in
+    ✓ can get home
+    ✓ create task success
+    ✓ task done
+    ✓ task undone
+    ✓ task deleted
+    ✓ is signed out
+
+    HTTP
+    http_req_duration.......................................................: avg=79.33ms  min=55.99µs med=36.21ms  max=882.22ms p(90)=221.5ms p(95)=284.95ms
+      { expected_response:true }............................................: avg=79.33ms  min=55.99µs med=36.21ms  max=882.22ms p(90)=221.5ms p(95)=284.95ms
+    http_req_failed.........................................................: 0.00%  0 out of 416223
+    http_reqs...............................................................: 416223 867.094175/s
+
+    EXECUTION
+    iteration_duration......................................................: avg=715.37ms min=53.3ms  med=731.08ms max=2.16s    p(90)=1.27s   p(95)=1.4s
+    iterations..............................................................: 46247  96.343797/s
+    vus.....................................................................: 1      min=1           max=100
+    vus_max.................................................................: 100    min=100         max=100
+
+    NETWORK
+    data_received...........................................................: 1.2 GB 2.5 MB/s
+    data_sent...............................................................: 157 MB 328 kB/s
+
+
+
+
+running (8m00.0s), 000/100 VUs, 46247 complete and 0 interrupted iterations
+default ✓ [ 100% ] 000/100 VUs  8m0s
