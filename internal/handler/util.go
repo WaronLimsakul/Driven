@@ -117,9 +117,9 @@ func (h DBHandler) CreateTaskForUser(c echo.Context) (database.Task, int, error)
 	inThePast := taskDate.Before(today.Add(-24 * time.Hour))
 	// don't allow any task later than a year
 	if moreThanYear || inThePast {
-		fmt.Printf("than year: %v | past: %v\n", moreThanYear, inThePast)
-		fmt.Printf("today: %v\n", today)
-		fmt.Printf("task date: %v\n", taskDate)
+		// fmt.Printf("than year: %v | past: %v\n", moreThanYear, inThePast)
+		// fmt.Printf("today: %v\n", today)
+		// fmt.Printf("task date: %v\n", taskDate)
 		return database.Task{}, http.StatusForbidden, fmt.Errorf("invalid task date")
 	}
 

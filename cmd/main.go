@@ -7,8 +7,8 @@ import (
 	handlers "github.com/WaronLimsakul/Driven/internal/handler"
 	"github.com/WaronLimsakul/Driven/internal/middlewares"
 	"github.com/joho/godotenv"
-	"github.com/labstack/echo/middleware"
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 func main() {

@@ -78,7 +78,7 @@ func (m ServerMiddleware) AuthMiddleware(handler echo.HandlerFunc) echo.HandlerF
 				c.Logger().Printf("catch at 1: %v", err)
 				return err
 			}
-			fmt.Printf("token refreshed\n")
+			// fmt.Printf("token refreshed\n")
 		}
 
 		jwtCookie, err = c.Cookie("driven-jwt") // assign again after refresh
