@@ -1,12 +1,17 @@
 import http from "k6/http";
-import { sleep } from "k6";
+import { parseHTML } from "k6/html";
+import { sleep, check } from "k6";
 
 export const options = {
   vus: 3,
-  duration: "1m",
+  duration: "15s",
 };
 
 export default function () {
-  http.get("http://localhost:8080/");
-  sleep(1);
+  const baseUrl = "http://localhost:8080";
+
+  let res = http.get(baseUrl);
+  check(res, {
+    "get home page": (r) => r.status == 200,
+  });
 }

@@ -68,6 +68,8 @@ func main() {
 	e.PUT("/tasks/day/:id/undone", serverMiddleware.HXAuthMiddleware(serverDBHandlers.HandleUndoneTaskDay))
 	e.PUT("/tasks/day/:id/keys", serverMiddleware.AuthMiddleware(serverDBHandlers.HandlePutTaskKeys))
 
+	e.DELETE("/tasks/:id", serverMiddleware.AuthMiddleware(serverDBHandlers.HandleDeleteTask))
+
 	e.GET("/error", handlers.HandleLandError)
 	e.GET("/*", handlers.HandleNotFound) // for not found page
 

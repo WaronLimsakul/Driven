@@ -9,7 +9,7 @@ import (
 )
 
 // Helper function to compare time.Time values ignoring location
-func timeEqual(t1, t2 time.Time) bool {
+func dateEqual(t1, t2 time.Time) bool {
 	return t1.Year() == t2.Year() && t1.Month() == t2.Month() && t1.Day() == t2.Day()
 }
 
@@ -43,10 +43,10 @@ func TestGetWeekRange(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			gotMonday, gotSunday := GetWeekRange(tt.input)
-			if !timeEqual(gotMonday, tt.wantMonday) {
+			if !dateEqual(gotMonday, tt.wantMonday) {
 				t.Errorf("GetWeekRange() gotMonday = %v, want %v", gotMonday, tt.wantMonday)
 			}
-			if !timeEqual(gotSunday, tt.wantSunday) {
+			if !dateEqual(gotSunday, tt.wantSunday) {
 				t.Errorf("GetWeekRange() gotSunday = %v, want %v", gotSunday, tt.wantSunday)
 			}
 		})
@@ -176,7 +176,7 @@ func TestSpanWeekDate(t *testing.T) {
 	}
 
 	for i := range want {
-		if !timeEqual(got[i], want[i]) {
+		if !dateEqual(got[i], want[i]) {
 			t.Errorf("SpanWeekDate()[%d] = %v, want %v", i, got[i], want[i])
 		}
 	}

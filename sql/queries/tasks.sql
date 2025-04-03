@@ -41,3 +41,7 @@ UPDATE tasks
 SET keys = $1, updated_at = NOW()
 WHERE owner_id = $2 AND id = $3
 RETURNING *;
+
+-- name: DeleteTaskByID :exec
+DELETE FROM tasks
+WHERE id = $1 AND owner_id = $2;
