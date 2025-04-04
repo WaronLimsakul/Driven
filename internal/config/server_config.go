@@ -11,7 +11,7 @@ type ServerConfig struct {
 }
 
 func NewServerConfig() (ServerConfig, error) {
-	port := os.Getenv("HOST")
+	port := os.Getenv("PORT")
 	if port == "" {
 		return ServerConfig{}, fmt.Errorf("couldn't get host number")
 	}
@@ -21,7 +21,7 @@ func NewServerConfig() (ServerConfig, error) {
 	}
 
 	return ServerConfig{
-		Port: port,
+		Port: fmt.Sprintf(":%s", port),
 		Env:  env,
 	}, nil
 }

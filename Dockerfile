@@ -1,5 +1,7 @@
 FROM debian:stable-slim
 
-COPY driven /bin/driven
+RUN apt-get update && apt-get install -y ca-certificates
 
-CMD ["/bin/driven"]
+COPY driven /usr/bin/driven
+
+CMD ["driven"]
