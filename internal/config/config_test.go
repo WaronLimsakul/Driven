@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"os"
 	"testing"
 )
@@ -28,8 +29,8 @@ func TestNewServerConfig(t *testing.T) {
 				t.Fatalf("test %s: expect no error but found %v", test.name, err)
 			} else if config.Env != test.env {
 				t.Fatalf("test %s: expect env %s but found %s", test.name, test.env, config.Env)
-			} else if config.Port != test.port {
-				t.Fatalf("test %s: expect port %s but found %s", test.name, test.port, config.Env)
+			} else if config.Port != fmt.Sprintf(":%s", test.port) {
+				t.Fatalf("test %s: expect port %s but found %s", test.name, test.port, config.Port)
 			}
 		} else if test.wantErr && err == nil {
 			t.Fatalf("test %s: expect error", test.name)
