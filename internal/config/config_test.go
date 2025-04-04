@@ -20,7 +20,7 @@ func TestNewServerConfig(t *testing.T) {
 	}
 
 	for _, test := range testCases {
-		os.Setenv("HOST", test.port)
+		os.Setenv("PORT", test.port)
 		os.Setenv("ENV", test.env)
 		config, err := NewServerConfig()
 		if !test.wantErr {
