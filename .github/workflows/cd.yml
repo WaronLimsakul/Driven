@@ -24,14 +24,20 @@ jobs:
         run: goose up
       - name: Build product
         run: go build -o driven cmd/main.go
-      - name: Config AWS ECR
+      - name: Config AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.ECR_REGION }}
+      - name: Login to ECR
         run: >
           aws ecr get-login-password
           --region ${{ secrets.ECR_REGION }} | docker login
-          --username AWS --password-stdin ${{ secrets.ECR_PASSWORD }}
+          --username AWS --password-stdin ${{ secrets.ECR_REGISTRY }}
       - name: Build container
         run: docker build -t driven .
       - name: Tag image
-        run: docker tag driven:latest ${{ secrets.IMG_SOURCE }}
+        run: docker tag driven:latest ${{ secrets.ECR_REGISTRY }}/driven:latest
       - name: Push image
-        run: docker push ${{ secrets.IMG_SOURCE }}
+        run: docker push ${{ secrets.ECR_REGISTRY }}/driven:latest
