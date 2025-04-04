@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"github.com/WaronLimsakul/Driven/internal/config"
 	handlers "github.com/WaronLimsakul/Driven/internal/handler"
@@ -14,9 +15,11 @@ import (
 func main() {
 	e := echo.New()
 
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatalf("Couldn't load .env file: %v", err)
+	if os.Getenv("ENV") != "production" {
+		err := godotenv.Load()
+		if err != nil {
+			log.Fatalf("Couldn't load .env file: %v", err)
+		}
 	}
 
 	serverConfig, err := config.NewServerConfig()
