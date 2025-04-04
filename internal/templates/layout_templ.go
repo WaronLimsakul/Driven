@@ -36,7 +36,7 @@ func head() templ.Component {
 			return templ_7745c5c3_Err
 		}
 		if os.Getenv("ENV") == "production" {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<link rel=\"stylesheet\" href=\"/static/css/style.min.css\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "<link rel=\"stylesheet\" href=\"/static/css/style.min.css\"><!-- Google tag (gtag.js) --> <script async src=\"https://www.googletagmanager.com/gtag/js?id=G-2VGXFFSVLC\"></script> <script>\n\t\t\t  window.dataLayer = window.dataLayer || [];\n\t\t\t  function gtag(){dataLayer.push(arguments);}\n\t\t\t  gtag('js', new Date());\n\n\t\t\t  gtag('config', 'G-2VGXFFSVLC');\n\t\t\t</script>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -84,7 +84,7 @@ func injectedHead(script templ.Component) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		if os.Getenv("ENV") == "production" {
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "<link rel=\"stylesheet\" href=\"/static/css/style.min.css\">")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 6, "<link rel=\"stylesheet\" href=\"/static/css/style.min.css\"><!-- Google tag (gtag.js) --> <script async src=\"https://www.googletagmanager.com/gtag/js?id=G-2VGXFFSVLC\"></script> <script>\n\t\t\t  window.dataLayer = window.dataLayer || [];\n\t\t\t  function gtag(){dataLayer.push(arguments);}\n\t\t\t  gtag('js', new Date());\n\n\t\t\t  gtag('config', 'G-2VGXFFSVLC');\n\t\t\t</script>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -164,7 +164,7 @@ func navbar(isSignedIn bool, userName string) templ.Component {
 			var templ_7745c5c3_Var5 string
 			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(userName)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/layout.templ`, Line: 66, Col: 20}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/layout.templ`, Line: 84, Col: 20}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 			if templ_7745c5c3_Err != nil {

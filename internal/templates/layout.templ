@@ -10,6 +10,15 @@ templ head() {
 		<script src="/static/scripts/htmx.min.js"/>
 		if os.Getenv("ENV") == "production" {
 			<link rel="stylesheet" href="/static/css/style.min.css"/>
+			<!-- Google tag (gtag.js) -->
+			<script async src="https://www.googletagmanager.com/gtag/js?id=G-2VGXFFSVLC"></script>
+			<script>
+			  window.dataLayer = window.dataLayer || [];
+			  function gtag(){dataLayer.push(arguments);}
+			  gtag('js', new Date());
+
+			  gtag('config', 'G-2VGXFFSVLC');
+			</script>
 		} else {
 			<link rel="stylesheet" href="/static/css/style.css"/>
 		}
@@ -25,6 +34,15 @@ templ injectedHead(script templ.Component) {
 		@script
 		if os.Getenv("ENV") == "production" {
 			<link rel="stylesheet" href="/static/css/style.min.css"/>
+			<!-- Google tag (gtag.js) -->
+			<script async src="https://www.googletagmanager.com/gtag/js?id=G-2VGXFFSVLC"></script>
+			<script>
+			  window.dataLayer = window.dataLayer || [];
+			  function gtag(){dataLayer.push(arguments);}
+			  gtag('js', new Date());
+
+			  gtag('config', 'G-2VGXFFSVLC');
+			</script>
 		} else {
 			<link rel="stylesheet" href="/static/css/style.css"/>
 		}
