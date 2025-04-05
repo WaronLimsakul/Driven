@@ -13,6 +13,7 @@ func (h DBHandler) HandlePostTaskWeek(c echo.Context) error {
 	if err != nil {
 		return c.String(statusCode, err.Error())
 	}
+	// Retarget to add the end of task column
 	c.Response().Header().Add("HX-Reswap", "beforeend")
 	c.Response().Header().Add(
 		"HX-Retarget",

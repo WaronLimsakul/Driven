@@ -10,6 +10,13 @@ templ HomePageScript() {
 				  && event.detail.xhr.status == 201) { // creat task success
 					event.detail.shouldSwap = false;
 				}
+
+				// for adding task out of visible calendar range
+				// tell client to not swap + think of it as success
+				if (event.detail.xhr.status == 201 && !event.detail.target) {
+				    event.detail.shouldSwap = false;
+					event.detail.isError = false;
+				};
 			});
 
 			function scrollToBigTask(taskID) {
