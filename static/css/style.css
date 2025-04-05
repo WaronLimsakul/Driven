@@ -499,6 +499,12 @@
   .pb-14 {
     padding-bottom: calc(var(--spacing) * 14);
   }
+  .pt-6 {
+    padding-top: calc(var(--spacing) * 6);
+  }
+  .pb-14 {
+    padding-bottom: calc(var(--spacing) * 14);
+  }
   .text-center {
     text-align: center;
   }
