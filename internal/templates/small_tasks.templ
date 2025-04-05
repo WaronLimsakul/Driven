@@ -36,7 +36,7 @@ templ SmallTask(task database.Task) {
 				checked:scale-100"
 				hx-put={ fmt.Sprintf("/tasks/week/%s/undone", task.ID.String()) }
 				hx-target={ fmt.Sprintf("[id='%s']", GetSmallTasksColumnID(task.Date)) }
-				hx-swap="outerHTML swap:500ms"
+				hx-swap="outerHTML"
 				hx-on:click="event.stopPropagation()"
 				checked/>
 		} else {
@@ -80,7 +80,7 @@ templ DoneSmallTaskResponse(task database.Task, weekDay string) {
 				checked:scale-100"
 				hx-put={ fmt.Sprintf("/tasks/week/%s/undone", task.ID.String()) }
 				hx-target={ fmt.Sprintf("[id='%s']", GetSmallTasksColumnID(task.Date)) }
-				hx-swap="outerHTML swap:500ms"
+				hx-swap="outerHTML"
 				checked/>
 			<p>{task.Name}</p>
 		</div>
