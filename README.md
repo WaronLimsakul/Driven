@@ -74,6 +74,9 @@ section or come up with any features that you think will help boosting our produ
 #### Prerequisites
   - Go 1.24+
   - PostgreSQL (or update the config to match your setup)
+  - [sqlc](https://github.com/sqlc-dev/sqlc)
+  - [goose](https://github.com/pressly/goose)
+  - [Templ](https://github.com/a-h/templ)
   - [Tailwind CLI](https://tailwindcss.com/docs/installation/tailwind-cli)
 
 #### Env setup
