@@ -52,7 +52,7 @@ top of calendar.
 #### ☀️ Day view
 Now if you click at "to day" mode or click at any task in the week mode, you will be
 navigated to another format of the task which only focus on the one day. You can
-- navigate each day using either
+navigate each day using either
   1. the ">" and "<" at the top
   2. the quick navigation tool at the bottom left of the screen
 
