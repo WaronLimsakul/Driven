@@ -311,6 +311,9 @@
   .w-12 {
     width: calc(var(--spacing) * 12);
   }
+  .w-20 {
+    width: calc(var(--spacing) * 20);
+  }
   .w-35 {
     width: calc(var(--spacing) * 35);
   }
@@ -499,12 +502,6 @@
   .pb-14 {
     padding-bottom: calc(var(--spacing) * 14);
   }
-  .pt-6 {
-    padding-top: calc(var(--spacing) * 6);
-  }
-  .pb-14 {
-    padding-bottom: calc(var(--spacing) * 14);
-  }
   .text-center {
     text-align: center;
   }
@@ -658,6 +655,13 @@
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-flame-primary);
+      }
+    }
+  }
+  .hover\:bg-gray-400 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-gray-400);
       }
     }
   }

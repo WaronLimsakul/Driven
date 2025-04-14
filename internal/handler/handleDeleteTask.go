@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/WaronLimsakul/Driven/internal/database"
+	"github.com/WaronLimsakul/Driven/internal/templates"
 	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
 )
@@ -36,5 +37,5 @@ func (h *DBHandler) HandleDeleteTask(c echo.Context) error {
 		return c.String(http.StatusBadRequest, "couldn't find the task")
 	}
 
-	return c.String(http.StatusNoContent, "task deleted")
+	return render(http.StatusNoContent, c, templates.DeleteTaskResponse())
 }
