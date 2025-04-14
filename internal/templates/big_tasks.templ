@@ -31,6 +31,7 @@ func getTextHeight(text string) int {
 }
 
 templ keysArea(keys sql.NullString) {
+	// if the keys already exist, return the extended one
 	if keys.Valid {
 		<textarea
 			class="w-full h-auto min-h-20 p-2 bg-gray-700 text-white rounded my-2 resize-none overflow-hidden"
@@ -53,29 +54,40 @@ templ keysArea(keys sql.NullString) {
 templ BigTask(task database.Task) {
 	// the id doesn't work with query selector, so I have to use name
 	<div id={ task.ID.String() } class="bg-gray-800 p-4 mx-2 rounded-lg">
-		<div class="flex items-center gap-1 my-2">
-			if task.IsDone {
-				<input
-       				type="checkbox"
-           			hx-put={ fmt.Sprintf("/tasks/day/%s/undone", task.ID.String()) }
-            		hx-swap="outerHTML"
-              		hx-target="#big-tasks-column"
-	                class="h-6 w-6 border-white-400/20 scale-100
-					transition-all duration-500 ease-in-out hover:scale-110
-					checked:scale-100"
-                	checked>
-			} else {
-   				<input
-       				type="checkbox"
-           			hx-put={ fmt.Sprintf("/tasks/day/%s/done", task.ID.String()) }
-              		hx-swap="outerHTML"
-                	hx-target={ fmt.Sprintf("[id='%s']", task.ID.String()) }
-                 	class="h-6 w-6 border-white-400/20 scale-100
-					transition-all duration-500 ease-in-out hover:scale-110
-					checked:scale-100">
-			}
-		    <div class="my-auto ml-2 font-semibold">{ task.Name }</div>
-			@priorityStars(task.Priority)
+		<div class="flex items-center justify-between">
+			<div class="flex items-center gap-1 my-2">
+				if task.IsDone {
+					<input
+	       				type="checkbox"
+	           			hx-put={ fmt.Sprintf("/tasks/day/%s/undone", task.ID.String()) }
+	            		hx-swap="outerHTML"
+	              		hx-target="#big-tasks-column"
+		                class="h-6 w-6 border-white-400/20 scale-100
+						transition-all duration-500 ease-in-out hover:scale-110
+						checked:scale-100"
+	                	checked>
+				} else {
+	   				<input
+	       				type="checkbox"
+	           			hx-put={ fmt.Sprintf("/tasks/day/%s/done", task.ID.String()) }
+	              		hx-swap="outerHTML"
+	                	hx-target={ fmt.Sprintf("[id='%s']", task.ID.String()) }
+	                 	class="h-6 w-6 border-white-400/20 scale-100
+						transition-all duration-500 ease-in-out hover:scale-110
+						checked:scale-100">
+				}
+			    <div class="my-auto ml-2 font-semibold">{ task.Name }</div>
+				@priorityStars(task.Priority)
+			</div>
+			<button
+				class="p-2 rounded-full cursor-pointer hover:bg-gray-600 transition-colors"
+				hx-confirm={ fmt.Sprintf("Deleting task '%s'?", task.Name) }
+				hx-delete={ fmt.Sprintf("/tasks/%s", task.ID.String()) }
+   				hx-target={ fmt.Sprintf("[id='%s']", task.ID.String()) }
+				hx-swap="outerHTML"
+			>
+	        	<img src="/static/img/delete.svg" width="20"/>
+	        </button>
 		</div>
         // <div class="text-sm mb-2">Timer: ....</div>
         <form
@@ -108,4 +120,7 @@ templ DoneBigTaskResponse(task database.Task) {
 	<div hx-swap-oob="beforeend:#big-tasks-column">
 		@BigTask(task)
 	</div>
+}
+
+templ DeleteTaskResponse() {
 }
