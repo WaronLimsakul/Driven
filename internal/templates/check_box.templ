@@ -1,0 +1,50 @@
+package templates
+
+import (
+	"fmt"
+
+	"github.com/WaronLimsakul/Driven/internal/database"
+)
+
+templ smallCheckBox(task database.Task) {
+	if task.IsDone {
+		<input
+			type="checkbox"
+			class="h-5 w-5 shrink-0 border-white-400/20"
+			hx-put={ fmt.Sprintf("/tasks/week/%s/undone", task.ID.String()) }
+			hx-target={ fmt.Sprintf("[id='%s']", GetSmallTasksColumnID(task.Date)) }
+			hx-swap="outerHTML"
+			hx-on:click="event.stopPropagation()"
+			checked/>
+	} else {
+		<input
+			type="checkbox"
+			class="h-5 w-5 shrink-0 border-white-400/20"
+			hx-put={ fmt.Sprintf("/tasks/week/%s/done", task.ID.String()) }
+			hx-swap="outerHTML"
+			hx-target="closest div"
+			hx-on:click="event.stopPropagation()"
+			/>
+	}
+}
+
+templ bigCheckBox(task database.Task) {
+	if task.IsDone {
+		<input
+			type="checkbox"
+   			hx-put={ fmt.Sprintf("/tasks/day/%s/undone", task.ID.String()) }
+      		hx-swap="outerHTML"
+        	hx-target="#big-tasks-column"
+            class="h-6 w-6 border-white-400/20"
+        	checked
+		>
+	} else {
+		<input
+			type="checkbox"
+ 			hx-put={ fmt.Sprintf("/tasks/day/%s/done", task.ID.String()) }
+      		hx-swap="outerHTML"
+            hx-target={ fmt.Sprintf("[id='%s']", task.ID.String()) }
+            class="h-6 w-6 border-white-400/20"
+		>
+	}
+}
