@@ -1,0 +1,29 @@
+package templates
+
+import (
+	"fmt"
+
+	"github.com/WaronLimsakul/Driven/internal/database"
+)
+
+templ checkBox(task database.Task) {
+	if task.IsDone {
+		<input
+			type="checkbox"
+			class="h-5 w-5 shrink-0 border-white-400/20"
+			hx-put={ fmt.Sprintf("/tasks/week/%s/undone", task.ID.String()) }
+			hx-target={ fmt.Sprintf("[id='%s']", GetSmallTasksColumnID(task.Date)) }
+			hx-swap="outerHTML"
+			hx-on:click="event.stopPropagation()"
+			checked/>
+	} else {
+		<input
+			type="checkbox"
+			class="h-5 w-5 shrink-0 border-white-400/20"
+			hx-put={ fmt.Sprintf("/tasks/week/%s/done", task.ID.String()) }
+			hx-swap="outerHTML"
+			hx-target="closest div"
+			hx-on:click="event.stopPropagation()"
+			/>
+	}
+}

@@ -28,30 +28,12 @@ templ SmallTask(task database.Task) {
 		hx-target="#view"
 		hx-headers={ fmt.Sprintf("{\"scrollTarget\":\"%s\"}", task.ID.String()) }
 	>
+		@checkBox(task)
 		if task.IsDone {
-			<input
-				type="checkbox"
-				class="h-5 w-5 border-white-400/20 scale-100
-				transition-all duration-500 ease-in-out hover:scale-110
-				checked:scale-100"
-				hx-put={ fmt.Sprintf("/tasks/week/%s/undone", task.ID.String()) }
-				hx-target={ fmt.Sprintf("[id='%s']", GetSmallTasksColumnID(task.Date)) }
-				hx-swap="outerHTML"
-				hx-on:click="event.stopPropagation()"
-				checked/>
+			<s class="truncate">{ task.Name }</s>
 		} else {
-			<input
-				type="checkbox"
-				class="h-5 w-5 border-white-400/20 scale-100
-				transition-all duration-500 ease-in-out hover:scale-110
-				checked:scale-100"
-				hx-put={ fmt.Sprintf("/tasks/week/%s/done", task.ID.String()) }
-				hx-swap="outerHTML swap:550ms"
-				hx-target="closest div"
-				hx-on:click="event.stopPropagation()"
-				/>
+			<p class="truncate">{ task.Name }</p>
 		}
-		<p class="truncate">{task.Name}</p>
 	</div>
 }
 
@@ -67,22 +49,14 @@ templ SmallTasksColumn(tasks []database.Task, day time.Time) {
 
 templ DoneSmallTaskResponse(task database.Task, weekDay string) {
 	// this hx-swap-oob is like telling the browser like it needs to
-	// be swapped but not at the target. so we basically we can
+	// be swapped but not at the target. so basically we can swap
 	// many things at once using this attribute.
 	<div hx-swap-oob={ fmt.Sprintf("beforeend:[id='%s']", GetSmallTasksColumnID(task.Date)) }>
 		<div
 			id={ task.ID.String() }
 			class={ getSmallTaskClass(task.Priority) }>
-			<input
-				type="checkbox"
-				class="h-5 w-5 border-white-400/20 scale-100
-				transition-all duration-500 ease-in-out hover:scale-110
-				checked:scale-100"
-				hx-put={ fmt.Sprintf("/tasks/week/%s/undone", task.ID.String()) }
-				hx-target={ fmt.Sprintf("[id='%s']", GetSmallTasksColumnID(task.Date)) }
-				hx-swap="outerHTML"
-				checked/>
-			<p>{task.Name}</p>
+			@checkBox(task)
+			<s class="truncate">{ task.Name }</s>
 		</div>
 	</div>
 }
