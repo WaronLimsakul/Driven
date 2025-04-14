@@ -28,7 +28,7 @@ templ SmallTask(task database.Task) {
 		hx-target="#view"
 		hx-headers={ fmt.Sprintf("{\"scrollTarget\":\"%s\"}", task.ID.String()) }
 	>
-		@checkBox(task)
+		@smallCheckBox(task)
 		if task.IsDone {
 			<s class="truncate">{ task.Name }</s>
 		} else {
@@ -55,7 +55,7 @@ templ DoneSmallTaskResponse(task database.Task, weekDay string) {
 		<div
 			id={ task.ID.String() }
 			class={ getSmallTaskClass(task.Priority) }>
-			@checkBox(task)
+			@smallCheckBox(task)
 			<s class="truncate">{ task.Name }</s>
 		</div>
 	</div>

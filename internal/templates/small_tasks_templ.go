@@ -110,7 +110,7 @@ func SmallTask(task database.Task) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = checkBox(task).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = smallCheckBox(task).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -286,7 +286,7 @@ func DoneSmallTaskResponse(task database.Task, weekDay string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = checkBox(task).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = smallCheckBox(task).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
