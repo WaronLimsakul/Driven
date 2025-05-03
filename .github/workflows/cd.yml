@@ -22,8 +22,6 @@ jobs:
         run: go install github.com/pressly/goose/v3/cmd/goose@latest
       - name: Migrate DB to new version
         run: goose up
-      - name: Build product
-        run: GOOS=linux GOARCH=amd64 go build -o driven cmd/main.go
 
       - name: Auth Google Cloud
         uses: google-github-actions/auth@v2
@@ -33,15 +31,13 @@ jobs:
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
 
-      - name: Move binary into Docker build context
-        run: cp driven .
-
       - name: Build Docker image and push to GCP AR
-        run: gcloud builds submit --tag northamerica-northeast2-docker.pkg.dev/driven-458703/driven-registry:latest .
+        run: gcloud builds submit --tag northamerica-northeast2-docker.pkg.dev/driven-458703/driven-registry/driven:latest .
+
       - name: Deploy to Cloud Run
         run: >
           gcloud run deploy driven
-          --image northamerica-northeast2-docker.pkg.dev/driven-458703/driven-registry:latest
+          --image northamerica-northeast2-docker.pkg.dev/driven-458703/driven-registry/driven:latest
           --region northamerica-northeast2
           --allow-unauthenticated
           --project driven-458703
