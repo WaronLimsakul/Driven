@@ -24,20 +24,21 @@ jobs:
         run: goose up
       - name: Build product
         run: go build -o driven cmd/main.go
-      - name: Config AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
+
+      - name: Auth Google Cloud
+        uses: google-github-actions/auth@v2
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.ECR_REGION }}
-      - name: Login to ECR
+          credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
+
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+      - name: Build Docker image and push to GCP AR
+        run: gcloud builds submit --tag northamerica-northeast2-docker.pkg.dev/driven-458703/driven-registry:latest .
+      - name: Deploy to Cloud Run
         run: >
-          aws ecr get-login-password
-          --region ${{ secrets.ECR_REGION }} | docker login
-          --username AWS --password-stdin ${{ secrets.ECR_REGISTRY }}
-      - name: Build container
-        run: docker build -t driven .
-      - name: Tag image
-        run: docker tag driven:latest ${{ secrets.ECR_REGISTRY }}/driven:latest
-      - name: Push image
-        run: docker push ${{ secrets.ECR_REGISTRY }}/driven:latest
+          gcloud run deploy notely
+          --image northamerica-northeast2-docker.pkg.dev/driven-458703/driven-registry:latest
+          --region northamerica-northeast2
+          --allow-unauthenticated
+          --project driven-458703
+          --max-instances=4
