@@ -1,10 +1,19 @@
 FROM golang:1.24.1-alpine AS builder
-WORKDIR /app
-COPY . .
-RUN GOOS=linux GOARCH=amd64 go build -o driven cmd/main.go
 
-FROM debian:stable-slim
-RUN apt-get update && apt-get install -y ca-certificates
+WORKDIR /app
+
+COPY go.mod go.sum ./
+RUN go mod download
+
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build \
+    -ldflags="-w -s" \
+    -o driven \ 
+    cmd/main.go
+
+FROM gcr.io/distroless/static-debian12:nonroot
+
 COPY --from=builder /app/driven /usr/bin/driven
-COPY static /static
+COPY --from=builder /app/static /static
+
 CMD ["driven"]
