@@ -1,0 +1,9 @@
+design/
+sql/
+testing/
+tmp/
+.env.*
+.gitignore
+*.md
+.git/
+.github/
