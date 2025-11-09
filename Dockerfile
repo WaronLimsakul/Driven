@@ -12,8 +12,9 @@ RUN CGO_ENABLED=0 GOOS=linux go build \
     cmd/main.go
 
 FROM gcr.io/distroless/static-debian12:nonroot
+WORKDIR /app
 
-COPY --from=builder /app/driven /usr/bin/driven
-COPY static /static
+COPY --from=builder /app/driven /app/driven
+COPY static /app/static
 
-CMD ["driven"]
+CMD ["/app/driven"]
